@@ -1,4 +1,4 @@
-window._ = require('lodash');
+window._ = import("lodash");
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -6,13 +6,13 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
-} catch (e) {
-}
+try {
+    window.Popper = import("popper.js").default;
+    window.$ = window.jQuery = import("jquery");
+
+    import("bootstrap");
+} catch (e) {}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -9,7 +9,7 @@
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
     @stack('third_party_stylesheets')
 
@@ -78,8 +78,6 @@
         reserved.
     </footer>
 </div>
-
-@vite(['resources/js/app.js'])
 
 @stack('third_party_scripts')
 
