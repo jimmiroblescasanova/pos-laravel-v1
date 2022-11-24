@@ -12,13 +12,13 @@
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/') }}"><b>{{ config('app.name') }}</b></a>
     </div>
     <!-- /.login-logo -->
 
@@ -74,21 +74,11 @@
 
                 </div>
             </form>
-
-            <p class="mb-1">
-                <a href="{{ route('password.request') }}">I forgot my password</a>
-            </p>
-            <p class="mb-0">
-                <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>
 
 </div>
 <!-- /.login-box -->
-
-@vite(['resources/js/app.js'])
-
 </body>
 </html>

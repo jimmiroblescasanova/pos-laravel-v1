@@ -12,7 +12,7 @@
 
     @stack('third_party_stylesheets')
 
-    @stack('page_css')
+    @livewireStyles
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -91,6 +91,6 @@
 
 @stack('third_party_scripts')
 
-@stack('page_scripts')
+@livewireScripts
 </body>
 </html>
