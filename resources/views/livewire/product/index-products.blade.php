@@ -1,7 +1,7 @@
 <div>
     <div class="row">
         <div class="col-md-2">
-            <a href="{{ route('products.crete') }}" class="btn btn-primary btn-block">
+            <a href="{{ route('products.create') }}" class="btn btn-primary btn-block">
                 <i class="fas fa-plus mr-2"></i>
                 Nuevo producto
             </a>
@@ -23,11 +23,11 @@
                 <tbody>
                     @forelse ($products as $product)
                         <tr>
-                            <td scope="row"></td>
+                            <td scope="row">{{ $product->barcode }}</td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td>{{ $product->status }}</td>
                             <td></td>
                         </tr>
                     @empty

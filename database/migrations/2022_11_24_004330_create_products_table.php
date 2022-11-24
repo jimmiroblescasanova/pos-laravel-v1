@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('barcode');
             $table->string('name');
-            $table->longText('description');
-            $table->string('supplier_code');
-            $table->integer('cost');
-            $table->integer('price');
-            $table->integer('inventory');
-            $table->integer('minimum');
-            $table->integer('status');
-            $table->string('image');
+            $table->string('supplier_code')->nullable();
+            $table->integer('cost')->default(0);
+            $table->integer('price')->default(0);
+            $table->integer('inventory')->default(0);
+            $table->integer('minimum')->default(0);
+            $table->boolean('status')->default(1);
+            $table->longText('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -16,4 +16,5 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/usuarios', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
-Route::get('/productos/nuevo', [ProductController::class, 'create'])->name('products.crete');
+Route::get('/productos/nuevo', [ProductController::class, 'create'])->name('products.create');
+Route::post('/productos/nuevo', [ProductController::class, 'store'])->name('products.store');
