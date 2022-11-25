@@ -22,9 +22,8 @@ return new class extends Migration
             $table->integer('price')->default(0);
             $table->integer('inventory')->default(0);
             $table->integer('minimum')->default(0);
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
             $table->longText('description')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

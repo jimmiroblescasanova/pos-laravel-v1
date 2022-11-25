@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        @livewire('user.index-users')
+    <div class="row">
+        <div class="col-12">
+            @livewire('user.index-users')
+        </div>
     </div>
 @stop
