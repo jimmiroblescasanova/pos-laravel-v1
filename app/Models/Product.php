@@ -20,7 +20,7 @@ class Product extends Model implements HasMedia
     protected function barcode(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => Str::upper( Str::replace(' ', '', $value) ),
+            set: fn ($value) => Str::upper(Str::replace(' ', '', $value)),
         );
     }
 
@@ -31,12 +31,21 @@ class Product extends Model implements HasMedia
         );
     }
 
+    public function scopeSearchProduct($query, $search)
+    {
+        $search = "%$search%";
+
+        return $query->where('barcode', 'LIKE', $search)
+            ->orWhere('name', 'LIKE', $search)
+            ->orWhere('supplier_code', 'LIKE', $search);
+    }
+
     public function registerMediaCollections(): void
     {
         $this
             ->addMediaCollection('product')
             ->singleFile()
-            ->registerMediaConversions(function(Media $media){
+            ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('thumb')
                     ->fit(Manipulations::FIT_FILL, 80, 80)
@@ -50,5 +59,4 @@ class Product extends Model implements HasMedia
                     ->nonQueued();
             });
     }
-
 }

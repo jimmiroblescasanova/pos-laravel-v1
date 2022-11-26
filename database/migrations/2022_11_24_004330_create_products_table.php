@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('minimum')->default(0);
             $table->boolean('active')->default(1);
             $table->longText('description')->nullable();
+            $table->bigInteger('total_sales')->default(0); // para contar el más vendido
             $table->timestamps();
         });
     }

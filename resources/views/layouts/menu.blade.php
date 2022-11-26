@@ -6,8 +6,14 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{ route('orders.create') }}" class="nav-link {{ Route::is('orders.create') ? 'active' : '' }}">
+        <i class="fas fa-cash-register nav-icon"></i>
+        <p>Punto de Venta</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.*') ? 'active' : '' }}">
-        <i class="fas fa-users nav-icon"></i>
+        <i class="fas fa-boxes nav-icon"></i>
         <p>Productos</p>
     </a>
 </li>
