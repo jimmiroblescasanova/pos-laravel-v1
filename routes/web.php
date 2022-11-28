@@ -24,3 +24,4 @@ Route::patch('/productos/{product}/editar', [ProductController::class, 'update']
 Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Route::get('/pos', [OrderController::class, 'create'])->name('orders.create');
+Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.delete');

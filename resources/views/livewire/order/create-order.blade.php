@@ -3,13 +3,17 @@
         <div class="col-md-6">
             <div class="card card-outline card-danger">
                 <div class="card-header">
-                    Carrito de compras (total prod: {{ $itemsCount }})
+                    <div class="row justify-content-between">
+                        <span>Carrito de compras</span>
+                        <span>Folio: {{ sprintf('%04d', $order->id) }}</span>
+                    </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-0 pb-2">
                     <div class="row form-group p-3">
                         <label for="customer" class="col-sm-2 col-form-label">CLIENTE:</label>
                         <div class="col-sm-10">
-                            <input type="text" wire:model.lazy="customerName" id="customer" class="form-control" style="text-transform: uppercase">
+                            <input type="text" wire:model.lazy="customerName" id="customer" class="form-control"
+                                style="text-transform: uppercase">
                         </div>
                     </div>
                     <table class="table table-sm table-condensed">
@@ -25,7 +29,7 @@
                                 <tr>
                                     <td scope="row">{{ $item->product->name }}</td>
                                     <td class="text-right">
-                                        <span>{{ $item->price }}</span>
+                                        <span>{{ accounting($item->price) }}</span>
                                     </td>
                                     <td>
                                         <div class="input-group input-group-sm" role="group">
@@ -58,15 +62,20 @@
                             <tr>
                                 <td colspan="2" class="text-right">Total:</td>
                                 <td class="text-right">
-                                    {{ $order->total }}
+                                    {{ accounting($order->total) }}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer text-muted">
-                    Footer
-                </div>
+                @if ($itemsCount > 0)
+                    <div class="card-footer text-center">
+                        <button type="button" wire:click="closeOrder" class="btn btn-sm btn-warning">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                            TERMINAR VENTA
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="col-md-6">
@@ -86,18 +95,23 @@
                             <thead>
                                 <tr>
                                     <th>Descripcion</th>
-                                    <th>Precio</th>
-                                    <th>+</th>
+                                    <th style="width: 15%;">Precio</th>
+                                    <th style="width: 20%;">Inventario</th>
+                                    <th style="width: 10%;" class="text-center">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($products as $product)
                                     <tr>
                                         <td scope="row">{{ $product->name }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>
-                                            <button type="button" wire:click="addProduct('{{ $product->id }}')">
-                                                add
+                                        <td class="text-right">{{ accounting($product->price) }}</td>
+                                        <td class="text-right">{{ $product->inventory }}</td>
+                                        <td class="text-right">
+                                            <button type="button" wire:click="addProduct('{{ $product->id }}')"
+                                                class="btn btn-sm btn-default">
+                                                <i class="fas fa-cart-plus"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
+        "php-flasher/flasher-notyf-laravel": "^1.8",
         "protonemedia/laravel-form-components": "^3.6",
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-permission": "^5.7"
@@ -30,7 +31,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

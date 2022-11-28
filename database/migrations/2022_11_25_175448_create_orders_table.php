@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('customer');
-            $table->dateTime('date');
-            $table->integer('products')->default(0);
             $table->integer('total')->default(0);
             $table->boolean('closed')->default(0);
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
