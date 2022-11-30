@@ -23,3 +23,9 @@
         <p>Usuarios</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('settings') }}" class="nav-link {{ Route::is('settings') ? 'active' : '' }}">
+        <i class="fas fa-users nav-icon"></i>
+        <p>Configuraciones</p>
+    </a>
+</li>

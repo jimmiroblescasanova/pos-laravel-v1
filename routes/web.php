@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Settings\TicketController;
 
 // routes for authenticating users
 Route::get('login', [LoginController::class, 'ShowLoginForm'])->name('login');
@@ -25,3 +26,9 @@ Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy
 
 Route::get('/pos', [OrderController::class, 'create'])->name('orders.create');
 Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.delete');
+
+Route::get('/ticket/{order}/pdf', [TicketController::class, 'printTicket'])->name('ticket.print');
+
+Route::get('/configuraciones', function() {
+    return view('settings');
+})->name('settings')->middleware('auth');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,11 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected function customer(): Attribute
