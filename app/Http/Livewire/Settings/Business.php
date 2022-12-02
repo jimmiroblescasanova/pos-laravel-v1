@@ -13,22 +13,25 @@ class Business extends Component
     public $company;
     public $name;
     public $address;
-    public $admin_email;
     public $logo;
 
     protected $rules = [
         'name' => 'required|min:6',
         'address' => 'nullable|min:6',
-        'admin_email' => 'nullable|email',
-        'logo' => ['nullable', 'image', 'size:100']
+        'logo' => [
+            'nullable', 
+            'image',
+            'max:100',
+            'dimensions:max_width=250,max_height=250',
+        ],
     ];
 
     public function mount()
     {
-        $this->company = BusinessSettings::find(1);
-        $this->name = $this->company->name;
-        $this->address = $this->company->address;
-        $this->admin_email = $this->company->admin_email;
+        $this->company  = BusinessSettings::find(1);
+        $this->name     = $this->company->name;
+        $this->address  = $this->company->address;
+        $this->logo     = $this->company->logo;
     }
 
     public function updated($name)

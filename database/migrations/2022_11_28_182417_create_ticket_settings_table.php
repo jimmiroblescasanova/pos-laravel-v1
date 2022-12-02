@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('ticket_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('greetings');
+            $table->string('greeting_1')->nullable();
+            $table->string('greeting_2')->nullable();
+            $table->string('greeting_3')->nullable();
+            $table->boolean('signature_line');
             $table->timestamps();
         });
     }

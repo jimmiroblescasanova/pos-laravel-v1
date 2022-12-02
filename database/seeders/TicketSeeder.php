@@ -16,7 +16,10 @@ class TicketSeeder extends Seeder
     public function run()
     {
         DB::table('ticket_settings')->insert([
-            'greetings' => 'Gracias por tu compra, vuelve pronto.',
+            'greeting_1' => 'Gracias por tu compra.',
+            'greeting_2' => 'Esperamos verte pronto.',
+            'greeting_3' => 'Atte. La Gerencia',
+            'signature_line' => false,
             'created_at' => NOW(),
         ]);
     }

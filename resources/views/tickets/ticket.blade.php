@@ -11,30 +11,38 @@
             border-collapse: collapse;
             width: 100%;
         }
+
         .itemsTable thead th {
             border: 1px solid gray;
             font-weight: bold;
             text-align: center;
         }
+
         .itemsTable tr td.money {
             text-align: right;
         }
+
         .itemsTable tr:nth-child(even) {
             background-color: #f0f0f0;
+        }
+        .greetings {
+            text-align: center;
+            width: 100%;
+        }
+        .greetings tr td {
+            padding-bottom: 1em;
         }
     </style>
 </head>
 
 <body>
-    <table style="width: 100%;">
-        @if ($business->logo != null)
-            <tr>
-                <td>logo</td>
-            </tr>
-        @endif
+    <table style="width: 100%; text-align: center;">
+        <tr>
+            <td><img src="{{ asset($business->logo) }}" alt="logo empresa" style="max-width: 85px;"></td>
+        </tr>
         <tr>
             <td>
-                {{ $business->company_name }}
+                {{ $business->name }}
             </td>
         </tr>
         <tr>
@@ -47,7 +55,10 @@
                 <table style="width: 100%;">
                     <tr>
                         <td>Cliente: {{ $order->customer }}</td>
-                        <td style="width: 20%;">{{ $order->updated_at->format('d/m/Y') }}</td>
+                        <td style="width: 20%;">
+                            Folio: {{ $order->id }} <br />
+                            {{ $order->updated_at->format('d/m/Y') }}
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -81,13 +92,29 @@
     <br />
     <table style="border: 1px solid gray; width:100%;">
         <tr>
-            <td>
-                Total de productos: 
-                <br />
-                Vendido por: {{ $order->user->name }}
-            </td>
-            <td>Total:</td>
-            <td>{{ $order->total }}</td>
+            <td>Vendido por: {{ $order->user->name }}</td>
+            <td style="text-align: right;">Total:</td>
+            <td style="text-align: right;">{{ accounting($order->total) }}</td>
+        </tr>
+    </table>
+    <br />
+    <table class="greetings">
+        @if ($ticket->signature_line)
+            <tr>
+                <td>
+                    ______________________<br/>
+                    Firma de conformidad
+                </td>
+            </tr>
+        @endif
+        <tr>
+            <td>{{ $ticket->greeting_1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ $ticket->greeting_2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ $ticket->greeting_3 }}</td>
         </tr>
     </table>
 </body>

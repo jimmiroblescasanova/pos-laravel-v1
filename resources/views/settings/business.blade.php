@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    @livewire('settings.ticket-configuration')
+    @livewire('settings.business')
 @stop

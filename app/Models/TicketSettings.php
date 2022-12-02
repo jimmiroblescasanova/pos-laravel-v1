@@ -10,7 +10,10 @@ class TicketSettings extends Model
     use HasFactory;
 
     protected $fillable = [
-        'greetings', 
+        'greeting_1', 
+        'greeting_2', 
+        'greeting_3', 
+        'signature_line', 
     ];
 
 }

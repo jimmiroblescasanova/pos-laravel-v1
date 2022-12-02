@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Settings\BusinessController;
 use App\Http\Controllers\Settings\TicketController;
 
 // routes for authenticating users
@@ -29,6 +30,5 @@ Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.
 
 Route::get('/ticket/{order}/pdf', [TicketController::class, 'printTicket'])->name('ticket.print');
 
-Route::get('/configuraciones', function() {
-    return view('settings');
-})->name('settings')->middleware('auth');
+Route::get('/configuraciones/empresa', [BusinessController::class, 'index'])->name('settings.business');
+Route::get('/configuraciones/ticket', [TicketController::class, 'index'])->name('settings.ticket');
