@@ -38,7 +38,7 @@
     </div>
     <div class="card card-default">
         <div class="card-body p-0">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <x-table-heading sortable wire:click="sortBy('barcode')" :direction="$sortField === 'barcode' ? $sortDirection : null">
@@ -79,7 +79,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6">No existen resultados para la búsqueda realizada.</td>
+                            <td colspan="7">No existen resultados para la búsqueda realizada. ¿Deseas agregar un <a href="{{ route('products.create') }}">producto nuevo</a>?</td>
                         </tr>
                     @endforelse
                 </tbody>

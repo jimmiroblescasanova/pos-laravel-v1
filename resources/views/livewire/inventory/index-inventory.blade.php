@@ -70,7 +70,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @forelse ($products as $product)
                             <tr>
                                 <td scope="row">{{ $product->barcode }}</td>
                                 <td>{{ $product->supplier_code }}</td>
@@ -84,7 +84,11 @@
                                     </button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6">No existen resultados para la búsqueda realizada. ¿Deseas agregar un <a href="{{ route('products.create') }}">producto nuevo</a>?</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -56,7 +56,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3">Agrega un producto para iniciar</td>
+                                    <td colspan="3">Agrega un producto para iniciar.</td>
                                 </tr>
                             @endforelse
                             <tr>
@@ -117,7 +117,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3">No hay productos para la búsqueda</td>
+                                        <td colspan="4">No hay productos para la búsqueda. ¿Deseas agregar <a href="{{ route('products.create') }}">nuevo producto</a>?</td>
                                     </tr>
                                 @endforelse
                             </tbody>
