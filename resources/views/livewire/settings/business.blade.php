@@ -10,7 +10,7 @@
                     <x-form-input name="address" label="Direccion de la empresa" />
                 @endwire
                 <div class="form-group">
-                    <label for="logo">Selecciona una imagen</label>
+                    <label for="logo">Selecciona una imagen de logo</label>
                     <input type="file" wire:model.defer="logo" class="form-control-file @error('logo') is-invalid @enderror" id="logo">
                     <span class="text-muted text-sm">Tamaño máximo: 100 kb, 250px</span>
                     @error('logo')

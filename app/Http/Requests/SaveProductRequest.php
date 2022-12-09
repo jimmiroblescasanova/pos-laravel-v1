@@ -29,8 +29,6 @@ class SaveProductRequest extends FormRequest
             'supplier_code' => ['nullable', 'min:5', 'string'],
             'cost' => ['nullable', 'numeric'],
             'price' => ['nullable', 'numeric'],
-            'inventory' => ['nullable', 'numeric'],
-            'minimum' => ['nullable', 'numeric'],
             'active' => ['required', 'boolean'],
             'description' => ['nullable', 'string'],
         ];

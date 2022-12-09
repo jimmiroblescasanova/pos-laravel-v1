@@ -15,6 +15,7 @@
                     <div class="card-body">
                         @include('products._form')
                         <div class="form-group">
+                            <label for="image">Seleccionar imagen del producto</label>
                             <input type="file" name="image" id="image" class="form-control-file">
                         </div>
                     </div>

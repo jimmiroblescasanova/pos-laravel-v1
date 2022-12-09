@@ -26,6 +26,7 @@
                         @include('products._form')
                         <div class="row form-group">
                             <div class="col-sm-6">
+                                <label for="image">Actualizar imagen del producto</label>
                                 <input type="file" name="image" id="image">
                             </div>
                             <div class="col-sm-6">

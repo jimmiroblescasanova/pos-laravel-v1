@@ -31,7 +31,7 @@ class Product extends Model implements HasMedia
         );
     }
 
-    public function scopeSearchProduct($query, $search)
+    public function scopeSearch($query, $search)
     {
         $search = "%$search%";
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Settings\BusinessController;
 use App\Http\Controllers\Settings\TicketController;
 
@@ -24,6 +25,9 @@ Route::post('/productos/nuevo', [ProductController::class, 'store'])->name('prod
 Route::get('/productos/{product}/editar', [ProductController::class, 'edit'])->name('products.edit');
 Route::patch('/productos/{product}/editar', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/inventario', [InventoryController::class, 'index'])->name('inventory.index');
+Route::post('/inventario', [InventoryController::class, 'update'])->name('inventory.update');
 
 Route::get('/pos', [OrderController::class, 'create'])->name('orders.create');
 Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.delete');

@@ -1,8 +1,8 @@
 <!-- need to remove -->
 <li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link {{ Route::is('home') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
-        <p>Home</p>
+        <i class="nav-icon fas fa-store"></i>
+        <p>Inicio</p>
     </a>
 </li>
 <li class="nav-item">
@@ -15,6 +15,12 @@
     <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.*') ? 'active' : '' }}">
         <i class="fas fa-boxes nav-icon"></i>
         <p>Productos</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('inventory.index') }}" class="nav-link {{ Route::is('inventory.*') ? 'active' : '' }}">
+        <i class="fas fa-warehouse nav-icon"></i>
+        <p>Inventario</p>
     </a>
 </li>
 <li class="nav-item">

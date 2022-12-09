@@ -116,7 +116,7 @@ class CreateOrder extends Component
         $this->itemsCount = $this->order->items()->count();
 
         $products = Product::query()
-            ->searchProduct($this->search)
+            ->search($this->search)
             ->where('active', 1)
             ->orderBy('total_sales', 'desc')
             ->get();
