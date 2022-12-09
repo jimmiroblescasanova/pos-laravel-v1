@@ -7,7 +7,8 @@
         </div>
         <div class="col-6 col-md-2">
             <div class="form-group">
-                <select name="" id="" class="form-control border-0 shadow-sm">
+                <select wire:model='active' class="form-control border-0 shadow-sm">
+                    <option value="all">Todos</option>
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
                 </select>
@@ -24,8 +25,8 @@
             </div>
         </div>
         <div class="col-3 col-md-1">
-            <button type="button" class="btn btn-default btn-block">
-                <i class="fas fa-eraser"></i>
+            <button type="button" wire:click='clear' class="btn btn-default btn-block">
+                <i class="fas fa-eraser mr-2"></i>Limpiar
             </button>
         </div>
         <div class="col-12 col-md-2">
@@ -40,21 +41,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Codigo de barras</th>
+                        <x-table-heading sortable wire:click="sortBy('barcode')" :direction="$sortField === 'barcode' ? $sortDirection : null">
+                            Código barras
+                        </x-table-heading>
+                        <x-table-heading sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null"
+                            width="30%">
+                            Nombre del producto
+                        </x-table-heading>
                         <th>Imagen</th>
-                        <th>Descripcion</th>
                         <th>Precio</th>
                         <th>Estado</th>
                         <th>Fecha alta</th>
-                        <th><i class="fas fa-cogs"></i></th>
+                        <th class="text-center"><i class="fas fa-cogs"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($products as $product)
                         <tr>
                             <td scope="row">{{ $product->barcode }}</td>
-                            <td><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
                             <td>{{ $product->name }}</td>
+                            <td><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
                             <td>{{ $product->price }}</td>
                             <td>
                                 <span @class([
@@ -64,7 +70,7 @@
                                 ])>{{ $product->active ? 'Activo' : 'Inactivo' }}</span>
                             </td>
                             <td>{{ $product->created_at->format('d/m/Y') }}</td>
-                            <td>
+                            <td class="text-right">
                                 <a href="{{ route('products.edit', $product) }}" class="btn btn-primary btn-xs">
                                     <i class="fas fa-edit mr-2"></i>
                                     Editar
