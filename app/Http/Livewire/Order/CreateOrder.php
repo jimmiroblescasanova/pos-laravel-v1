@@ -119,6 +119,7 @@ class CreateOrder extends Component
             ->search($this->search)
             ->where('active', 1)
             ->orderBy('total_sales', 'desc')
+            ->take(15)
             ->get();
 
         return view('livewire.order.create-order', [

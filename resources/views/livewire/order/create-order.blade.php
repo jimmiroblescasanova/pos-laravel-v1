@@ -124,9 +124,6 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer text-muted">
-                    Footer
-                </div>
             </div>
         </div>
     </div>
