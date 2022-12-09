@@ -45,9 +45,9 @@
                     Ticket de ejemplo
                 </div>
                 <div class="card-body text-center px-5">
-                    <p><img src="{{ asset($business->logo) }}" alt="logo empresa" style="max-height: 85px;"></p>
-                    <p>{{ $business->name }}</p>
-                    <p>{{ $business->address }}</p>
+                    <p><img src="{{ asset( settings()->get('app_logo') ) }}" alt="logo empresa" style="max-height: 85px;"></p>
+                    <p>{{ settings()->get('app_name') }}</p>
+                    <p>{{ settings()->get('app_address') }}</p>
                     <div class="row justify-content-between mb-3">
                         <span>Cliente: VENTA MOSTRADOR</span>
                         <span>Folio: 001<br /> Fecha: {{ NOW()->format('d/m/Y') }} </span>

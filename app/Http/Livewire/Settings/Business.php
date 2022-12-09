@@ -4,13 +4,11 @@ namespace App\Http\Livewire\Settings;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\BusinessSettings;
 
 class Business extends Component
 {
     use WithFileUploads;
 
-    public $company;
     public $name;
     public $address;
     public $logo;
@@ -28,10 +26,9 @@ class Business extends Component
 
     public function mount()
     {
-        $this->company  = BusinessSettings::find(1);
-        $this->name     = $this->company->name;
-        $this->address  = $this->company->address;
-        $this->logo     = $this->company->logo;
+        $this->name     = settings()->get('app_name');
+        $this->address  = settings()->get('app_address');
+        $this->logo     = settings()->get('app_logo');
     }
 
     public function updated($name)
@@ -41,15 +38,16 @@ class Business extends Component
 
     public function save()
     {
-        $validatedData = $this->validate();
+        $this->validate();
 
-        $this->company->update($validatedData);
+        settings()->set([
+            'app_name', $this->name,
+            'app_address', $this->address,
+        ]);
 
         if ($this->logo != null) {
             $logo = $this->logo->store('images', 'public');
-            $this->company->update([
-                'logo' => $logo,
-            ]);
+            settings()->set('app_logo', $logo);
         }
 
         notyf()

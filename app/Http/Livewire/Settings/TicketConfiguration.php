@@ -3,13 +3,9 @@
 namespace App\Http\Livewire\Settings;
 
 use Livewire\Component;
-use App\Models\TicketSettings;
-use App\Models\BusinessSettings;
 
 class TicketConfiguration extends Component
 {
-    public $business;
-    public $ticket;
     public $greeting_1, $greeting_2, $greeting_3;
     public $signature_line;
 
@@ -22,20 +18,16 @@ class TicketConfiguration extends Component
 
     public function mount()
     {
-        $this->business = BusinessSettings::find(1);
-        $this->ticket = TicketSettings::find(1);
-        $this->greeting_1 = $this->ticket->greeting_1;
-        $this->greeting_2 = $this->ticket->greeting_2;
-        $this->greeting_3 = $this->ticket->greeting_3;
-        $this->signature_line = $this->ticket->signature_line;
+        $this->greeting_1 = settings()->get('greeting_1');
+        $this->greeting_2 = settings()->get('greeting_2');
+        $this->greeting_3 = settings()->get('greeting_3');
+        $this->signature_line = settings()->get('signature_line');
     }
 
     public function updated($field, $value)
     {
         $this->validateOnly($field);
-        $this->ticket->update([
-            $field => $value,
-        ]);
+        settings()->set($field, $value);
 
         notyf()
             ->ripple(true)
