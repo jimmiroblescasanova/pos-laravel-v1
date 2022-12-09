@@ -20,8 +20,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="card-body">
-                    <x-form :action="route('products.update', $product)" enctype="multipart/form-data" method="POST">
+                <x-form :action="route('products.update', $product)" enctype="multipart/form-data" method="POST">
+                    <div class="card-body">
                         @method('patch')
                         @include('products._form')
                         <div class="row form-group">
@@ -33,12 +33,12 @@
                                 <img src="{{ $product->getFirstMediaUrl('product', 'small') }}" alt="">
                             </div>
                         </div>
-                        <x-form-submit />
-                    </x-form>
-                </div>
-                <div class="card-footer text-muted">
-                    Footer
-                </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" onclick="history.back();" class="btn btn-default"><i class="fas fa-backward mr-2"></i>Atrás</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt mr-2"></i>Actualizar producto</button>
+                    </div>
+                </x-form>
             </div>
         </div>
     </div>
