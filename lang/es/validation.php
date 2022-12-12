@@ -106,11 +106,11 @@ return [
     'not_regex'            => 'El formato del campo :attribute es inválido.',
     'numeric'              => 'El campo :attribute debe ser un número.',
     'password'             => [
-        'letters'   => 'The :attribute must contain at least one letter.',
-        'mixed'     => 'The :attribute must contain at least one uppercase and one lowercase letter.',
-        'numbers'   => 'The :attribute must contain at least one number.',
-        'symbols'   => 'The :attribute must contain at least one symbol.',
-        'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+        'letters'   => 'La :attribute debe contener al menos una letra.',
+        'mixed'     => 'La :attribute debe contener al menos una letra mayuscula y una minúscula.',
+        'numbers'   => 'La :attribute debe contener al menos un número.',
+        'symbols'   => 'La :attribute debe contener al menos un caracter especial.',
+        'uncompromised' => 'La :attribute se encuentra en una base de datos filtrada. Por favor selecciona otra.',
     ],
     'present'              => 'El campo :attribute debe estar presente.',
     'prohibited'           => 'El campo :attribute esta prohíbido.',
@@ -176,6 +176,7 @@ return [
         'address'           => 'dirección',
         'admin_email'       => 'email',
         'logo'              => 'logotipo',
+        'password'          => 'contraseña',
     ],
 
 ];

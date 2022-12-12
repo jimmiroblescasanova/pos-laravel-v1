@@ -4,15 +4,19 @@ namespace App\Http\Livewire\Access;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class IndexUsers extends Component
 {
-    public $users;
-
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    
     public function render()
     {
-        $this->users = User::all();
+        $users = User::where('id', '!=', 1)->paginate(2);
         
-        return view('livewire.access.index-users');
+        return view('livewire.access.index-users', [
+            'users' => $users,
+        ]);
     }
 }

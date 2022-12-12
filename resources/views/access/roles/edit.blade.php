@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content-header')
-    <h1 class="m-0">Usuarios</h1>
+    <div class="col-12">
+        <h1 class="m-0">Editar perfil</h1>
+    </div>
 @endsection
 
 @section('content')
@@ -11,7 +13,7 @@
                 <div class="card-header">
                     Seleccionar permisos del perfil: {{ Str::upper($role->name) }}
                 </div>
-                <form action="{{ route('roles.update', $role) }}" method="POST">
+                <form action="{{ route('access.roles.update', $role) }}" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="row">

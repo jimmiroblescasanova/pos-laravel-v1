@@ -30,8 +30,8 @@
 @can('users_access')
 <li class="nav-item">
     <a href="{{ route('access.index') }}" class="nav-link {{ Route::is('access.*') ? 'active' : '' }}">
-        <i class="fas fa-users nav-icon"></i>
-        <p>Accesos</p>
+        <i class="fas fa-users-cog nav-icon"></i>
+        <p>Control de Acceso</p>
     </a>
 </li>
 @endcan

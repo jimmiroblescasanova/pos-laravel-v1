@@ -17,7 +17,7 @@
                         <td scope="row">{{ $role->name }}</td>
                         <td class="text-right">
                             @if ($role->id > 1)
-                            <a href="{{ route('roles.edit', $role) }}" class="btn btn-xs btn-primary">
+                            <a href="{{ route('access.roles.edit', $role) }}" class="btn btn-xs btn-default">
                                 <i class="fas fa-edit mr-2"></i>
                                 Editar
                             </a>
@@ -28,8 +28,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer text-muted">
-            Footer
+        <div class="card-footer">
+            {{ $roles->links() }}
         </div>
     </div>
 </div>
