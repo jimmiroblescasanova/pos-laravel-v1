@@ -11,7 +11,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    Seleccionar permisos del perfil: {{ Str::upper($role->name) }}
+                    <h3 class="card-title">
+                        Seleccionar permisos del perfil: {{ Str::upper($role->name) }}
+                    </h3>
+                    <div class="card-tools">
+                        <form action="{{ route('access.roles.destroy', $role) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt mr-2"></i>Eliminar perfil</button>
+                        </form>
+                    </div>
                 </div>
                 <form action="{{ route('access.roles.update', $role) }}" method="POST">
                     @csrf

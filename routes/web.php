@@ -28,7 +28,8 @@ Route::group([
     Route::post('/roles/nuevo', [RoleController::class, 'store'])->name('roles.store');
     Route::get('/roles/{role:name}/edit', [RoleController::class, 'edit'])->name('roles.edit');
     Route::post('/roles/{role:name}/edit', [RoleController::class, 'update'])->name('roles.update');
-    
+    Route::delete('/roles/{role:name}/edit', [RoleController::class, 'destroy'])->name('roles.destroy');
+
     Route::get('/usuarios/nuevo', [UserController::class, 'create'])->name('users.create');
     Route::post('/usuarios/nuevo', [UserController::class, 'store'])->name('users.store');
     Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');

@@ -11,7 +11,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    Seleccionar permisos del perfil
+                    <h3 class="card-title">
+                        Seleccionar permisos del perfil
+                    </h3>
                 </div>
                 <form action="{{ route('access.roles.create') }}" method="POST">
                     @csrf
