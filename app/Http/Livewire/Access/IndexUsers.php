@@ -10,10 +10,13 @@ class IndexUsers extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    protected $queryString = [
+        'page' => ['except' => 1, 'as' => 'u'],
+    ];
     
     public function render()
     {
-        $users = User::where('id', '!=', 1)->paginate(2);
+        $users = User::where('id', '!=', 1)->paginate();
         
         return view('livewire.access.index-users', [
             'users' => $users,

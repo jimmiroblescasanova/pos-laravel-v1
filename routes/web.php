@@ -24,8 +24,11 @@ Route::group([
     'as' => 'access.',
 ], function () {
     Route::get('/', AccessController::class)->name('index');
+    Route::get('/roles/nuevo', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles/nuevo', [RoleController::class, 'store'])->name('roles.store');
     Route::get('/roles/{role:name}/edit', [RoleController::class, 'edit'])->name('roles.edit');
     Route::post('/roles/{role:name}/edit', [RoleController::class, 'update'])->name('roles.update');
+    
     Route::get('/usuarios/nuevo', [UserController::class, 'create'])->name('users.create');
     Route::post('/usuarios/nuevo', [UserController::class, 'store'])->name('users.store');
     Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');

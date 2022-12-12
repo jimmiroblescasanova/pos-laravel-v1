@@ -10,6 +10,9 @@ class IndexRoles extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    protected $queryString = [
+        'page' => ['except' => 1, 'as' => 'r'],
+    ];
     
     public function render()
     {

@@ -1,10 +1,15 @@
 <div>
     <div class="card">
-        <div class="card-header">
-            Header
+        <div class="card-header border-0">
+            <h3 class="card-title">
+                <i class="fas fa-id-card-alt mr-2"></i>Listado de tipos de perfil
+            </h3>
+            <div class="card-tools">
+                <a href="{{ route('access.roles.create') }}" class="btn btn-xs btn-primary"><i class="fas fa-pencil-alt mr-2"></i>Crear un perfil</a>
+            </div>
         </div>
         <div class="card-body p-0">
-            <table class="table">
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr>
                         <th>Nombre del perfil</th>
