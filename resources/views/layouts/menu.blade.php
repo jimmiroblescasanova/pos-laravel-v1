@@ -11,24 +11,30 @@
         <p>Punto de Venta</p>
     </a>
 </li>
+@can('products_access')
 <li class="nav-item">
     <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.*') ? 'active' : '' }}">
         <i class="fas fa-boxes nav-icon"></i>
         <p>Productos</p>
     </a>
 </li>
+@endcan
+@can('inventory_access')
 <li class="nav-item">
     <a href="{{ route('inventory.index') }}" class="nav-link {{ Route::is('inventory.*') ? 'active' : '' }}">
         <i class="fas fa-warehouse nav-icon"></i>
         <p>Inventario</p>
     </a>
 </li>
+@endcan
+@can('users_access')
 <li class="nav-item">
-    <a href="{{ route('users.index') }}" class="nav-link {{ Route::is('users.*') ? 'active' : '' }}">
+    <a href="{{ route('access.index') }}" class="nav-link {{ Route::is('access.*') ? 'active' : '' }}">
         <i class="fas fa-users nav-icon"></i>
-        <p>Usuarios</p>
+        <p>Accesos</p>
     </a>
 </li>
+@endcan
 <li class="nav-item {{ Route::is('settings.*') ? 'menu-open' : '' }}">
     <a href="#" class="nav-link {{ Route::is('settings.*') ? 'active' : '' }}">
         <i class="fas fa-cogs nav-icon"></i>

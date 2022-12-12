@@ -15,13 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+        ]);
 
-        \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
         ]);
+
+        $user->assignRole('admin');
 
         settings()->set('app_name', 'PuntoDeVenta');
 

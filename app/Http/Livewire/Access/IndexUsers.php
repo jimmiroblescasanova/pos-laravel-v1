@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Http\Livewire\Access;
 
 use App\Models\User;
 use Livewire\Component;
@@ -13,6 +13,6 @@ class IndexUsers extends Component
     {
         $this->users = User::all();
         
-        return view('livewire.user.index-users');
+        return view('livewire.access.index-users');
     }
 }
