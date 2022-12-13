@@ -11,6 +11,12 @@
         <p>Punto de Venta</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('sales.index') }}" class="nav-link {{ Route::is('sales.*') ? 'active' : '' }}">
+        <i class="fas fa-money-bill-alt nav-icon"></i>
+        <p>Ventas</p>
+    </a>
+</li>
 @can('products_access')
 <li class="nav-item">
     <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.*') ? 'active' : '' }}">

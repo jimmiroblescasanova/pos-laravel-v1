@@ -9,6 +9,7 @@ use App\Http\Controllers\AccessController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\Settings\TicketController;
 use App\Http\Controllers\Settings\BusinessController;
 
@@ -54,3 +55,5 @@ Route::get('/ticket/{order}/pdf', [TicketController::class, 'printTicket'])->nam
 
 Route::get('/configuraciones/empresa', [BusinessController::class, 'index'])->name('settings.business');
 Route::get('/configuraciones/ticket', [TicketController::class, 'index'])->name('settings.ticket');
+
+Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');

@@ -36,4 +36,9 @@ class Order extends Model
             set: fn ($value) => Str::upper($value),
         );
     }
+
+    public function scopeSearch($query, $search)
+    {
+        $search = "%$search%";
+    }
 }
