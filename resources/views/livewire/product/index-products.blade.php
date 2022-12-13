@@ -38,7 +38,7 @@
     </div>
     <div class="card card-default">
         <div class="card-body p-0">
-            <table class="table table-striped">
+            <table class="table">
                 <thead>
                     <tr>
                         <x-table-heading sortable wire:click="sortBy('barcode')" :direction="$sortField === 'barcode' ? $sortDirection : null">
