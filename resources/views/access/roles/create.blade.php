@@ -44,8 +44,9 @@
                         </div>
                         <div class="col-12 col-sm-6 col-md-4"></div>
                     </div>
-                    <div class="card-footer text-muted">
-                        <button type="submit" class="btn btn-primary btn-sm">Actualizar permisos</button>
+                    <div class="card-footer text-right">
+                        <a href="{{ route('access.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save mr-2"></i>Crear perfil</button>
                     </div>
                 </form>
             </div>

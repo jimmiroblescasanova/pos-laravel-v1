@@ -2,7 +2,7 @@
 
 @section('content-header')
     <div class="col-12">
-        <h1 class="m-0">Alta de usuario nuevo</h1>
+        <h1 class="m-0">Crear usuario nuevo</h1>
     </div>
 @endsection
 
@@ -19,7 +19,7 @@
                         @include('access.users._form')
                     </div>
                     <div class="card-footer text-right">
-                        <button type="button" onclick="history.back();" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</button>
+                        <a href="{{ route('access.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-save mr-2"></i>Guardar usuario</button>
                     </div>
                 </form>
