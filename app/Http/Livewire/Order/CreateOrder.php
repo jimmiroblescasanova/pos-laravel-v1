@@ -22,6 +22,15 @@ class CreateOrder extends Component
 
     public function addProduct(Product $selectedProduct)
     {
+        if ($this->order->items->contains('product_id', $selectedProduct->id)) {
+            notyf()
+                ->ripple(true)
+                ->duration(1500)
+                ->addWarning('El producto ya esta en el carrito.');
+
+            return false;
+        }
+
         $this->order->items()->create([
             'product_id' => $selectedProduct->id,
             'price' => $selectedProduct->price,
@@ -117,7 +126,10 @@ class CreateOrder extends Component
 
         $products = Product::query()
             ->search($this->search)
-            ->where('active', 1)
+            ->where([
+                ['inventory', '>', 0],
+                ['active', 1],
+            ])
             ->orderBy('total_sales', 'desc')
             ->take(15)
             ->get();
