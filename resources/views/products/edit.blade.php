@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content-header')
-    <h1 class="m-0">Productos / Editar producto</h1>
+    <div class="col-12">
+        <h1 class="m-0">Productos / Editar producto</h1>
+    </div>
 @endsection
 
 @section('content')
@@ -35,8 +37,8 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="button" onclick="history.back();" class="btn btn-default"><i class="fas fa-backward mr-2"></i>Atrás</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-pencil-alt mr-2"></i>Actualizar producto</button>
+                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit mr-2"></i>Actualizar producto</button>
                     </div>
                 </x-form>
             </div>

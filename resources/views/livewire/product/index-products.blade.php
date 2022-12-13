@@ -71,7 +71,7 @@
                             </td>
                             <td>{{ $product->created_at->format('d/m/Y') }}</td>
                             <td class="text-right">
-                                <a href="{{ route('products.edit', $product) }}" class="btn btn-primary btn-xs">
+                                <a href="{{ route('products.edit', $product) }}" class="btn btn-default btn-xs">
                                     <i class="fas fa-edit mr-2"></i>
                                     Editar
                                 </a>

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content-header')
-    <h1 class="m-0">Productos / Crear producto nuevo</h1>
+    <div class="col-12">
+        <h1 class="m-0">Productos / Crear producto nuevo</h1>
+    </div>
 @endsection
 
 @section('content')
@@ -20,8 +22,9 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <x-form-submit>
-                            <i class="fas fa-pencil-alt mr-2"></i>Guardar producto
+                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        <x-form-submit class="btn btn-sm btn-primary">
+                            <i class="fas fa-save mr-2"></i>Guardar producto
                         </x-form-submit>
                     </div>
                 </x-form>
