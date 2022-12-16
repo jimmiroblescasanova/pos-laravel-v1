@@ -88,7 +88,7 @@
             reserved.
         </footer>
     </div>
-    @livewireScripts
     @stack('third_party_scripts')
+    @livewireScripts
 </body>
 </html>

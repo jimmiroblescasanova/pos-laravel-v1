@@ -1,6 +1,6 @@
 window._ = import("lodash");
 import $ from "jquery";
-window.$ = $;
+window.jQuery = window.$ = $
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -9,12 +9,13 @@ window.$ = $;
  */
 
 
-try {
+// try {
     window.Popper = import("popper.js").default;
     // window.$ = window.jQuery = import("jquery");
 
-    import("bootstrap");
-} catch (e) {}
+    // import("bootstrap");
+    import * as bootstrap from 'bootstrap';
+// } catch (e) {}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

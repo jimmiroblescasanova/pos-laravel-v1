@@ -1,13 +1,18 @@
 <div>
-    <div class="row mb-3">
+    <div class="row">
         <div class="col-12 col-md-6">
             <div class="form-group">
-                <input type="text" wire:model.debounce.500ms='search' class="form-control border-0 shadow-sm" placeholder="Buscar por código, descipción, cod. proveedor...">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" wire:model.debounce.500ms='search' class="form-control" placeholder="Buscar por código, descipción, cod. proveedor...">
+                </div>
             </div>
         </div>
         <div class="col-6 col-md-2">
             <div class="form-group">
-                <select wire:model='active' class="form-control border-0 shadow-sm">
+                <select wire:model='active' class="form-control">
                     <option value="all">Todos</option>
                     <option value="1">Activo</option>
                     <option value="0">Inactivo</option>
@@ -16,7 +21,7 @@
         </div>
         <div class="col-3 col-md-1">
             <div class="form-group">
-                <select wire:model='perPage' class="form-control border-0 shadow-sm">
+                <select wire:model='perPage' class="form-control">
                     <option>10</option>
                     <option>20</option>
                     <option>25</option>
@@ -25,8 +30,8 @@
             </div>
         </div>
         <div class="col-3 col-md-1">
-            <button type="button" wire:click='clear' class="btn btn-default btn-block">
-                <i class="fas fa-eraser mr-2"></i>Limpiar
+            <button type="button" wire:click='clear' data-toggle="tooltip" class="btn btn-default btn-block">
+                <i class="fas fa-eraser mr-2"></i>
             </button>
         </div>
         <div class="col-12 col-md-2">
@@ -87,3 +92,14 @@
         </div>
     </div>
 </div>
+
+@push('third_party_scripts')
+<script type="module">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            placement: 'top',
+            title: "Limpiar valores",
+        });
+    });
+</script>
+@endpush

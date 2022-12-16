@@ -1,18 +1,23 @@
 <div>
     <div class="row">
         <div class="col-12 col-md-5 form-group">
-            <input type="text" wire:model.debounce.300ms='search' class="form-control border-0 shadow-sm"
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" wire:model.debounce.300ms='search' class="form-control"
                 placeholder="Buscar por nombre, codigo de barras, codigo prov...">
+            </div>
         </div>
         <div class="col-6 col-md-3 form-group">
-            <select wire:model='showInventory' class="form-control border-0 shadow-sm">
+            <select wire:model='showInventory' class="form-control">
                 <option value="0">Todos</option>
                 <option value="1">Existencia cero</option>
                 <option value="2">Solo en existencia</option>
             </select>
         </div>
         <div class="col-6 col-md-1 form-group">
-            <select wire:model='perPage' class="form-control border-0 shadow-sm">
+            <select wire:model='perPage' class="form-control">
                 <option>10</option>
                 <option>15</option>
                 <option>25</option>
@@ -20,8 +25,8 @@
             </select>
         </div>
         <div class="col-6 col-md-1 form-group">
-            <button type="button" wire:click='clear' class="btn btn-default btn-block">
-                <i class="fas fa-eraser mr-2"></i> Limpiar
+            <button type="button" wire:click='clear' data-toggle="tooltip" class="btn btn-default btn-block">
+                <i class="fas fa-eraser mr-2"></i>
             </button>
         </div>
         <div class="col-6 col-md-2 form-group">
@@ -96,3 +101,14 @@
         </div>
     </div>
 </div>
+
+@push('third_party_scripts')
+<script type="module">
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        placement: 'top',
+        title: "Limpiar valores",
+    });
+});
+</script>
+@endpush
