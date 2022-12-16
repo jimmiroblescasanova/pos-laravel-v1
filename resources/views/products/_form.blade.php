@@ -24,14 +24,14 @@
             </x-form-input>
         </div>
         <div class="col-sm-3">
-            <x-form-input type="number" name="cost" label="Costo de compra">
+            <x-form-input type="number" step="0.01" name="cost" label="Costo de compra">
                 @slot('prepend')
                     <i class="fas fa-coins"></i>
                 @endslot
             </x-form-input>
         </div>
         <div class="col-sm-3">
-            <x-form-input type="number" name="price" label="Precio de venta (neto)">
+            <x-form-input type="number" step="0.01" name="price" label="Precio de venta (neto)">
                 @slot('prepend')
                     <i class="fas fa-coins"></i>
                 @endslot

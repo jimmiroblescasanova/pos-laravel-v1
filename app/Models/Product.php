@@ -31,6 +31,22 @@ class Product extends Model implements HasMedia
         );
     }
 
+    protected function cost(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+        );
+    }
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+        );
+    }
+
     public function scopeSearch($query, $search)
     {
         $search = "%$search%";

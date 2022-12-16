@@ -37,6 +37,14 @@ class Order extends Model
         );
     }
 
+    protected function total(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+        );
+    }
+
     public function scopeSearch($query, $search)
     {
         $search = "%$search%";
