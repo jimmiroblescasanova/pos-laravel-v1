@@ -38,8 +38,8 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-body p-0">
-            <table class="table">
+        <div class="card-body p-0 table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th style="width: 10%;">ID</th>
@@ -68,8 +68,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="card-footer text-muted">
-            Footer
+        <div class="card-footer">
+            {{ $sales->links() }}
         </div>
     </div>
 </div>

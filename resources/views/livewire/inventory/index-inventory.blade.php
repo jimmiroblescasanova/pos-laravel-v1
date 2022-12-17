@@ -1,22 +1,22 @@
 <div>
     <div class="row">
-        <div class="col-12 col-md-5 form-group">
+        <div class="col-12 col-lg-6 form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
                 </div>
                 <input type="text" wire:model.debounce.300ms='search' class="form-control"
                 placeholder="Buscar por nombre, codigo de barras, codigo prov...">
             </div>
         </div>
-        <div class="col-6 col-md-3 form-group">
+        <div class="col-6 col-md-3 col-lg-2 form-group">
             <select wire:model='showInventory' class="form-control">
                 <option value="0">Todos</option>
                 <option value="1">Existencia cero</option>
                 <option value="2">Solo en existencia</option>
             </select>
         </div>
-        <div class="col-6 col-md-1 form-group">
+        <div class="col-6 col-md-3 col-lg-1 form-group">
             <select wire:model='perPage' class="form-control">
                 <option>10</option>
                 <option>15</option>
@@ -24,12 +24,12 @@
                 <option>50</option>
             </select>
         </div>
-        <div class="col-6 col-md-1 form-group">
+        <div class="col-6 col-md-3 col-lg-1 form-group">
             <button type="button" wire:click='clear' data-toggle="tooltip" class="btn btn-default btn-block">
                 <i class="fas fa-eraser mr-2"></i>
             </button>
         </div>
-        <div class="col-6 col-md-2 form-group">
+        <div class="col-6 col-md-3 col-lg-2 form-group">
             <div class="btn-group btn-block">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">Opciones avanzadas
@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body p-0">
+                <div class="card-body p-0 table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>

@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="card card-default">
-        <div class="card-body p-0">
+        <div class="card-body p-0 table-responsive">
             <table class="table">
                 <thead>
                     <tr>

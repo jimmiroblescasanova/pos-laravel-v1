@@ -10,7 +10,7 @@
             </div>
             @endcan
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-0 table-responsive">
             <table class="table table-sm table-striped">
                 <thead>
                     <tr>

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content-header')
-    <h1 class="m-0">Inventario</h1>
+    <div class="col-12">
+        <h1 class="m-0">Inventario</h1>
+    </div>
 @endsection
 
 @section('content')

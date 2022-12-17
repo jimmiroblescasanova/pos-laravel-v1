@@ -8,10 +8,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-7">
+        <div class="col-12 col-md-7">
             @livewire('access.index-users')
         </div>
-        <div class="col-5">
+        <div class="col-12 col-md-5">
             @livewire('access.index-roles')
         </div>
     </div>

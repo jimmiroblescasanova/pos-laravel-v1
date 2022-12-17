@@ -8,7 +8,7 @@
                 <a href="{{ route('access.roles.create') }}" class="btn btn-xs btn-primary"><i class="fas fa-pencil-alt mr-2"></i>Crear un perfil</a>
             </div>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-0 table-responsive">
             <table class="table table-sm table-striped">
                 <thead>
                     <tr>
