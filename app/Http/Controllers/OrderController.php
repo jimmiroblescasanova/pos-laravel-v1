@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function create()
     {
         $order = new Order();

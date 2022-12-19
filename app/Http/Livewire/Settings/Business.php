@@ -14,7 +14,7 @@ class Business extends Component
     public $logo;
 
     protected $rules = [
-        'name' => 'required|min:6',
+        'name' => 'required|min:3',
         'address' => 'nullable|min:6',
         'logo' => [
             'nullable', 
@@ -28,7 +28,6 @@ class Business extends Component
     {
         $this->name     = settings()->get('app_name');
         $this->address  = settings()->get('app_address');
-        $this->logo     = settings()->get('app_logo');
     }
 
     public function updated($name)
@@ -41,8 +40,8 @@ class Business extends Component
         $this->validate();
 
         settings()->set([
-            'app_name', $this->name,
-            'app_address', $this->address,
+            'app_name' => $this->name,
+            'app_address'=> $this->address,
         ]);
 
         if ($this->logo != null) {
