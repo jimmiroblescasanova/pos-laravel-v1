@@ -10,7 +10,9 @@ use Livewire\WithPagination;
 class IndexSales extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
+    public $perPage = 10;
     public $startDate = null; 
     public $endDate = null; 
     public $users;
@@ -24,12 +26,18 @@ class IndexSales extends Component
     public function clear()
     {
         $this->reset([
+            'perPage',
             'selectedUser',
             'startDate',
             'endDate',
         ]);
         $this->resetPage();
         $this->emit('ClearDates');
+    }
+
+    public function dehydrate()
+    {
+        $this->resetPage();
     }
 
     public function render()
@@ -43,7 +51,7 @@ class IndexSales extends Component
             $q->where('user_id', $this->selectedUser);
         })
         ->orderBy('id', 'desc')
-        ->paginate();
+        ->paginate($this->perPage);
 
         return view('livewire.sale.index-sales', [
             'sales' => $sales,

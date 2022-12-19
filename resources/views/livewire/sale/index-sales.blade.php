@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="form-group col-6">
+        <div class="form-group col-12 col-md-5">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
@@ -8,7 +8,7 @@
                 <input type="text" id="date-range" class="form-control" placeholder="Selecciona un rango de fechas">
             </div>
         </div>
-        <div class="form-group col-3">
+        <div class="form-group col-6 col-md-3">
             <select wire:model="selectedUser" class="form-control">
                 <option value="all">Todos los vendedores</option>
                 @foreach ($users as $id => $user)
@@ -16,10 +16,18 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group col-1">
+        <div class="form-group col-2 col-md-1">
+            <select wire:model="perPage" class="form-control">
+                <option>10</option>
+                <option>15</option>
+                <option>25</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div class="form-group col-2 col-md-1">
             <button wire:click="clear" class="btn btn-block btn-default" data-toggle="tooltip"><i class="fas fa-eraser mr-2"></i></button>
         </div>
-        <div class="col-6 col-md-2 form-group">
+        <div class="form-group col-12 col-md-2">
             <div class="btn-group btn-block">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">Opciones avanzadas
