@@ -38,16 +38,16 @@
 <body>
     <table style="width: 100%; text-align: center;">
         <tr>
-            <td><img src="{{ asset($business->logo) }}" alt="logo empresa" style="max-width: 85px;"></td>
+            <td><img src="{{ asset(settings()->get('app_logo')) }}" alt="logo empresa" style="max-width: 85px;"></td>
         </tr>
         <tr>
             <td>
-                {{ $business->name }}
+                {{ settings()->get('app_name') }}
             </td>
         </tr>
         <tr>
             <td>
-                {{ $business->address }}
+                {{ settings()->get('app_address') }}
             </td>
         </tr>
         <tr>
@@ -99,7 +99,7 @@
     </table>
     <br />
     <table class="greetings">
-        @if ($ticket->signature_line)
+        @if (settings()->get('signature_line'))
             <tr>
                 <td>
                     ______________________<br/>
@@ -108,13 +108,13 @@
             </tr>
         @endif
         <tr>
-            <td>{{ $ticket->greeting_1 }}</td>
+            <td>{{ settings()->get('greeting_1') }}</td>
         </tr>
         <tr>
-            <td>{{ $ticket->greeting_2 }}</td>
+            <td>{{ settings()->get('greeting_2') }}</td>
         </tr>
         <tr>
-            <td>{{ $ticket->greeting_3 }}</td>
+            <td>{{ settings()->get('greeting_3') }}</td>
         </tr>
     </table>
 </body>

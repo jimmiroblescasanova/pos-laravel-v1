@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Settings;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
@@ -12,7 +12,7 @@ class BusinessController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function __invoke(): View
     {
         return view('settings.business');
     }

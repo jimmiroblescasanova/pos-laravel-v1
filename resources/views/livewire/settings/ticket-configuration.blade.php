@@ -79,12 +79,12 @@
                             <B>TOTAL: $ 180.00</B>
                         </span>
                     </div>
-                    @if ($signature_line)
+                    @if (settings()->get('signature_line'))
                         <p>_______________________ <br />Firma de conformidad</p>
                     @endif
-                    <p>{{ $greeting_1 }}</p>
-                    <p>{{ $greeting_2 }}</p>
-                    <p>{{ $greeting_3 }}</p>
+                    <p>{{ settings()->get('greeting_1') }}</p>
+                    <p>{{ settings()->get('greeting_2') }}</p>
+                    <p>{{ settings()->get('greeting_3') }}</p>
                 </div>
             </div>
         </div>

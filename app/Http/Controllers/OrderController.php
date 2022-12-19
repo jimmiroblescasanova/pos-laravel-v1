@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -53,5 +55,20 @@ class OrderController extends Controller
             ->addSuccess('Orden cancelada');
 
         return redirect()->route('home');
+    }
+
+    public function printTicket(Order $order)
+    {
+        $pdf = Pdf::loadView('pdf.ticket', [
+            'order' => $order,
+        ]);
+        $pdf->setPaper('half-letter', 'portrait');
+        
+        $content = $pdf->download()->getOriginalContent();
+        $filePath = 'tickets/'.$order->id.'.pdf';
+
+        Storage::put('public/'.$filePath, $content) ;
+
+        return view('orders.print', compact('filePath'));
     }
 }
