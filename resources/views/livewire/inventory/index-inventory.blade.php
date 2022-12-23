@@ -34,9 +34,15 @@
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">Opciones avanzadas
                 </button>
-                <div class="dropdown-menu dropdown-menu-right" style="">
-                    <a class="dropdown-item" href="#"><i class="fas fa-download mr-2"></i> Descargar inventario</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-upload mr-2"></i> Cargar inventario</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button type="button" id="download-inventory" class="dropdown-item">
+                        <i class="fas fa-download mr-2"></i>
+                        Descargar inventario
+                    </button>
+                    <a class="dropdown-item" href="{{ route('inventory.import') }}">
+                        <i class="fas fa-upload mr-2"></i>
+                        Cargar inventario
+                    </a>
                 </div>
             </div>
         </div>
@@ -100,6 +106,10 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('inventory.export') }}" class="d-none" method="POST" id="download-form">
+        @csrf
+        <input type="hidden" name="type" value="{{ $showInventory }}">
+    </form>
 </div>
 
 @push('third_party_scripts')
@@ -109,6 +119,13 @@ $(function () {
         placement: 'top',
         title: "Limpiar valores",
     });
+});
+
+let btnDownload = document.getElementById('download-inventory');
+let form = document.getElementById('download-form');
+
+btnDownload.addEventListener('click', function() {
+    form.submit();
 });
 </script>
 @endpush

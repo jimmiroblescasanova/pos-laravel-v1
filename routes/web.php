@@ -47,6 +47,9 @@ Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy
 
 Route::get('/inventario', [InventoryController::class, 'index'])->name('inventory.index');
 Route::post('/inventario', [InventoryController::class, 'update'])->name('inventory.update');
+Route::post('/inventario/exportar', [InventoryController::class, 'export'])->name('inventory.export');
+Route::get('/inventario/importar', [InventoryController::class, 'import'])->name('inventory.import');
+Route::post('/inventario/importar', [InventoryController::class, 'handleImport'])->name('inventory.handleImport');
 
 Route::get('/pos', [OrderController::class, 'create'])->name('orders.create');
 Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.delete');
