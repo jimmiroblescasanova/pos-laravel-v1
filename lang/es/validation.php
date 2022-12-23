@@ -172,11 +172,20 @@ return [
     */
 
     'attributes' => [
+        // usuarios
         'name'              => 'nombre',
         'address'           => 'dirección',
         'admin_email'       => 'email',
         'logo'              => 'logotipo',
         'password'          => 'contraseña',
+        // productos
+        'barcode'           => 'código de barras',
+        'supplier_code'     => 'código del proveedor',
+        'costo'             => 'costo',
+        'price'             => 'precio',
+        'inventory'         => 'inventario',
+        'minimum'           => 'mínimo',
+        'description'       => 'descripción',
     ],
 
 ];

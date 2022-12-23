@@ -64,7 +64,7 @@
                                     sortable 
                                     wire:click="sortBy('supplier_code')" 
                                     :direction="$sortField === 'supplier_code' ? $sortDirection : null">
-                                    Código barras
+                                    Código proveedor
                                 </x-table-heading>
                                 <x-table-heading 
                                     sortable 

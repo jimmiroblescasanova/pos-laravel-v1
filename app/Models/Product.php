@@ -24,6 +24,13 @@ class Product extends Model implements HasMedia
         );
     }
 
+    protected function supplierCode(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Str::upper(Str::replace(' ', '', $value)),
+        );
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(

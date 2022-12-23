@@ -24,7 +24,7 @@ class SaveProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'barcode' => ['required', 'min:5', 'string'],
+            'barcode' => ['required', 'min:5', 'alpha_num', 'unique:products,barcode'],
             'name' => ['required', 'min:5', 'string', 'max:255'],
             'supplier_code' => ['nullable', 'min:5', 'string'],
             'cost' => ['nullable', 'numeric'],
