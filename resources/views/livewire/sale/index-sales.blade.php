@@ -33,14 +33,10 @@
                     aria-expanded="false">Opciones avanzadas
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="">
-                    <a class="dropdown-item" href="#">
+                    <button wire:click="export" class="dropdown-item">
                         <i class="fas fa-download mr-2"></i>
                         Descargar filtro XLS
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-upload mr-2"></i>
-                        Cargar inventario
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

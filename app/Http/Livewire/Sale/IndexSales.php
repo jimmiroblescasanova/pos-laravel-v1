@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Sale;
 
+use App\Exports\SalesExport;
 use App\Models\User;
 use App\Models\Order;
 use Livewire\Component;
@@ -38,6 +39,12 @@ class IndexSales extends Component
     public function dehydrate()
     {
         $this->resetPage();
+    }
+
+    public function export()
+    {
+        return (new SalesExport($this->selectedUser, $this->startDate, $this->endDate))
+            ->download('ventas_'.NOW()->format('Ymd').'.xlsx');
     }
 
     public function render()
