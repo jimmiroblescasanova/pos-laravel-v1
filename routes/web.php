@@ -60,3 +60,5 @@ Route::get('/configuraciones/empresa', BusinessController::class)->name('setting
 Route::get('/configuraciones/ticket', TicketController::class)->name('settings.ticket');
 
 Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
+Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');
+Route::get('/ventas/{order}/print', [SaleController::class, 'print'])->name('sales.print');

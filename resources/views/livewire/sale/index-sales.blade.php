@@ -60,9 +60,14 @@
                         <td scope="row">{{ $sale->id }}</td>
                         <td>{{ $sale->updated_at->format('d/m/Y') }}</td>
                         <td>{{ $sale->customer }}</td>
-                        <td>{{ $sale->total }}</td>
+                        <td style="text-align: right;">$ {{ number_format($sale->total, 2) }}</td>
                         <td>{{ $sale->user->name }}</td>
-                        <td></td>
+                        <td>
+                            <a href="{{ route('sales.show', $sale) }}" class="btn btn-xs btn-default">
+                                <i class="fas fa-eye mr-2"></i>
+                                <span>Ver</span>
+                            </a>
+                        </td>
                     </tr>
                     @empty
                         <tr>
