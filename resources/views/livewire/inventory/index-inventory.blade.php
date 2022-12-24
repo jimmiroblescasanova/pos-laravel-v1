@@ -1,38 +1,44 @@
 <div>
     <div class="row">
-        <div class="col-12 col-lg-6 form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+        <div class="col-12 col-md-5 col-lg-6">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" wire:model.debounce.300ms='search' class="form-control"
+                    placeholder="Buscar por nombre, codigo de barras, codigo prov...">
                 </div>
-                <input type="text" wire:model.debounce.300ms='search' class="form-control"
-                placeholder="Buscar por nombre, codigo de barras, codigo prov...">
             </div>
         </div>
-        <div class="col-6 col-md-3 col-lg-2 form-group">
-            <select wire:model='showInventory' class="form-control">
-                <option value="0">Todos</option>
-                <option value="1">Existencia cero</option>
-                <option value="2">Solo en existencia</option>
-            </select>
+        <div class="col-6 col-md-3 col-lg-2">
+            <div class="form-group">
+                <select wire:model='showInventory' class="form-control">
+                    <option value="0">Todos</option>
+                    <option value="1">Existencia cero</option>
+                    <option value="2">Solo en existencia</option>
+                </select>
+            </div>
         </div>
-        <div class="col-6 col-md-3 col-lg-1 form-group">
-            <select wire:model='perPage' class="form-control">
-                <option>10</option>
-                <option>15</option>
-                <option>25</option>
-                <option>50</option>
-            </select>
+        <div class="col-6 col-md-3 col-lg-1">
+            <div class="form-group">
+                <select wire:model='perPage' class="form-control">
+                    <option>10</option>
+                    <option>15</option>
+                    <option>25</option>
+                    <option>50</option>
+                </select>
+            </div>
         </div>
-        <div class="col-6 col-md-3 col-lg-1 form-group">
+        <div class="col-6 col-md-3 col-lg-1">
             <button type="button" wire:click='clear' data-toggle="tooltip" class="btn btn-default btn-block">
                 <i class="fas fa-eraser mr-2"></i>
             </button>
         </div>
-        <div class="col-6 col-md-3 col-lg-2 form-group">
+        <div class="col-6 col-md-3 col-lg-2">
             <div class="btn-group btn-block">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">Opciones avanzadas
+                    aria-expanded="false">Avanzado
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <button type="button" id="download-inventory" class="dropdown-item">
@@ -75,7 +81,7 @@
                                 </x-table-heading>
                                 <th>Cant. minima</th>
                                 <th>Existencia actual</th>
-                                <th class="text-center">
+                                <th class="text-center" style="width: 15%;">
                                     <i class="fas fa-cogs"></i>
                                 </th>
                             </tr>

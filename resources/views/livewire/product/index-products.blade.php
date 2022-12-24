@@ -35,10 +35,21 @@
             </button>
         </div>
         <div class="col-12 col-md-2">
-            <a href="{{ route('products.create') }}" class="btn btn-primary btn-block">
-                <i class="fas fa-plus mr-2"></i>
-                Nuevo producto
-            </a>
+            <div class="btn-group d-flex">
+                <a href="{{ route('products.create') }}" class="btn btn-default">
+                    <i class="fas fa-plus mr-2"></i>
+                    Nuevo
+                </a>
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <button wire:click="export" class="dropdown-item">
+                        <i class="fas fa-download mr-2"></i>
+                        Descargar archivo a XLS
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card card-default">

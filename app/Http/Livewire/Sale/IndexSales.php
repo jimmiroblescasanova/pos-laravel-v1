@@ -13,6 +13,20 @@ class IndexSales extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    protected $queryString = [
+        'page' => ['except' => 1],
+        'perPage' => [
+            'as' => 'show',
+            'except' => 10,
+        ],
+        'startDate' => ['as' => 's'],
+        'endDate' => ['as' => 'e'],
+        'selectedUser' => [
+            'as' => 'u',
+            'except' => 'all',
+        ],
+    ];
+
     public $perPage = 10;
     public $startDate = null; 
     public $endDate = null; 

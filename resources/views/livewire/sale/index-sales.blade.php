@@ -30,7 +30,7 @@
         <div class="form-group col-12 col-md-2">
             <div class="btn-group btn-block">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">Opciones avanzadas
+                    aria-expanded="false">Avanzado
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="">
                     <button wire:click="export" class="dropdown-item">

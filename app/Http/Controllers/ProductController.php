@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(Product $product, SaveProductRequest $request)
+    public function update(Product $product, UpdateProductRequest $request)
     {
         $product->update($request->validated());
 
