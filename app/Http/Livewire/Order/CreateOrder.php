@@ -49,7 +49,7 @@ class CreateOrder extends Component
     public function removeProduct(OrderItem $orderItem)
     {
         $total = 0;
-        $orderItem->delete();
+        $orderItem->forceDelete();
 
         foreach ($this->order->items()->get() as $orderItem) {
             $total += $orderItem->price * $orderItem->quantity;
