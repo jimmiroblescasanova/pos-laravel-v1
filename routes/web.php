@@ -61,4 +61,5 @@ Route::get('/configuraciones/ticket', TicketController::class)->name('settings.t
 
 Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');
+Route::post('/ventas/{order}/ver', [SaleController::class, 'cancel'])->name('sales.cancel');
 Route::get('/ventas/{order}/print', [SaleController::class, 'print'])->name('sales.print');

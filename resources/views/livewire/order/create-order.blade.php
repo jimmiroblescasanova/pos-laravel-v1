@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <div class="row justify-content-between">
                         <span>Carrito de compras</span>
-                        <span>Folio: {{ sprintf('%04d', $order->id) }}</span>
+                        <span>Folio: {{ $order->number }}</span>
                     </div>
                 </div>
                 <div class="card-body p-0 pb-2">

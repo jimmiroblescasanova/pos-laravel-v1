@@ -2,7 +2,7 @@
 
 @section('content-header')
     <div class="col-12">
-        <h1 class="m-0">Venta ID: {{ $order->id }}</h1>
+        <h1 class="m-0">Venta ID: {{ $order->number }}</h1>
     </div>
 @endsection
 
@@ -12,7 +12,7 @@
             <div class="card card-outline card-primary">
                 <div class="card-header d-flex">
                     <span class="mr-auto">Vendedor: {{ $order->user->name }}</span>
-                    <span>Fecha: {{ $order->updated_at->format('d-m-Y') }}</span>
+                    <span>Fecha de Venta: {{ $order->updated_at->format('d-m-Y') }}</span>
                 </div>
                 <div class="card-body">
                     <p>Nombre del cliente: {{ $order->customer }}</p>
@@ -53,14 +53,31 @@
                 <i class="fas fa-paper-plane mr-2"></i>
                 Email
             </a>
-            <a href="#" class="btn btn-lg btn-block btn-outline-danger">
+            <button type="button" id="cancelBtn" class="btn btn-lg btn-block btn-outline-danger">
                 <i class="fas fa-ban mr-2"></i>
                 Cancelar
-            </a>
+            </button>
             <button onclick="history.back();" class="btn btn-lg btn-block btn-outline-secondary">
                 <i class="fas fa-backward mr-2"></i>
                 Atrás
             </button>
         </div>
     </div>
+    <form action="{{ route('orders.delete', $order) }}" id="cancelOrder" method="POST">
+        @csrf
+        @method('delete')
+    </form>
 @stop
+
+@push('third_party_scripts')
+    <script>
+        let btn = document.getElementById('cancelBtn');
+        let form = document.getElementById('cancelOrder');
+        
+        btn.addEventListener('click', () => {
+            if (confirm('¿Estas seguro de cancelar la orden?')) {
+                form.submit();
+            }
+        });
+    </script>
+@endpush

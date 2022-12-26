@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="form-group col-12 col-md-5">
+        <div class="form-group col-12 col-md-6">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-alt"></i></span>
@@ -27,10 +27,11 @@
         <div class="form-group col-2 col-md-1">
             <button wire:click="clear" class="btn btn-block btn-default" data-toggle="tooltip"><i class="fas fa-eraser mr-2"></i></button>
         </div>
-        <div class="form-group col-12 col-md-2">
-            <div class="btn-group btn-block">
+        <div class="form-group col-2 col-md-1">
+            <div class="btn-group d-flex">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                    aria-expanded="false">Avanzado
+                    aria-expanded="false">
+                    <i class="fas fa-plus mr-2"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" style="">
                     <button wire:click="export" class="dropdown-item">
@@ -51,23 +52,18 @@
                         <th>Cliente</th>
                         <th style="width: 10%;">Total</th>
                         <th style="width: 25%;">Vendedor</th>
-                        <th style="width: 10%;"><i class="fas fa-cogs"></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($sales as $sale)
                     <tr>
-                        <td scope="row">{{ $sale->id }}</td>
+                        <td scope="row">
+                            <a href="{{ route('sales.show', $sale) }}">{{ $sale->number }}</a>
+                        </td>
                         <td>{{ $sale->updated_at->format('d/m/Y') }}</td>
                         <td>{{ $sale->customer }}</td>
                         <td style="text-align: right;">$ {{ number_format($sale->total, 2) }}</td>
                         <td>{{ $sale->user->name }}</td>
-                        <td>
-                            <a href="{{ route('sales.show', $sale) }}" class="btn btn-xs btn-default">
-                                <i class="fas fa-eye mr-2"></i>
-                                <span>Ver</span>
-                            </a>
-                        </td>
                     </tr>
                     @empty
                         <tr>

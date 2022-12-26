@@ -56,42 +56,50 @@
         <div class="card-body p-0 table-responsive">
             <table class="table">
                 <thead>
-                    <tr>
-                        <x-table-heading sortable wire:click="sortBy('barcode')" :direction="$sortField === 'barcode' ? $sortDirection : null">
+                    <tr class="text-center">
+                        <x-table-heading 
+                            sortable 
+                            width="15%"
+                            wire:click="sortBy('barcode')" 
+                            :direction="$sortField === 'barcode' ? $sortDirection : null">
                             Código barras
                         </x-table-heading>
                         <x-table-heading sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null"
                             width="30%">
                             Nombre del producto
                         </x-table-heading>
-                        <th>Imagen</th>
                         <th>Precio</th>
                         <th>Estado</th>
                         <th>Fecha alta</th>
-                        <th class="text-center"><i class="fas fa-cogs"></i></th>
+                        <th>Imagen</th>
+                        {{-- <th class="text-center"><i class="fas fa-cogs"></i></th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($products as $product)
                         <tr>
-                            <td scope="row">{{ $product->barcode }}</td>
+                            <td scope="row">
+                                <a href="{{ route('products.edit', $product) }}">
+                                    {{ $product->barcode }}
+                                </a>
+                            </td>
                             <td>{{ $product->name }}</td>
-                            <td><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
-                            <td>{{ $product->price }}</td>
-                            <td>
+                            <td class="text-right">$ {{ number_format($product->price, 2) }}</td>
+                            <td class="text-center">
                                 <span @class([
                                     'badge', 
                                     'badge-success' => $product->active,
                                     'badge-danger' => !$product->active,
-                                ])>{{ $product->active ? 'Activo' : 'Inactivo' }}</span>
+                                    ])>{{ $product->active ? 'Activo' : 'Inactivo' }}</span>
                             </td>
-                            <td>{{ $product->created_at->format('d/m/Y') }}</td>
-                            <td class="text-right">
+                            <td class="text-right">{{ $product->created_at->format('d/m/Y') }}</td>
+                            <td class="text-right"><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
+                            {{-- <td class="text-right">
                                 <a href="{{ route('products.edit', $product) }}" class="btn btn-default btn-xs">
                                     <i class="fas fa-edit mr-2"></i>
                                     Editar
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @empty
                         <tr>

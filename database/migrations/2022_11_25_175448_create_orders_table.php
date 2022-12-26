@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('customer');
             $table->integer('total')->default(0);
-            $table->boolean('closed')->default(0);
+            $table->boolean('closed')->default(false);
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -25,6 +25,15 @@ class SaleController extends Controller
         ]);
     }
 
+    public function cancel(Order $order)
+    {
+        $order->update([
+            'canceled_at' => NOW(),
+        ]);
+
+        return back();
+    }
+
     public function print(Order $order)
     {
         $pdf = Pdf::loadView('pdf.ticket', [
