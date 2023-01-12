@@ -37,7 +37,7 @@
                             @endforeach
                             <tr>
                                 <td scope="row" colspan="3" class="text-right">TOTAL:</td>
-                                <td class="text-right">$ {{ number_format($order->items()->sum('price')/100, 2) }}</td>
+                                <td class="text-right">$ {{ number_format($order->total, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>

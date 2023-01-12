@@ -57,4 +57,9 @@ class Order extends Model
             get: fn ($value) => $value / 100,
         );
     }
+
+    public function scopeOnlyClosed($query)
+    {
+        return $query->where('closed', true);
+    }
 }
