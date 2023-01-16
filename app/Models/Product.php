@@ -54,6 +54,11 @@ class Product extends Model implements HasMedia
         );
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     public function scopeSearch($query, $search)
     {
         $search = "%$search%";

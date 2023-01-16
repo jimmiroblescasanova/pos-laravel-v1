@@ -49,6 +49,14 @@
             </a>
         </li>
     </ul>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('reports.product-sales.index') }}" class="nav-link {{ Route::is('reports.product-sales.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ventas por producto</p>
+            </a>
+        </li>
+    </ul>
 </li>
 @can('users_access')
 <li class="nav-item">

@@ -38,7 +38,7 @@ class DailySales extends Component
         $content = $pdf->download()->getOriginalContent();
         $this->pdfUrl = 'reports/daily-sales-'.date('his').'.pdf';
 
-        Storage::put('public/'.$this->pdfUrl, $content) ;
+        Storage::put('public/'.$this->pdfUrl, $content);
     }
 
     public function render()

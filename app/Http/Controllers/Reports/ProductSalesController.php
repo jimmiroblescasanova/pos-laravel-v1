@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
 
-class DailySalesController extends Controller
+class ProductSalesController extends Controller
 {
     public function __invoke()
     {
-        return view('reports.daily-sales.index');
+        return view('reports.product-sales.index');
     }
 }
