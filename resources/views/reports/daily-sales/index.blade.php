@@ -2,10 +2,10 @@
 
 @section('content-header')
     <div class="col-12">
-        <h1 class="m-0">Configuraciones</h1>
+        <h1 class="m-0">Reporte: Ventas del día</h1>
     </div>
 @endsection
 
 @section('content')
-    @livewire('settings.business')
+    @livewire('reports.daily-sales')
 @stop

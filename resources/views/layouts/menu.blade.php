@@ -33,6 +33,23 @@
     </a>
 </li>
 @endcan
+<li class="nav-item {{ Route::is('reports.*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link {{ Route::is('reports.*') ? 'active' : '' }}">
+        <i class="fas fa-folder-open nav-icon"></i>
+        <p>
+            Reportes
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('reports.daily-sales.index') }}" class="nav-link {{ Route::is('reports.daily-sales.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Ventas del día</p>
+            </a>
+        </li>
+    </ul>
+</li>
 @can('users_access')
 <li class="nav-item">
     <a href="{{ route('access.index') }}" class="nav-link {{ Route::is('access.*') ? 'active' : '' }}">

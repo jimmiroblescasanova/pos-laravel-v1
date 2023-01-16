@@ -10,6 +10,7 @@ use App\Http\Controllers\AccessController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Settings\TicketController;
 use App\Http\Controllers\Settings\BusinessController;
 
@@ -63,3 +64,10 @@ Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');
 Route::post('/ventas/{order}/ver', [SaleController::class, 'cancel'])->name('sales.cancel');
 Route::get('/ventas/{order}/print', [SaleController::class, 'print'])->name('sales.print');
+
+Route::group([
+    'prefix' => 'reportes',
+    'as' => 'reports.',
+], function () {
+    Route::get('/ventas/ventas-del-dia', [DailySalesController::class, 'index'])->name('daily-sales.index');
+});
