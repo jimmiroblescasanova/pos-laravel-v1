@@ -59,7 +59,7 @@
             <tr>
                 <td id="reportName">
                     <p>REPORTE DE VENTAS DEL D&Iacute;A</p>
-                    <p>{{ $date }}</p>
+                    <p>{{ $date->format('d/m/Y') }}</p>
                 </td>
             </tr>
             <tr>

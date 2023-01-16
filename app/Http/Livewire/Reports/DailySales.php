@@ -15,6 +15,10 @@ class DailySales extends Component
     public $pdfUrl = null;
     public $form;
 
+    protected $rules = [
+        'form.date' => ['required', 'date', 'before_or_equal:today'],
+    ];
+
     public function mount()
     {
         $this->users = User::pluck('name', 'id');
@@ -23,6 +27,8 @@ class DailySales extends Component
 
     public function pdf()
     {
+        $this->validate();
+
         $result = Order::query()
         ->where('closed', true)
         ->whereDate('updated_at', $this->form['date'])
@@ -33,7 +39,7 @@ class DailySales extends Component
 
         $pdf = Pdf::loadView('reports.daily-sales.pdf', [
             'documents' => $result,
-            'date' => Carbon::parse($this->form['date'])->format('d/m/Y'),
+            'date' => Carbon::parse($this->form['date']),
         ]);
         $content = $pdf->download()->getOriginalContent();
         $this->pdfUrl = 'reports/daily-sales-'.date('his').'.pdf';

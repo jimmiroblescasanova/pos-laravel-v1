@@ -15,6 +15,11 @@ class ProductSales extends Component
     public $pdfUrl = null;
     public $form;
 
+    protected $rules = [
+        'form.startDate'    => 'required|date',
+        'form.endDate'      => 'required|date|after_or_equal:form.startDate',
+    ];
+
     public function mount()
     {
         $this->products = Product::pluck('name', 'id');
@@ -23,6 +28,8 @@ class ProductSales extends Component
 
     public function pdf()
     {
+        $this->validate();
+
         $result = OrderItem::query()
         ->whereBetween('updated_at', [$this->form['startDate'], $this->form['endDate']." 23:59:59"])
         ->when($this->form['product'] != 'all', function($q) {
@@ -33,10 +40,11 @@ class ProductSales extends Component
 
         $pdf = Pdf::loadView('reports.product-sales.pdf', [
             'orderItems' => $result,
-            'date' => Carbon::parse($this->form['startDate'])->format('d/m/Y') . " - " . Carbon::parse($this->form['endDate'])->format('d/m/Y'),
+            'startDate' => Carbon::parse($this->form['startDate'])->format('d/m/Y'),
+            'endDate' => Carbon::parse($this->form['endDate'])->format('d/m/Y'),
         ]);
         $content = $pdf->download()->getOriginalContent();
-        $this->pdfUrl = 'reports/daily-sales-'.date('his').'.pdf';
+        $this->pdfUrl = 'reports/product-sales-'.date('his').'.pdf';
 
         Storage::put('public/'.$this->pdfUrl, $content);
     }

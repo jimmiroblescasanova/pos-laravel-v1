@@ -59,7 +59,7 @@
             <tr>
                 <td id="reportName">
                     <p>REPORTE DE VENTAS POR PRODUCTO</p>
-                    <p>{{ $date }}</p>
+                    <p>DEL {{ $startDate }} AL {{ $endDate }}</p>
                 </td>
             </tr>
             <tr>
@@ -72,6 +72,7 @@
                                     <th>Folio</th>
                                     <th>Fecha</th>
                                     <th>Cantidad</th>
+                                    <th colspan="2" style="width: 120px;">Precio U.</th>
                                     <th colspan="2" style="width: 120px;">Importe</th>
                                 </tr>
                             </thead>
@@ -83,6 +84,8 @@
                                         <td style="text-align: center;">{{ $item->quantity }}</td>
                                         <td class="money-sign">$</td>
                                         <td class="total">{{ number_format( $item->price, 2) }}</td>
+                                        <td class="money-sign">$</td>
+                                        <td class="total">{{ number_format($item->quantity * $item->price, 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -186,6 +186,9 @@ return [
         'inventory'         => 'inventario',
         'minimum'           => 'mínimo',
         'description'       => 'descripción',
+        // reportes
+        'form.startDate'    => 'fecha inicial',
+        'form.endDate'      => 'fecha final',
     ],
 
 ];

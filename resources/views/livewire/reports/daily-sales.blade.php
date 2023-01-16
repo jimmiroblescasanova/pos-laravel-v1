@@ -5,27 +5,32 @@
                 <div class="card-header">
                     Parámetros del reporte
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="date">Fecha</label>
-                        <input type="date" class="form-control" wire:model="form.date" id="date">
+                <form wire:submit.prevent='pdf'>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="date">Fecha</label>
+                            <input type="date" class="form-control" wire:model="form.date" id="date">
+                            @error('form.date')
+                                <span class="text-xs text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Seleccionar vendedor</label>
+                            <select class="form-control" wire:model="form.user">
+                                <option value="all">== Todos los vendedores ==</option>
+                                @foreach ($users as $id => $user)
+                                <option value="{{ $id }}">{{ $user }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Seleccionar vendedor</label>
-                        <select class="form-control" wire:model="form.user">
-                            <option value="all">== Todos los vendedores ==</option>
-                            @foreach ($users as $id => $user)
-                            <option value="{{ $id }}">{{ $user }}</option>
-                            @endforeach
-                        </select>
+                    <div class="card-footer text-muted">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-file-pdf mr-2"></i>
+                            PDF
+                        </button>
                     </div>
-                </div>
-                <div class="card-footer text-muted">
-                    <button type="button" wire:click="pdf" class="btn btn-sm btn-danger">
-                        <i class="fas fa-file-pdf mr-2"></i>
-                        PDF
-                    </button>
-                </div>
+                </form>
             </div>
         </div>
         <div class="col-12 col-md-8">
