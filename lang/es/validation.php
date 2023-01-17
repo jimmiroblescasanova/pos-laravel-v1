@@ -187,6 +187,7 @@ return [
         'minimum'           => 'mínimo',
         'description'       => 'descripción',
         // reportes
+        'form.date'         => 'fecha',
         'form.startDate'    => 'fecha inicial',
         'form.endDate'      => 'fecha final',
     ],

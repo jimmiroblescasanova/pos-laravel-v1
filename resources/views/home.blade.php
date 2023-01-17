@@ -2,17 +2,19 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-8">
             <div class="card">
                 <div class="card-header border-0">
                     Gráfica de ventas
                 </div>
                 <div class="card-body">
-                    <canvas id="myChart"></canvas>
+                    <div class="chart">
+                        <canvas id="salesChart" height="100"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-4">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3><sup style="font-size: 20px">$</sup>{{ number_format($dailySales/100, 2) }}</h3>
@@ -23,30 +25,14 @@
                 </div>
                 <a href="{{ route('sales.index') }}" class="small-box-footer">Ir a ventas <i class="fas fa-arrow-circle-right ml-2"></i></a>
             </div>
-            <div class="card card-danger card-outline">
+            <div class="card">
                 <div class="card-header border-0">
-                    Top 5 productos
+                    Top 5 productos 
                 </div>
-                <div class="card-body p-0">
-                    <table class="table table-sm table-valign-middle">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Ventas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($top10products as $product)
-                            <tr>
-                                <td>
-                                    <img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" width="50px" class="image-circle mr-2">
-                                    {{ $product->name }}
-                                </td>
-                                <td class="text-right">{{ $product->total_sales }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas id="productChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,24 +42,43 @@
 @push('third_party_scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('myChart');
-    let labels = {{ Js::from($chartLabels) }}
-    let data = {{ Js::from($chartData) }}
-
-    new Chart(ctx, {
+    const sChart = document.getElementById('salesChart');
+    new Chart(sChart, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: {{ Js::from($historySales->keys()) }},
             datasets: [{
-            label: 'Ventas del Mes',
-            data: data,
+            label: 'Total del mes',
+            data: {{ Js::from($historySales->values()) }},
             borderWidth: 1
             }]
         },
-            options: {
-                scales: {
+        options: {
+            scales: {
                 y: {
                     beginAtZero: false
+                }
+            }, 
+        }
+    });
+
+    const pChart = document.getElementById('productChart');
+    new Chart(pChart, {
+        type: 'pie',
+        data: {
+            labels: {{ Js::from($top5products->keys()) }},
+            datasets: [{
+                label: 'Ventas',
+                data: {{ Js::from($top5products->values()) }},
+                borderWidth: 1,
+                hoverOffset: 9,
+            }]
+        }, 
+        options: {
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    align: "middle"
                 }
             }
         }
