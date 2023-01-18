@@ -26,7 +26,7 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
     {
         return [
             '*.0' => ['required', 'alpha_num', 'min:5'],
-            '*.1' => ['string', 'min:5'],
+            '*.1' => ['nullable', 'string', 'min:5'],
             '*.2' => ['string', 'min:5', 'max:255'],
             '*.3' => ['numeric'],
             '*.4' => ['required', 'numeric'],

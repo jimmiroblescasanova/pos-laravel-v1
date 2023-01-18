@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\DatabaseNotification;
 
 class HomeController extends Controller
 {
@@ -27,5 +25,20 @@ class HomeController extends Controller
     public function index()
     { 
         return view('home');
+    }
+
+    public function readNotification($id)
+    {
+        $notification = DatabaseNotification::where('id', $id)->first();
+        $notification->markAsRead();
+
+        return redirect()->route('inventory.index', 's='.$notification->data['barcode']);
+    }
+
+    public function readAllNotifications()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+
+        return back();
     }
 }

@@ -21,6 +21,8 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/notificacion/{id}', [HomeController::class, 'readNotification'])->name('home.readNotification');
+Route::get('/leer-notificaciones', [HomeController::class, 'readAllNotifications'])->name('home.readAllNotifications');
 
 Route::group([
     'prefix' => '/accesos',

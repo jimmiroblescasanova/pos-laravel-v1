@@ -14,6 +14,11 @@ class IndexInventory extends Component
 
     public $showInventory = 0;
 
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 's'],
+        'perPage' => ['except' => 10, 'as' => 'show'],
+    ];
+
     public function mount()
     {
         $this->sortField = 'barcode';

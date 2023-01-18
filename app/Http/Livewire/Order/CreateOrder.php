@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\OrderItem;
+use App\Jobs\SoldOutProduct;
 
 class CreateOrder extends Component
 {
@@ -106,10 +107,16 @@ class CreateOrder extends Component
     {
         // Descontar el inventario y sumar la venta
         foreach ($this->order->items as $item) {
+            $inventory = $item->product->inventory - $item->quantity;
+
             $item->product()->update([
-                'inventory'     => $item->product->inventory - $item->quantity,
+                'inventory'     => $inventory,
                 'total_sales'   => $item->product->total_sales + $item->quantity,
             ]);
+
+            if ($inventory == 0) {
+                SoldOutProduct::dispatch($item->product->barcode);
+            }
         }
 
         // Terminar y cerrar orden 
