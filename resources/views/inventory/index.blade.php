@@ -24,12 +24,10 @@
                     <input type="hidden" name="product">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="minimum">Cantidad min en almacen</label>
-                            <input type="text" class="form-control" name="minimum" id="minimum" required>
+                            <x-form-input type="number" label="Cantidad min en almacen" name="minimum" required />
                         </div>
                         <div class="form-group">
-                            <label for="inventory">Existencia total</label>
-                            <input type="text" class="form-control" name="inventory" id="inventory" required>
+                            <x-form-input type="number" label="Existencia total" name="inventory" required />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -48,6 +46,10 @@
         let inputProduct = document.querySelector('input[name="product"]');
         let inputMinimum = document.querySelector('input[name="minimum"]');
         let inputInventory = document.querySelector('input[name="inventory"]');
+
+        @if (count($errors) > 0)
+            myModal.modal('show');
+        @endif
         
         $('.btn-edit').on('click', function(e) {
             $.ajax({

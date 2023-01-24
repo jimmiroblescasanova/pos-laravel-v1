@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Exports\InventoryExport;
 use App\Imports\InventoryImport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\UpdateInventoryRequest;
 
 class InventoryController extends Controller
 {
@@ -19,7 +19,7 @@ class InventoryController extends Controller
         return view('inventory.index');
     }
 
-    public function update(Request $request)
+    public function update(UpdateInventoryRequest $request)
     {
         $product = Product::findOrFail($request->product);
 
