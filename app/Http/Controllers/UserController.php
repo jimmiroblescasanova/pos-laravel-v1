@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,12 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    public function create()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function create(): View
     {
         $roles = Role::pluck('name');
 
@@ -43,7 +49,7 @@ class UserController extends Controller
         return redirect()->route('access.index');
     }
 
-    public function edit(User $user)
+    public function edit(User $user): View
     {
         $roles = Role::pluck('name');
 

@@ -21,7 +21,9 @@ class DailySales extends Component
 
     public function mount()
     {
-        $this->users = User::pluck('name', 'id');
+        $this->users = User::query()
+            ->hideAdmin()
+            ->pluck('name', 'id');
         $this->form['user'] = 'all';
     }
 

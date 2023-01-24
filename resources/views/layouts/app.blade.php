@@ -61,7 +61,7 @@
                                 class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
-                                <small>Miembro desde {{ Auth::user()->created_at->format('M. Y') }}</small>
+                                <small>Perfil: {{ Auth::user()->getRoleNames() }}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
@@ -100,13 +100,7 @@
         </div>
 
         <!-- Main Footer -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.5
-            </div>
-            <strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
-        </footer>
+        @include('layouts.footer')
     </div>
     @stack('third_party_scripts')
     @livewireScripts

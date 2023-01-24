@@ -35,7 +35,9 @@ class IndexSales extends Component
 
     public function mount()
     {
-        $this->users = User::pluck('name', 'id');
+        $this->users = User::query()
+            ->hideAdmin()
+            ->pluck('name', 'id');
     }
 
     public function clear()

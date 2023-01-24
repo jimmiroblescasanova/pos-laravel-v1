@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class SaleController extends Controller
@@ -13,12 +13,12 @@ class SaleController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(): View
     {
         return view('sales.index');
     }
 
-    public function show(Order $order)
+    public function show(Order $order): View
     {
         return view('sales.show', [
             'order' => $order,

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 use App\Http\Requests\SaveProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -13,12 +13,12 @@ class ProductController extends Controller
         return $this->middleware('auth');
     }
 
-    public function index()
+    public function index(): View
     {
         return view('products.index');
     }
 
-    public function create()
+    public function create(): View
     {
         $product = new Product();
         return view('products.create', compact('product'));
@@ -35,7 +35,7 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         return view('products.edit', compact('product'));
     }
