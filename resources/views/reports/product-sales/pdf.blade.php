@@ -9,7 +9,12 @@
         table {
             boder: none;
             border-collapse: collapse;
+            page-break-inside: auto;
             width: 100%;
+        }
+        caption {
+            padding: 15px 0;
+            text-align: left;
         }
         .table-bordered td,
         .table-bordered th {
@@ -62,38 +67,34 @@
                     <p>DEL {{ $startDate }} AL {{ $endDate }}</p>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    @foreach ($orderItems as $key => $items)
-                        <p>Producto: <b>{{ $key }}</b></p>
-                        <table class="table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Folio</th>
-                                    <th>Fecha</th>
-                                    <th>Cantidad</th>
-                                    <th colspan="2" style="width: 120px;">Precio U.</th>
-                                    <th colspan="2" style="width: 120px;">Importe</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($items as $item)
-                                    <tr>
-                                        <td>{{ $item->order->id }}</td>
-                                        <td>{{ $item->updated_at->format('d/m/Y') }}</td>
-                                        <td style="text-align: center;">{{ $item->quantity }}</td>
-                                        <td class="money-sign">$</td>
-                                        <td class="total">{{ number_format( $item->price, 2) }}</td>
-                                        <td class="money-sign">$</td>
-                                        <td class="total">{{ number_format($item->quantity * $item->price, 2) }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @endforeach
-                </td>
-            </tr>
         </tbody>
     </table>
+    @foreach ($orderItems as $key => $items)
+        <table class="table-bordered">
+            <caption>Producto: <b>{{ $key }}</b></caption>
+            <thead>
+                <tr>
+                    <th>Folio</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th colspan="2" style="width: 120px;">Precio U.</th>
+                    <th colspan="2" style="width: 120px;">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($items as $item)
+                    <tr>
+                        <td>{{ $item->order->id }}</td>
+                        <td>{{ $item->updated_at->format('d/m/Y') }}</td>
+                        <td style="text-align: center;">{{ $item->quantity }}</td>
+                        <td class="money-sign">$</td>
+                        <td class="total">{{ number_format( $item->price, 2) }}</td>
+                        <td class="money-sign">$</td>
+                        <td class="total">{{ number_format($item->quantity * $item->price, 2) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endforeach
 </body>
 </html>
