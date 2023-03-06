@@ -13,5 +13,5 @@
 @endsection
 
 @section('content')
-    <embed src="{{ asset($filePath) }}" style="width: 100%; height: 80vh;" frameborder="0">
+    <embed src="{{ asset('storage/'.$filePath) }}" style="width: 100%; height: 80vh;" frameborder="0">
 @stop
