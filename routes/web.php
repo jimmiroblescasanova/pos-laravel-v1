@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Reports\DailySalesController;
+use App\Http\Controllers\Reports\InventoryCountController;
 use App\Http\Controllers\Reports\ProductSalesController;
 use App\Http\Controllers\Settings\TicketController;
 use App\Http\Controllers\Settings\BusinessController;
@@ -72,6 +73,18 @@ Route::group([
     'prefix' => 'reportes',
     'as' => 'reports.',
 ], function () {
-    Route::get('/ventas/ventas-del-dia', DailySalesController::class)->name('daily-sales.index');
-    Route::get('/ventas/ventas-por-producto', ProductSalesController::class)->name('product-sales.index');
+    Route::group([
+        'prefix' => 'ventas',
+        'as' => 'sales.',
+    ], function () {
+        Route::get('/ventas-del-dia', DailySalesController::class)->name('daily-sales.index');
+        Route::get('/ventas-por-producto', ProductSalesController::class)->name('product-sales.index');
+    });
+    
+    Route::group([
+        'prefix' => 'inventario',
+        'as' => 'inventory.',
+    ], function () {
+        Route::get('/conteo', InventoryCountController::class)->name('count.index');
+    });
 });

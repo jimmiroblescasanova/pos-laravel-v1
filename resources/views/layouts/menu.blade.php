@@ -42,19 +42,41 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="{{ route('reports.daily-sales.index') }}" class="nav-link {{ Route::is('reports.daily-sales.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ventas del día</p>
+        <li class="nav-item {{ Route::is('reports.sales.*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link">
+                <i class="fas fa-angle-right nav-icon"></i>
+                <p>Ventas</p>
+                <i class="right fas fa-angle-left"></i>
             </a>
+            <ul class="nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('reports.sales.daily-sales.index') }}" class="nav-link {{ Route::is('reports.sales.daily-sales.index') ? 'active' : '' }}">
+                        <i class="fas fa-angle-double-right nav-icon"></i>
+                        <p>Ventas del día</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('reports.sales.product-sales.index') }}" class="nav-link {{ Route::is('reports.sales.product-sales.index') ? 'active' : '' }}">
+                        <i class="fas fa-angle-double-right nav-icon"></i>
+                        <p>Ventas por producto</p>
+                    </a>
+                </li>
+            </ul>
         </li>
-    </ul>
-    <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('reports.product-sales.index') }}" class="nav-link {{ Route::is('reports.product-sales.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ventas por producto</p>
+            <a href="#" class="nav-link {{ Route::is('reports.inventory.*') ? 'menu-open' : '' }}">
+                <i class="fas fa-angle-right nav-icon"></i>
+                <p>Inventarios</p>
+                <i class="right fas fa-angle-left"></i>
             </a>
+            <ul class="nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('reports.inventory.count.index') }}" class="nav-link {{ Route::is('reports.inventory.count.index') ? 'active' : '' }}">
+                        <i class="fas fa-angle-double-right nav-icon"></i>
+                        <p>Toma de inventario</p>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </li>
