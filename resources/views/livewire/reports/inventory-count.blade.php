@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body p-0">
                     @if (!is_null($pdf))
-                        <embed src="{{ asset($pdf) }}" style="width: 100%; height: 70vh;" frameborder="0">
+                        <embed src="{{ asset('storage/'.$pdf) }}" style="width: 100%; height: 70vh;" frameborder="0">
                     @endif
                 </div>
             </div>
