@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'name' => 'Administrador',
+            'email' => 'admin@inventarionube.com',
             'password' => Hash::make('password'),
         ]);
 
