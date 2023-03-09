@@ -45,7 +45,7 @@
                     Ticket de ejemplo
                 </div>
                 <div class="card-body text-center px-5">
-                    <p><img src="{{ asset( settings()->get('app_logo') ) }}" alt="logo empresa" style="max-height: 85px;"></p>
+                    <p><img src="{{ asset('storage/' . settings()->get('app_logo') ) }}" alt="logo empresa" style="max-height: 85px;"></p>
                     <p>{{ settings()->get('app_name') }}</p>
                     <p>{{ settings()->get('app_address') }}</p>
                     <div class="row justify-content-between mb-3">

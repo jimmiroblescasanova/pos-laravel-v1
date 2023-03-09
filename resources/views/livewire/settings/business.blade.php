@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <img src="{{ asset(settings()->get('app_logo')) }}" height="100">
+                        <img src="{{ asset('storage/'.settings()->get('app_logo')) }}" height="100">
                     </div>
                 </div>
             </div>

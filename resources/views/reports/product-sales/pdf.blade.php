@@ -51,7 +51,7 @@
                     <table>
                         <tr>
                             <td style="width: 100px;">
-                                <img src="{{ asset(settings()->get('app_logo')) }}" alt="logo empresa" style="max-width: 85px;">
+                                <img src="{{ asset('storage/' . settings()->get('app_logo')) }}" alt="logo empresa" style="max-width: 85px;">
                             </td>
                             <td style="font-size: 15pt; text-align:center;">{{ settings()->get('app_name') }}</td>
                             <td style="font-size: 9pt; width: 100px; text-align:right; vertical-align:top;">
