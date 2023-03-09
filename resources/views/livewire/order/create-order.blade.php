@@ -60,6 +60,12 @@
                                 </tr>
                             @endforelse
                             <tr>
+                                <td colspan="2" class="text-right">Descuento:</td>
+                                <td class="text-right">
+                                    <input type="text" class="form-control form-control-sm text-right" wire:model.lazy='discount' value="{{ $discount }}">
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="2" class="text-right">Total:</td>
                                 <td class="text-right">
                                     {{ accounting($order->total) }}

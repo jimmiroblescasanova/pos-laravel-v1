@@ -7,7 +7,7 @@
 
     <style>
         .itemsTable {
-            border: 1px solid gray;
+            border: 0.5px solid gray;
             border-collapse: collapse;
             width: 100%;
         }
@@ -90,9 +90,13 @@
         </tbody>
     </table>
     <br />
-    <table style="border: 1px solid gray; width:100%;">
+    <table style="border: 0.5px solid gray; width:100%;">
         <tr>
-            <td>Vendido por: {{ $order->user->name }}</td>
+            <td rowspan="2" style="vertical-align: text-top;">Vendedor: {{ $order->user->name }}</td>
+            <td style="text-align: right;">Descuento:</td>
+            <td style="text-align: right;">{{ accounting($order->discount) }}</td>
+        </tr>
+        <tr>
             <td style="text-align: right;">Total:</td>
             <td style="text-align: right;">{{ accounting($order->total) }}</td>
         </tr>

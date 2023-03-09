@@ -36,6 +36,10 @@
                             </tr>
                             @endforeach
                             <tr>
+                                <td scope="row" colspan="3" class="text-right">Descuento:</td>
+                                <td class="text-right">$ {{ number_format($order->discount, 2) }}</td>
+                            </tr>
+                            <tr>
                                 <td scope="row" colspan="3" class="text-right">TOTAL:</td>
                                 <td class="text-right">$ {{ number_format($order->total, 2) }}</td>
                             </tr>

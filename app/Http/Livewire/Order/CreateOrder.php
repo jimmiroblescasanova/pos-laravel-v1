@@ -13,12 +13,14 @@ class CreateOrder extends Component
     public $order;
     public $search = '';
     public $customerName;
+    public $discount;
     public $itemsCount = 0;
 
     public function mount(Order $order)
     {
         $this->order = $order;
         $this->customerName = $this->order->customer;
+        $this->discount = $this->order->discount;
     }
 
     public function addProduct(Product $selectedProduct)
@@ -57,6 +59,10 @@ class CreateOrder extends Component
         }
 
         $this->order->total = $total;
+        if (($total - $this->order->discount) < 0) {
+            $this->order->discount = 0;
+            $this->discount = 0;
+        }
         $this->order->save();
 
         notyf()
@@ -101,6 +107,33 @@ class CreateOrder extends Component
             ->ripple(true)
             ->duration(1500)
             ->addInfo('Cliente actualizado');
+    }
+
+    public function updatedDiscount($value)
+    {
+        $grandTotal = $this->order->total + $this->order->discount;
+
+        if (($grandTotal - $value) < 0) {
+            $this->discount = $this->order->discount;
+
+            notyf()
+                ->ripple(true)
+                ->duration(1500)
+                ->addError('Descuento excede el total');
+            
+            return false;
+        }
+
+        $this->order->update([
+            'discount' => $value,
+            'total' => $grandTotal - $value,
+        ]);
+
+        notyf()
+            ->ripple(true)
+            ->duration(1500)
+            ->addSuccess('Descuento actualizado');
+        
     }
 
     public function closeOrder()

@@ -88,6 +88,7 @@
     </a>
 </li>
 @endcan
+@can('configurations_access')
 <li class="nav-item {{ Route::is('settings.*') ? 'menu-open' : '' }}">
     <a href="#" class="nav-link {{ Route::is('settings.*') ? 'active' : '' }}">
         <i class="fas fa-cogs nav-icon"></i>
@@ -111,3 +112,4 @@
         </li>
     </ul>
 </li>
+@endcan

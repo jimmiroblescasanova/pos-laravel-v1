@@ -16,6 +16,7 @@ class Order extends Model
 
     protected $fillable = [
         'customer',
+        'discount',
         'total', 
         'closed',
         'user_id',
@@ -47,6 +48,14 @@ class Order extends Model
     {
         return Attribute::make(
             set: fn ($value) => Str::upper($value),
+        );
+    }
+
+    protected function discount(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value * 100,
+            get: fn ($value) => $value / 100,
         );
     }
 
