@@ -6,7 +6,6 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Traits\WithSorting;
 use App\Traits\WithSearching;
-use App\Exports\ProductsExport;
 
 class IndexProducts extends Component
 {
@@ -28,12 +27,6 @@ class IndexProducts extends Component
             'active',
         ]);
         $this->resetPage();
-    }
-
-    public function export()
-    {
-        return (new ProductsExport($this->active, $this->search))
-            ->download('productos_'. NOW()->format('Ymd') .'.xlsx');
     }
 
     public function render()

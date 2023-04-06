@@ -46,6 +46,7 @@ Route::group([
 Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/nuevo', [ProductController::class, 'create'])->name('products.create');
 Route::post('/productos/nuevo', [ProductController::class, 'store'])->name('products.store');
+Route::post('/productos/descargar', [ProductController::class, 'download'])->name('products.download');
 Route::get('/productos/{product}/editar', [ProductController::class, 'edit'])->name('products.edit');
 Route::patch('/productos/{product}/editar', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy'])->name('products.destroy');

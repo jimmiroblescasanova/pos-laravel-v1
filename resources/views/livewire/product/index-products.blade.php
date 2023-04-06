@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-8">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -34,23 +34,6 @@
                 <i class="fas fa-eraser mr-2"></i>
             </button>
         </div>
-        <div class="col-12 col-md-2">
-            <div class="btn-group d-flex">
-                <a href="{{ route('products.create') }}" class="btn btn-default">
-                    <i class="fas fa-plus mr-2"></i>
-                    Nuevo
-                </a>
-                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <button wire:click="export" class="dropdown-item">
-                        <i class="fas fa-download mr-2"></i>
-                        Descargar archivo a XLS
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="card card-default">
         <div class="card-body p-0 table-responsive">
@@ -72,7 +55,6 @@
                         <th>Estado</th>
                         <th>Fecha alta</th>
                         <th>Imagen</th>
-                        {{-- <th class="text-center"><i class="fas fa-cogs"></i></th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -94,12 +76,6 @@
                             </td>
                             <td class="text-right">{{ $product->created_at->format('d/m/Y') }}</td>
                             <td class="text-right"><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
-                            {{-- <td class="text-right">
-                                <a href="{{ route('products.edit', $product) }}" class="btn btn-default btn-xs">
-                                    <i class="fas fa-edit mr-2"></i>
-                                    Editar
-                                </a>
-                            </td> --}}
                         </tr>
                     @empty
                         <tr>
