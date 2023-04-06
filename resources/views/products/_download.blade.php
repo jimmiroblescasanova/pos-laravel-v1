@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('products.download') }}" method="post">
+            <form action="{{ route('products.download', '#create') }}" method="post">
                 @csrf 
                 <div class="modal-body">
                     <div class="form-group">
@@ -50,6 +50,9 @@
                                 Precio
                             </label>
                         </div>
+                        @error('columns')
+                            <span class="text-danger text-sm">Debes seleccionar al menos una opción</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -37,3 +37,15 @@
     <!-- Modal download products -->
     @include('products._download')
 @stop
+
+@push('third_party_scripts')
+    <script type="module">
+        if (window.location.hash === '#create') {
+            $('#downloadProducts').modal('show');
+        }
+
+        $('#downloadProducts').on('hide.bs.modal', function (){
+            window.location.hash = '#';
+        });
+    </script>
+@endpush
