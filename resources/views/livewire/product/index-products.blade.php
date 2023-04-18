@@ -86,6 +86,9 @@
             </table>
         </div>
     </div>
+    <div class="card-footer">
+        {{ $products->links() }}
+    </div>
 </div>
 
 @push('third_party_scripts')
