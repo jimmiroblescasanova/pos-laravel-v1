@@ -28,7 +28,7 @@ class UpdateProductRequest extends FormRequest
             'barcode' => [
                 'required', 
                 'min:5', 
-                'alpha_num', 
+                'string', 
                 Rule::unique('products')->ignore($this->product->id),
             ],
             'name' => ['required', 'min:5', 'string', 'max:255'],
