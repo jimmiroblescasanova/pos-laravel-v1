@@ -10,6 +10,7 @@ use App\Exports\ProductsExport;
 use App\Http\Requests\ProductDownloadRequest;
 use App\Http\Requests\SaveProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Imports\ProductsImport;
 
 class ProductController extends Controller
 {
@@ -57,7 +58,22 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+
+        if($product->orderItems->count() >= 1)
+        {
+            notyf()
+                ->ripple(true)
+                ->duration(2000)
+                ->addError('El producto tiene ventas.');
+
+            return back();
+        }
+
         $product->delete();
+        notyf()
+            ->ripple(true)
+            ->duration(2000)
+            ->addSuccess('Producto eliminado.');
 
         return redirect()->route('products.index');
     }
@@ -66,5 +82,27 @@ class ProductController extends Controller
     {
         return (new ProductsExport($request->status, $request->columns))
             ->download('productos.csv', Excel::CSV, ['Content-Type' => 'text/csv']);
+    }
+
+    public function import()
+    {
+        return view('products.import');
+    }
+
+    public function handleImport(Request $request)
+    {
+        $import = new ProductsImport();
+        $import->import(request()->file('file'));
+        
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        notyf()
+            ->ripple(true)
+            ->duration(2000)
+            ->addSuccess('Productos cargados con éxito.');
+
+        return redirect()->route('products.index');
     }
 }

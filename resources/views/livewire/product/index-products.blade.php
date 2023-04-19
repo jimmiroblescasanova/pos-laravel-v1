@@ -85,9 +85,9 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div class="card-footer">
-        {{ $products->links() }}
+        <div class="card-footer">
+            {{ $products->links() }}
+        </div>
     </div>
 </div>
 

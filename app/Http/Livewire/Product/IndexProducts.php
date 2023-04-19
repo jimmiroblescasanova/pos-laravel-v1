@@ -14,7 +14,7 @@ class IndexProducts extends Component
     use WithSearching;
     use WithPagination;
 
-    public $active = 'all';
+    public $active = '1';
 
     public function mount()
     {

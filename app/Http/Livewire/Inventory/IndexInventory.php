@@ -6,11 +6,13 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Traits\WithSorting;
 use App\Traits\WithSearching;
+use Livewire\WithPagination;
 
 class IndexInventory extends Component
 {
     use WithSorting;
     use WithSearching;
+    use WithPagination;
 
     public $showInventory = 0;
 

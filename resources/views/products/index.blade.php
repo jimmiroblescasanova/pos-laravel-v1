@@ -18,7 +18,7 @@
                         <i class="fas fa-download mr-2"></i>
                         Descargar a CSV
                     </button>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('products.import') }}">
                         <i class="fas fa-upload mr-2"></i>
                         Carga masiva
                     </a>

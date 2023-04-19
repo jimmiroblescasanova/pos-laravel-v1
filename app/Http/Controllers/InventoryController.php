@@ -48,7 +48,6 @@ class InventoryController extends Controller
 
     public function handleImport()
     {
-
         $import = new InventoryImport();
         $import->import(request()->file('file'));
         
