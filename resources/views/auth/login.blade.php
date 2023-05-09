@@ -18,14 +18,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ url('/') }}"><b>{{ settings()->get('app_name') ?? config('app.name') }}</b></a>
     </div>
     <!-- /.login-logo -->
 
     <!-- /.login-box-body -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Escribe tus datos de acceso</p>
 
             <form method="post" action="{{ url('/login') }}">
                 @csrf
@@ -47,7 +47,7 @@
                 <div class="input-group mb-3">
                     <input type="password"
                            name="password"
-                           placeholder="Password"
+                           placeholder="Contraseña"
                            class="form-control @error('password') is-invalid @enderror">
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -64,12 +64,12 @@
                     <div class="col-8">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
-                            <label for="remember">Remember Me</label>
+                            <label for="remember">Mantener sesión</label>
                         </div>
                     </div>
 
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                     </div>
 
                 </div>
