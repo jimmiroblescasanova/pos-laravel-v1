@@ -54,6 +54,7 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
                 'minimum' => isset($row[3]) ? $row[3] : 0,
                 'inventory' => $row[4],
             ]);
+            $product->save();
         }
     }
 }
