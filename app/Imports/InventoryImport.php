@@ -47,12 +47,10 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
     public function collection(Collection $rows)
     {        
         foreach ($rows as $row) {
-            Product::updateOrCreate([
-                'barcode' => $row[0]
-            ],
-            [
-                'supplier_code' => $row[1],
-                'name' => $row[2],
+
+            $product = Product::where('barcode', $row[0]);
+
+            $product->update([
                 'minimum' => isset($row[3]) ? $row[3] : 0,
                 'inventory' => $row[4],
             ]);
