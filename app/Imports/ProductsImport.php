@@ -25,7 +25,7 @@ class ProductsImport implements ToCollection, WithStartRow, WithValidation, Skip
     public function rules(): array
     {
         return [
-            '*.0' => ['required', 'string', 'min:5'],
+            '*.0' => ['required', 'min:1'],
             '*.1' => ['nullable', 'string', 'min:5'],
             '*.2' => ['string', 'min:5', 'max:125'],
             '*.3' => ['numeric'],

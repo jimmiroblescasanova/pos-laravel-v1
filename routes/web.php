@@ -10,6 +10,7 @@ use App\Http\Controllers\AccessController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Reports\InventoryCountController;
 use App\Http\Controllers\Reports\ProductSalesController;
@@ -66,6 +67,8 @@ Route::get('/pos/{order}/pdf', [OrderController::class, 'printTicket'])->name('t
 
 Route::get('/configuraciones/empresa', BusinessController::class)->name('settings.business');
 Route::get('/configuraciones/ticket', TicketController::class)->name('settings.ticket');
+
+Route::get('/configuraciones/groups', [GroupController::class, 'index'])->name('settings.groups.index');
 
 Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');

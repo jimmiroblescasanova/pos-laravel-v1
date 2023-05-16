@@ -44,7 +44,7 @@
     <ul class="nav nav-treeview">
         <li class="nav-item {{ Route::is('reports.sales.*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-                <i class="fas fa-angle-right nav-icon"></i>
+                <i class="nav-icon"></i>
                 <p>Ventas</p>
                 <i class="right fas fa-angle-left"></i>
             </a>
@@ -65,7 +65,7 @@
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link {{ Route::is('reports.inventory.*') ? 'menu-open' : '' }}">
-                <i class="fas fa-angle-right nav-icon"></i>
+                <i class="nav-icon"></i>
                 <p>Inventarios</p>
                 <i class="right fas fa-angle-left"></i>
             </a>
@@ -108,6 +108,11 @@
             <a href="{{ route('settings.ticket') }}" class="nav-link {{ Route::is('settings.ticket') ? 'active' : '' }}">
                 <i class="fas fa-users nav-icon"></i>
                 <p>Ticket</p>
+            </a>
+        </li><li class="nav-item">
+            <a href="{{ route('settings.groups.index') }}" class="nav-link {{ Route::is('settings.groups.index') ? 'active' : '' }}">
+                <i class="fas fa-cog nav-icon"></i>
+                Grupos de productos
             </a>
         </li>
     </ul>
