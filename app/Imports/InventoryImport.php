@@ -48,7 +48,7 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
     {        
         foreach ($rows as $row) {
 
-            $product = Product::where('barcode', $row[0]);
+            $product = Product::where('barcode', $row[0])->get();
 
             $product->update([
                 'minimum' => isset($row[3]) ? $row[3] : 0,
