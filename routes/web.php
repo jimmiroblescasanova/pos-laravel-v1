@@ -69,6 +69,8 @@ Route::get('/configuraciones/empresa', BusinessController::class)->name('setting
 Route::get('/configuraciones/ticket', TicketController::class)->name('settings.ticket');
 
 Route::get('/configuraciones/groups', [GroupController::class, 'index'])->name('settings.groups.index');
+Route::post('/configuraciones/groups', [GroupController::class, 'store'])->name('settings.groups.store');
+Route::delete('/configuraciones/groups', [GroupController::class, 'destroy'])->name('settings.groups.destroy');
 
 Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
 Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');
