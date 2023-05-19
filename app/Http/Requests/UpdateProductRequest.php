@@ -37,6 +37,7 @@ class UpdateProductRequest extends FormRequest
             'price' => ['nullable', 'numeric'],
             'active' => ['required', 'boolean'],
             'description' => ['nullable', 'string'],
+            'group_id' => ['sometimes']
         ];
     }
 }

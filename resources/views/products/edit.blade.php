@@ -12,7 +12,7 @@
             <div class="card card-default">
                 <div class="card-header">
                     <div class="row justify-content-between">
-                        <span>Formulario de producto nuevo</span>
+                        <span>Vista general del producto</span>
                         <form action="{{ route('products.destroy', $product) }}" id="deleteForm" method="post">
                             @csrf
                             @method('delete')
@@ -47,7 +47,7 @@
 @stop
 
 @push('third_party_scripts')
-    <script>
+    <script type="module">
         const deleteBtn = document.getElementById('delete');
         const deleteForm = document.getElementById('deleteForm');
 

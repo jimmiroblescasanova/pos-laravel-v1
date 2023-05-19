@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Product;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 use App\Exports\ProductsExport;
-use App\Http\Requests\ProductDownloadRequest;
+use App\Imports\ProductsImport;
 use App\Http\Requests\SaveProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Imports\ProductsImport;
+use App\Http\Requests\ProductDownloadRequest;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,9 @@ class ProductController extends Controller
     public function create(): View
     {
         $product = new Product();
-        return view('products.create', compact('product'));
+        $groups = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('products.create', compact('product', 'groups'));
     }
 
     public function store(SaveProductRequest $request)
@@ -40,9 +43,11 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function edit(Product $product): View
+    public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $groups = Group::orderBy('name')->pluck('name', 'id');
+
+        return view('products.edit', compact('product', 'groups'));
     }
 
     public function update(Product $product, UpdateProductRequest $request)

@@ -39,10 +39,37 @@
         </div>
         <div class="col-sm-3">
             <x-form-select name="active" label="Estado">
-                <option value="1" {{ $product->active == true ?? 'selected' }}>Activo</option>
-                <option value="0" {{ $product->active == false ?? 'selected' }}>Inactivo</option>
+                <option value="1" @selected($product->active == 1)>Activo</option>
+                <option value="0" @selected($product->active == 0)>Inactivo</option>
             </x-form-select>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="group">Grupo</label>
+                <select 
+                    name="group_id"
+                    class="form-control select2 @error('group_id') is-invalid @enderror">
+                    <option value="">(Ninguno)</option>
+                    @foreach ($groups as $id => $group)
+                    <option value="{{ $id }}" @selected($product->group_id == $id)>{{ $group }}</option>
+                    @endforeach
+                </select>
+                @error('group_id')
+                    <small class="invalid-feedback">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
     </div>
     <x-form-textarea name="description" label="Descripcion larga del producto"></x-form-textarea>
 @endbind
+
+
+@push('third_party_scripts')
+    <script type="module">
+        $(document).ready(function () {
+            $('.select2').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>
+@endpush

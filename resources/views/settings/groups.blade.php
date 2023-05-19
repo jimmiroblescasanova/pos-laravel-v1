@@ -85,6 +85,10 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
+                <div class="modal-body">
+                    <p>* Todos los productos con este grupo, quedarán en (Ninguno).</p>
+                    <p class="text-danger">* Esta acción no se puede deshacer.</p>
+                </div>
                 <div class="modal-footer">
                     <form action="{{ route('settings.groups.destroy') }}" method="POST">
                         @csrf 

@@ -31,6 +31,7 @@ class SaveProductRequest extends FormRequest
             'price' => ['required', 'numeric', 'min:1'],
             'active' => ['required', 'boolean'],
             'description' => ['nullable', 'string'],
+            'group_id' => 'sometimes',
         ];
     }
 }

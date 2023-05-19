@@ -87,4 +87,9 @@ class Product extends Model implements HasMedia
                     ->nonQueued();
             });
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

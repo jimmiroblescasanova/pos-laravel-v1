@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('group_product', function (Blueprint $table) {
-            $table->unsignedBigInteger('group_id');
-            $table->unsignedBigInteger('product_id');
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreignId('group_id')->nullable()->after('total_sales')->constrained()->nullOnDelete();
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_product');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('group_id');
+        });
     }
 };
