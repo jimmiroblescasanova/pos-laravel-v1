@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->enum('payment_method', [1,2,3,4,5,99])->default(99)->after('user_id');
+            $table->enum('payment_method', [1,2,3,4,5,99])->default(1)->after('user_id');
         });
     }
 

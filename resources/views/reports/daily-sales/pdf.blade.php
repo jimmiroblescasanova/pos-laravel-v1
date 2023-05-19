@@ -33,8 +33,9 @@
             padding: 1em 0;
             text-align: center;
         }
-        #reportTotalArea {
-            padding: 1em 0;
+
+        .reportTotalArea {
+            padding: 1em 0 0 0;
         }
     </style>
 </head>
@@ -69,6 +70,7 @@
                             <tr>
                                 <th>Folio</th>
                                 <th>Cliente</th>
+                                <th>Forma de Pago</th>
                                 <th>Vendedor</th>
                                 <th colspan="2" style="width: 120px;">Importe</th>
                             </tr>
@@ -78,6 +80,7 @@
                                 <tr>
                                     <td>{{ $docto->id }}</td>
                                     <td>{{ $docto->customer }}</td>
+                                    <td>{{ paymentMethod($docto->payment_method) }}</td>
                                     <td>{{ $docto->user->name }}</td>
                                     <td class="money-sign">$</td>
                                     <td class="total">{{ number_format( $docto->total, 2) }}</td>
@@ -88,7 +91,29 @@
                 </td>
             </tr>
             <tr>
-                <td id="reportTotalArea">
+                <td class="reportTotalArea">
+                    <table style="width: auto;" class="table-bordered">
+                        <tr>
+                            <th style="width: 250px;">Forma de pago</th>
+                            <th colspan="2">Total de ventas</th>
+                        </tr>
+                        @foreach ($documents->groupBy('payment_method') as $name => $doctos)
+                            <tr>
+                                <td>{{ paymentMethod($name) }}</td>
+                                <td class="money-sign">$</td>
+                                <td class="total">{{ number_format($doctos->sum('total'), 2) }}</td>
+                            </tr>
+                        @endforeach
+                        <tr style="font-weight: bold;">
+                            <td>GRAN TOTAL</td>
+                            <td class="money-sign">$</td>
+                            <td class="total">{{ number_format($documents->sum('total'), 2) }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="reportTotalArea">
                     <table style="width: auto;" class="table-bordered">
                         <tr>
                             <th style="width: 250px;">Vendedor</th>

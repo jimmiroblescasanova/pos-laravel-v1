@@ -20,7 +20,7 @@
                         <label for="payment_method" class="col-sm-3 col-form-label">Forma de pago:</label>
                         <div class="col-sm-9">
                             <select wire:model.lazy="paymentMethod" class="form-control">
-                                <option value="1" selected>Efectivo</option>
+                                <option value="1">Efectivo</option>
                                 <option value="2">Transferencia Electrónica</option>
                                 <option value="3">Tarjeta de Débito</option>
                                 <option value="4">Tarjeta de Crédito</option>
