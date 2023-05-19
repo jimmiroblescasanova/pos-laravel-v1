@@ -35,11 +35,3 @@ if (!function_exists('paymentMethod')) {
         }
     }
 }
-
-$paymentMethods = [
-    1 => "Efectivo",
-    2 => "Transferencia Electrónica",
-    3 => "Tarjeta de Débito",
-    4 => "Tarjeta de Crédito",
-    99 => "Otro",
-];

@@ -43,12 +43,15 @@ class OrderController extends Controller
     {
         try {
             DB::beginTransaction();
-            // Regresar el inventario de los productos 
-            foreach ($order->items as $item) {
-                $item->product()->update([
-                    'inventory' => $item->product->inventory + $item->quantity,
-                    'total_sales' => $item->product->total_sales - $item->quantity,
-                ]);
+            // solo si la orden esta cerrada
+            if ($order->closed) {
+                // Regresar el inventario de los productos 
+                foreach ($order->items as $item) {
+                    $item->product()->update([
+                        'inventory' => $item->product->inventory + $item->quantity,
+                        'total_sales' => $item->product->total_sales - $item->quantity,
+                    ]);
+                }
             }
             // Eliminar los items del carrito
             $order->items()->delete();
