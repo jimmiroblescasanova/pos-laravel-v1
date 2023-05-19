@@ -14,6 +14,7 @@ class CreateOrder extends Component
     public $search = '';
     public $customerName;
     public $discount;
+    public $paymentMethod;
     public $itemsCount = 0;
 
     public function mount(Order $order)
@@ -21,6 +22,7 @@ class CreateOrder extends Component
         $this->order = $order;
         $this->customerName = $this->order->customer;
         $this->discount = $this->order->discount;
+        $this->paymentMethod = $this->order->payment_method;
     }
 
     public function addProduct(Product $selectedProduct)
@@ -134,6 +136,20 @@ class CreateOrder extends Component
             ->duration(1500)
             ->addSuccess('Descuento actualizado');
         
+    }
+
+    public function updatedPaymentMethod($val)
+    {
+        $this->order->update(
+            [
+                'payment_method' => $val
+            ]
+        );
+
+        notyf()
+            ->ripple(true)
+            ->duration(1500)
+            ->addSuccess('Pago actualizado');
     }
 
     public function closeOrder()

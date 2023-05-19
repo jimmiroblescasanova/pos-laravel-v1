@@ -38,7 +38,7 @@
 <body>
     <table style="width: 100%; text-align: center;">
         <tr>
-            <td><img src="{{ asset('storage/'.settings()->get('app_logo')) }}" alt="logo empresa" style="max-width: 85px;"></td>
+            <td><img src="{{ asset('storage/'.settings()->get('app_logo')) }}" alt="logo empresa" style="max-height: 120px;"></td>
         </tr>
         <tr>
             <td>

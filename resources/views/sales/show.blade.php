@@ -15,7 +15,12 @@
                     <span>Fecha de Venta: {{ $order->updated_at->format('d-m-Y') }}</span>
                 </div>
                 <div class="card-body">
-                    <p>Nombre del cliente: {{ $order->customer }}</p>
+                    <p>Nombre del cliente: 
+                        <span class="text-bold">{{ $order->customer }}</span>
+                    </p>
+                    <p>Forma de pago: 
+                        <span class="text-bold">{{ paymentMethod($order->payment_method) }}</span>
+                    </p>
                     <p>Detalle de productos:</p>
                     <table class="table table-sm">
                         <thead>

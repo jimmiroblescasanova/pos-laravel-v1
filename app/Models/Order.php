@@ -20,6 +20,7 @@ class Order extends Model
         'total', 
         'closed',
         'user_id',
+        'payment_method',
         'canceled_at',
     ];
 
