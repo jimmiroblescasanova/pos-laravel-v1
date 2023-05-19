@@ -18,6 +18,11 @@
             text-align: center;
         }
 
+        .itemsTable tbody {
+            font-size: 12px;
+            vertical-align: text-top;
+        }
+
         .itemsTable tr td.money {
             text-align: right;
         }
@@ -68,10 +73,10 @@
     <table class="itemsTable">
         <thead>
             <tr>
-                <th>Cant.</th>
+                <th style="width: 10%;">Cant.</th>
                 <th>Descripción</th>
-                <th>Precio</th>
-                <th>Importe</th>
+                <th style="width: 20%;">Precio</th>
+                <th style="width: 20%;">Importe</th>
             </tr>
         </thead>
         <tbody>
@@ -92,11 +97,14 @@
     <br />
     <table style="border: 0.5px solid gray; width:100%;">
         <tr>
-            <td rowspan="2" style="vertical-align: text-top;">Vendedor: {{ $order->user->name }}</td>
+            <td style="vertical-align: text-top;">Vendedor: {{ $order->user->name }}</td>
             <td style="text-align: right;">Descuento:</td>
             <td style="text-align: right;">{{ accounting($order->discount) }}</td>
         </tr>
         <tr>
+            <td style="vertical-align: text-top;">Forma de pago: 
+                <span>{{ paymentMethod($order->payment_method) }}</span>
+            </td>
             <td style="text-align: right;">Total:</td>
             <td style="text-align: right;">{{ accounting($order->total) }}</td>
         </tr>
