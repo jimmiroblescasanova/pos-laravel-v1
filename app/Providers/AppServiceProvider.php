@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             return Order::query()
                 ->where('closed', 1)
                 ->whereDate('updated_at', Carbon::today())
-                ->sum('totalWithTaxes');
+                ->sum('total');
         });
         View::share('dailySales', $dailySales);
 
