@@ -52,13 +52,20 @@ class ProductController extends Controller
 
     public function update(Product $product, UpdateProductRequest $request)
     {
+        $queryString = Request::capture()->getQueryString();
+
         $product->update($request->validated());
 
         if ($request->has('image')) {
             $product->addMediaFromRequest('image')->toMediaCollection('product');
         }
 
-        return redirect()->route('products.index');
+        notyf()
+            ->ripple(true)
+            ->duration(2000)
+            ->addSuccess('Producto actualizado con éxito.');
+
+        return redirect()->route('products.index', [$queryString]);
     }
 
     public function destroy(Product $product)

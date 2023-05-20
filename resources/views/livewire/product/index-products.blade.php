@@ -53,7 +53,7 @@
                         </x-table-heading>
                         <th>Precio</th>
                         <th>Estado</th>
-                        <th>Fecha alta</th>
+                        <th>Ult. modificación</th>
                         <th>Imagen</th>
                     </tr>
                 </thead>
@@ -74,7 +74,7 @@
                                     'badge-danger' => !$product->active,
                                     ])>{{ $product->active ? 'Activo' : 'Inactivo' }}</span>
                             </td>
-                            <td class="text-right">{{ $product->created_at->format('d/m/Y') }}</td>
+                            <td class="text-right">{{ $product->updated_at->format('d/m/Y') }}</td>
                             <td class="text-right"><img src="{{ $product->getFirstMediaUrl('product', 'thumb') }}" alt=""></td>
                         </tr>
                     @empty

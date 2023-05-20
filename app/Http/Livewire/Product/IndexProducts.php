@@ -16,6 +16,12 @@ class IndexProducts extends Component
 
     public $active = '1';
 
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 'p'],
+        'active' => ['except' => '1', 'as' => 's'],
+        'perPage' => ['except' => 10, 'as' => 'show'],
+    ];
+
     public function mount()
     {
         $this->sortField = 'barcode';

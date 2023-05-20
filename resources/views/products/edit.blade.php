@@ -22,7 +22,7 @@
                         </form>
                     </div>
                 </div>
-                <x-form :action="route('products.update', $product)" enctype="multipart/form-data" method="POST">
+                <x-form :action="route('products.update', $product) . '?' . parse_url(url()->previous(), PHP_URL_QUERY)" enctype="multipart/form-data" method="POST">
                     <div class="card-body">
                         @method('patch')
                         @include('products._form')
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <a href="{{ route('products.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit mr-2"></i>Actualizar producto</button>
                     </div>
                 </x-form>
