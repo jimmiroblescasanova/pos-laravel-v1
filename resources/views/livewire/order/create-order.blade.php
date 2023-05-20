@@ -72,15 +72,25 @@
                                 </tr>
                             @endforelse
                             <tr>
-                                <td colspan="2" class="text-right">Descuento:</td>
+                                <td colspan="2" class="text-right text-bold">Descuento:</td>
                                 <td class="text-right">
                                     <input type="text" class="form-control form-control-sm text-right" wire:model.lazy='discount' value="{{ $discount }}">
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="text-right">Total:</td>
+                                <td colspan="2" class="text-right">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" wire:model="tax" class="custom-control-input" id="customSwitch1" @checked($order->tax != 0)>
+                                        <label class="custom-control-label" for="customSwitch1">Incluir IVA:</label>
+                                    </div>
                                 <td class="text-right">
-                                    {{ accounting($order->total) }}
+                                    <span>{{ accounting($order->tax) }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right text-bold">Total:</td>
+                                <td class="text-right">
+                                    {{ accounting($order->totalWithTaxes) }}
                                 </td>
                             </tr>
                         </tbody>

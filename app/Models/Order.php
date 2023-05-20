@@ -18,6 +18,7 @@ class Order extends Model
         'customer',
         'discount',
         'total', 
+        'tax',
         'closed',
         'user_id',
         'payment_method',
@@ -26,6 +27,10 @@ class Order extends Model
 
     protected $dates = [
         'canceled_at',
+    ];
+
+    protected $appends = [
+        'totalWithTaxes',
     ];
 
     public function items()
@@ -66,6 +71,19 @@ class Order extends Model
             set: fn ($value) => $value * 100,
             get: fn ($value) => $value / 100,
         );
+    }
+
+    protected function tax(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+        );
+    }
+
+    protected function getTotalWithTaxesAttribute()
+    {
+        return $this->total + $this->tax;
     }
 
     public function scopeOnlyClosed($query)
