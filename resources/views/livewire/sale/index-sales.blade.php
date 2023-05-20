@@ -62,7 +62,7 @@
                         </td>
                         <td>{{ $sale->updated_at->format('d/m/Y') }}</td>
                         <td>{{ $sale->customer }}</td>
-                        <td style="text-align: right;">$ {{ number_format($sale->total, 2) }}</td>
+                        <td style="text-align: right;">$ {{ number_format($sale->totalWithTaxes, 2) }}</td>
                         <td>{{ $sale->user->name }}</td>
                     </tr>
                     @empty

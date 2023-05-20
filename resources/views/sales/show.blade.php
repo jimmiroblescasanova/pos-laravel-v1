@@ -45,8 +45,12 @@
                                 <td class="text-right">$ {{ number_format($order->discount, 2) }}</td>
                             </tr>
                             <tr>
+                                <td scope="row" colspan="3" class="text-right">IVA:</td>
+                                <td class="text-right">$ {{ number_format($order->tax, 2) }}</td>
+                            </tr>
+                            <tr>
                                 <td scope="row" colspan="3" class="text-right">TOTAL:</td>
-                                <td class="text-right">$ {{ number_format($order->total, 2) }}</td>
+                                <td class="text-right">$ {{ number_format($order->totalWithTaxes, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -54,7 +58,7 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <a href="{{ route('sales.print', $order) }}" class="btn btn-lg btn-block btn-outline-primary">
+            <a href="{{ route('sales.print', $order) }}" target="_blank" class="btn btn-lg btn-block btn-outline-primary">
                 <i class="fas fa-print mr-2"></i>
                 Imprimir
             </a>

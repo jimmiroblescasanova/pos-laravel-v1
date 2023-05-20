@@ -105,8 +105,12 @@
             <td style="vertical-align: text-top;">Forma de pago: 
                 <span>{{ paymentMethod($order->payment_method) }}</span>
             </td>
-            <td style="text-align: right;">Total:</td>
-            <td style="text-align: right;">{{ accounting($order->total) }}</td>
+            <td style="text-align: right;">IVA:</td>
+            <td style="text-align: right;">{{ accounting($order->tax) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">Total:</td>
+            <td style="text-align: right;">{{ accounting($order->totalWithTaxes) }}</td>
         </tr>
     </table>
     <br />

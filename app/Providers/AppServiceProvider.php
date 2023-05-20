@@ -38,12 +38,12 @@ class AppServiceProvider extends ServiceProvider
             return Order::query()
                 ->where('closed', 1)
                 ->whereDate('updated_at', Carbon::today())
-                ->sum('total');
+                ->sum('totalWithTaxes');
         });
         View::share('dailySales', $dailySales);
 
         // Cache history sales
-        $historySales = cache()->remember('historySales', 300, function () {
+        $historySales = cache()->remember('historySales', 3600, function () {
             return Order::query()
                 ->select(DB::raw("SUM(total/100) sales"), DB::raw("DATE_FORMAT(updated_at, '%Y %m') as months"))
                 ->onlyClosed()
@@ -56,7 +56,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('historySales', $historySales);
 
         // Cache sales by product
-        $top5products = cache()->remember('top5products', 300, function () {
+        $top5products = cache()->remember('top5products', 3600, function () {
             return Product::query()
                 ->where('active', true)
                 ->orderBy('total_sales', 'desc')

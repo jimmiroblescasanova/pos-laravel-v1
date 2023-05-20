@@ -11,6 +11,9 @@
             border-collapse: collapse;
             width: 100%;
         }
+        .table-bordered tbody {
+            font-size: 14px;
+        }
         .table-bordered td,
         .table-bordered th {
             border: 1px solid gray; // solo para diseño
@@ -72,7 +75,8 @@
                                 <th>Cliente</th>
                                 <th>Forma de Pago</th>
                                 <th>Vendedor</th>
-                                <th colspan="2" style="width: 120px;">Importe</th>
+                                <th colspan="2">IVA</th>
+                                <th colspan="2" style="width: 120px;">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +87,9 @@
                                     <td>{{ paymentMethod($docto->payment_method) }}</td>
                                     <td>{{ $docto->user->name }}</td>
                                     <td class="money-sign">$</td>
-                                    <td class="total">{{ number_format( $docto->total, 2) }}</td>
+                                    <td class="total">{{ number_format($docto->tax, 2) }}</td>
+                                    <td class="money-sign">$</td>
+                                    <td class="total">{{ number_format( $docto->totalWithTaxes, 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -101,13 +107,13 @@
                             <tr>
                                 <td>{{ paymentMethod($name) }}</td>
                                 <td class="money-sign">$</td>
-                                <td class="total">{{ number_format($doctos->sum('total'), 2) }}</td>
+                                <td class="total">{{ number_format($doctos->sum('totalWithTaxes'), 2) }}</td>
                             </tr>
                         @endforeach
                         <tr style="font-weight: bold;">
                             <td>GRAN TOTAL</td>
                             <td class="money-sign">$</td>
-                            <td class="total">{{ number_format($documents->sum('total'), 2) }}</td>
+                            <td class="total">{{ number_format($documents->sum('totalWithTaxes'), 2) }}</td>
                         </tr>
                     </table>
                 </td>
@@ -123,13 +129,13 @@
                             <tr>
                                 <td>{{ $name }}</td>
                                 <td class="money-sign">$</td>
-                                <td class="total">{{ number_format($doctos->sum('total'), 2) }}</td>
+                                <td class="total">{{ number_format($doctos->sum('totalWithTaxes'), 2) }}</td>
                             </tr>
                         @endforeach
                         <tr style="font-weight: bold;">
                             <td>GRAN TOTAL</td>
                             <td class="money-sign">$</td>
-                            <td class="total">{{ number_format($documents->sum('total'), 2) }}</td>
+                            <td class="total">{{ number_format($documents->sum('totalWithTaxes'), 2) }}</td>
                         </tr>
                     </table>
                 </td>
