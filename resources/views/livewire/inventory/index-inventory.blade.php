@@ -81,9 +81,11 @@
                                 </x-table-heading>
                                 <th>Cant. minima</th>
                                 <th>Existencia actual</th>
+                                @can('inventory_edit')
                                 <th class="text-center" style="width: 15%;">
                                     <i class="fas fa-cogs"></i>
                                 </th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -94,12 +96,14 @@
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->minimum }}</td>
                                 <td>{{ $product->inventory }}</td>
+                                @can('inventory_edit')
                                 <td class="text-right">
                                     <button type="button" class="btn btn-primary btn-xs btn-edit"
                                         data-product="{{ $product->id }}">
                                         <i class="fas fa-edit mr-2"></i>Modificar
                                     </button>
                                 </td>
+                                @endcan
                             </tr>
                             @empty
                             <tr>
