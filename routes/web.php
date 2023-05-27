@@ -37,11 +37,18 @@ Route::group([
     Route::post('/roles/{role:name}/edit', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/roles/{role:name}/edit', [RoleController::class, 'destroy'])->name('roles.destroy');
 
-    Route::get('/usuarios/nuevo', [UserController::class, 'create'])->name('users.create');
-    Route::post('/usuarios/nuevo', [UserController::class, 'store'])->name('users.store');
-    Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->name('users.edit');
-    Route::patch('/usuarios/{user}/editar', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/usuarios/{user}/editar', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::group([
+        'controller' => UserController::class,
+        'prefix' => '/usuarios',
+        'as' => 'users.',
+        'middleware' => 'can:users_access'
+    ], function () {
+        Route::get('/nuevo', 'create')->name('create')->middleware('can:users_create');
+        Route::post('/nuevo', 'store')->name('store')->middleware('can:users_create');
+        Route::get('/{user}/editar', 'edit')->name('edit')->middleware('can:users_edit');
+        Route::patch('/{user}/editar', 'update')->name('update')->middleware('can:users_edit');
+        Route::delete('/{user}/editar', 'destroy')->name('destroy')->middleware('can:users_delete');
+    });
 });
 
 Route::group([

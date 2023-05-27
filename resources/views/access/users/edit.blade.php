@@ -13,11 +13,13 @@
                 <div class="card-header">
                     <h3 class="card-title">Formulario de actualizacion de usuarios</h3>
                     <div class="card-tools">
+                        @can('users_delete')
                         <form action="{{ route('access.users.destroy', $user) }}" method="POST" id="delete">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt mr-2"></i>Eliminar usuario</button>
                         </form>
+                        @endcan
                     </div>
                 </div>
                 <form action="{{ route('access.users.update', $user) }}" method="POST">
@@ -28,7 +30,9 @@
                     </div>
                     <div class="card-footer text-right">
                         <a href="{{ route('access.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        @can('users_edit')
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-edit mr-2"></i>Actualizar datos</button>
+                        @endcan
                     </div>
                 </form>
             </div>

@@ -17,7 +17,9 @@
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Rol</th>
+                        @can('users_edit')
                         <th style="width: 15%;" class="text-center"><i class="fas fa-cogs"></i></th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +32,11 @@
                                     {{ $roles }}
                                 @endforeach
                             </td>
+                            @can('users_edit')
                             <td class="text-right">
                                 <a href="{{ route('access.users.edit', $user) }}" class="btn btn-xs btn-default"><i class="fas fa-edit mr-2"></i>Editar</a>
                             </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
