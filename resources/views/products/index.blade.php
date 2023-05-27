@@ -6,8 +6,9 @@
     </div>
     <div class="col-6">
         <div class="btn-group float-right" role="group">
-            <a href="{{ route('products.create') }}" class="btn btn-default">+ Producto</a>
-    
+            @can('products_create')
+                <a href="{{ route('products.create') }}" class="btn btn-default">+ Producto</a>
+            @endcan
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-expanded="false">

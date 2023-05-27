@@ -44,15 +44,22 @@ Route::group([
     Route::delete('/usuarios/{user}/editar', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
-Route::get('/productos/nuevo', [ProductController::class, 'create'])->name('products.create');
-Route::post('/productos/nuevo', [ProductController::class, 'store'])->name('products.store');
-Route::post('/productos/descargar', [ProductController::class, 'download'])->name('products.download');
-Route::get('/productos/importar', [ProductController::class, 'import'])->name('products.import');
-Route::post('/productos/importar', [ProductController::class, 'handleImport'])->name('products.handleImport');
-Route::get('/productos/{product}/editar', [ProductController::class, 'edit'])->name('products.edit');
-Route::patch('/productos/{product}/editar', [ProductController::class, 'update'])->name('products.update');
-Route::delete('/productos/{product}/editar', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::group([
+    'controller' => ProductController::class,
+    'prefix' => '/productos',
+    'as' => 'products.',
+    'middleware' => 'can:products_access'
+], function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/nuevo', 'create')->name('create')->middleware('can:products_create');
+    Route::post('/nuevo', 'store')->name('store')->middleware('can:products_create');
+    Route::post('/descargar', 'download')->name('download');
+    Route::get('/importar', 'import')->name('import');
+    Route::post('/importar', 'handleImport')->name('handleImport');
+    Route::get('/{product}/editar', 'edit')->name('edit')->middleware('can:products_edit');
+    Route::patch('/{product}/editar', 'update')->name('update')->middleware('can:products_edit');
+    Route::delete('/{product}/editar', 'destroy')->name('destroy')->middleware('can:products_delete');
+});
 
 Route::get('/inventario', [InventoryController::class, 'index'])->name('inventory.index');
 Route::post('/inventario', [InventoryController::class, 'update'])->name('inventory.update');

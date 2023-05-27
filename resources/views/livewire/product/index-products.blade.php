@@ -61,9 +61,13 @@
                     @forelse ($products as $product)
                         <tr>
                             <td scope="row">
+                                @can('products_edit')
                                 <a href="{{ route('products.edit', $product) }}">
                                     {{ $product->barcode }}
                                 </a>
+                                @else
+                                {{ $product->barcode }}
+                                @endcan
                             </td>
                             <td>{{ $product->name }}</td>
                             <td class="text-right">$ {{ number_format($product->price, 2) }}</td>
@@ -79,7 +83,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7">No existen resultados para la búsqueda realizada. ¿Deseas agregar un <a href="{{ route('products.create') }}">producto nuevo</a>?</td>
+                            <td colspan="6">No existen resultados para la búsqueda realizada. ¿Deseas agregar un <a href="{{ route('products.create') }}">producto nuevo</a>?</td>
                         </tr>
                     @endforelse
                 </tbody>
