@@ -14,6 +14,7 @@
                     <h3 class="card-title">
                         Seleccionar permisos del perfil: {{ Str::upper($role->name) }}
                     </h3>
+                    @can('roles_delete')
                     <div class="card-tools">
                         <form action="{{ route('access.roles.destroy', $role) }}" method="POST">
                             @csrf
@@ -21,11 +22,12 @@
                             <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash-alt mr-2"></i>Eliminar perfil</button>
                         </form>
                     </div>
+                    @endcan
                 </div>
                 <form action="{{ route('access.roles.update', $role) }}" method="POST">
                     @csrf
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-12 col-sm-6 col-md-4">
                                 @include('access.roles._pos')
                             </div>
@@ -36,7 +38,7 @@
                                 @include('access.roles._groups')
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-12 col-sm-6 col-md-4">
                                 @include('access.roles._products')
                             </div>
@@ -58,7 +60,9 @@
                     </div>
                     <div class="card-footer text-right">
                         <a href="{{ route('access.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
+                        @can('roles_edit')
                         <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-edit mr-2"></i>Actualizar permisos</button>
+                        @endcan
                     </div>
                 </form>
             </div>

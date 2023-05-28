@@ -30,12 +30,20 @@ Route::group([
     'prefix' => '/accesos',
     'as' => 'access.',
 ], function () {
-    Route::get('/', AccessController::class)->name('index');
-    Route::get('/roles/nuevo', [RoleController::class, 'create'])->name('roles.create');
-    Route::post('/roles/nuevo', [RoleController::class, 'store'])->name('roles.store');
-    Route::get('/roles/{role:name}/edit', [RoleController::class, 'edit'])->name('roles.edit');
-    Route::post('/roles/{role:name}/edit', [RoleController::class, 'update'])->name('roles.update');
-    Route::delete('/roles/{role:name}/edit', [RoleController::class, 'destroy'])->name('roles.destroy');
+    Route::get('/', AccessController::class)->name('index')->middleware('can:users_access,roles_access');
+
+    Route::group([
+        'controller' => RoleController::class,
+        'prefix' => '/roles', 
+        'as' => 'roles.', 
+        'middleware' => 'can:roles_access'
+    ], function () {
+        Route::get('/nuevo', 'create')->name('create')->middleware('can:roles_create');
+        Route::post('/nuevo', 'store')->name('store')->middleware('can:roles_create');
+        Route::get('/{role:name}/edit', 'edit')->name('edit')->middleware('can:roles_edit');
+        Route::post('/{role:name}/edit', 'update')->name('update')->middleware('can:roles_edit');
+        Route::delete('/{role:name}/edit', 'destroy')->name('destroy')->middleware('can:roles_delete');
+    });
 
     Route::group([
         'controller' => UserController::class,

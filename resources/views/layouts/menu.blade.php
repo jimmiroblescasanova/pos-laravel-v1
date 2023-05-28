@@ -80,7 +80,7 @@
         </li>
     </ul>
 </li>
-@can('users_access')
+@canany(['users_access', 'roles_access'])
 <li class="nav-item">
     <a href="{{ route('access.index') }}" class="nav-link {{ Route::is('access.*') ? 'active' : '' }}">
         <i class="fas fa-users-cog nav-icon"></i>
