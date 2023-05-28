@@ -27,24 +27,34 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-sm-6 col-md-4">
-                                @include('access.roles._products')
+                                @include('access.roles._pos')
                             </div>
                             <div class="col-12 col-sm-6 col-md-4">
-                                @include('access.roles._users')
+                                @include('access.roles._sales')
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @include('access.roles._groups')
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @include('access.roles._products')
                             </div>
                             <div class="col-12 col-sm-6 col-md-4">
                                 @include('access.roles._inventory')
                             </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @include('access.roles._configurations')
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6 col-md-4">
-                            @include('access.roles._pos')
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @include('access.roles._users')
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                                @include('access.roles._roles')
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4">
-                            @include('access.roles._configurations')
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4"></div>
                     </div>
                     <div class="card-footer text-right">
                         <a href="{{ route('access.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
