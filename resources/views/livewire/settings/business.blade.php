@@ -26,7 +26,9 @@
                 </div>
             </div>
             <div class="card-footer text-muted">
+                @can('company_edit')
                 <x-form-submit class="btn btn-sm btn-primary">Guardar datos empresa</x-form-submit>
+                @endcan
             </div>
         </x-form>
     </div>

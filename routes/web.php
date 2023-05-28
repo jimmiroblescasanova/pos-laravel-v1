@@ -27,6 +27,17 @@ Route::get('/notificacion/{id}', [HomeController::class, 'readNotification'])->n
 Route::get('/leer-notificaciones', [HomeController::class, 'readAllNotifications'])->name('home.readAllNotifications');
 
 Route::group([
+    'controller' => OrderController::class,
+    'prefix' => '/pos',
+    'as' => 'orders.',
+    'middleware' => 'can:pos_access'
+], function() {
+    Route::get('/', 'create')->name('create');
+    Route::get('/{order}/pdf', 'printTicket')->name('print');
+    Route::delete('/{order}', 'delete')->name('delete');
+});
+
+Route::group([
     'prefix' => '/accesos',
     'as' => 'access.',
 ], function () {
@@ -89,22 +100,36 @@ Route::group([
     Route::post('/importar','handleImport')->name('handleImport')->middleware('can:inventory_edit');
 });
 
-Route::get('/pos', [OrderController::class, 'create'])->name('orders.create');
-Route::delete('/pos/{order}', [OrderController::class, 'delete'])->name('orders.delete');
+Route::group([
+    'prefix' => '/configuraciones',
+    'as' => 'settings.'
+], function () {
+    Route::get('/empresa', BusinessController::class)->name('business')->middleware('can:company_edit');
+    Route::get('/ticket', TicketController::class)->name('ticket')->middleware('can:ticket_edit');
 
-Route::get('/pos/{order}/pdf', [OrderController::class, 'printTicket'])->name('ticket.print');
+    Route::group([
+        'controller' => GroupController::class,
+        'prefix' => 'grupos',
+        'as' => 'groups.',
+        'middleware' => 'can:groups_access',
+    ], function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store')->middleware('can:groups_create');
+        Route::delete('/', 'destroy')->name('destroy')->middleware('can:groups_delete');
+    });
+});
 
-Route::get('/configuraciones/empresa', BusinessController::class)->name('settings.business');
-Route::get('/configuraciones/ticket', TicketController::class)->name('settings.ticket');
-
-Route::get('/configuraciones/groups', [GroupController::class, 'index'])->name('settings.groups.index');
-Route::post('/configuraciones/groups', [GroupController::class, 'store'])->name('settings.groups.store');
-Route::delete('/configuraciones/groups', [GroupController::class, 'destroy'])->name('settings.groups.destroy');
-
-Route::get('/ventas', [SaleController::class, 'index'])->name('sales.index');
-Route::get('/ventas/{order}/ver', [SaleController::class, 'show'])->name('sales.show');
-Route::post('/ventas/{order}/ver', [SaleController::class, 'cancel'])->name('sales.cancel');
-Route::get('/ventas/{order}/print', [SaleController::class, 'print'])->name('sales.print');
+Route::group([
+    'controller' => SaleController::class,
+    'prefix' => '/ventas',
+    'as' => 'sales.',
+    'middleware' => 'can:sales_access'
+], function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{order}/ver', 'show')->name('show');
+    Route::get('/{order}/print', 'print')->name('print')->middleware('can:sales_share');
+    Route::delete('/{order}/ver', 'cancel')->name('cancel')->middleware('can:sales_cancel');
+});
 
 Route::group([
     'prefix' => 'reportes',

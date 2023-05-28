@@ -11,12 +11,14 @@
         <p>Punto de Venta</p>
     </a>
 </li>
+@can('sales_access')
 <li class="nav-item">
     <a href="{{ route('sales.index') }}" class="nav-link {{ Route::is('sales.*') ? 'active' : '' }}">
         <i class="fas fa-money-bill-alt nav-icon"></i>
         <p>Ventas</p>
     </a>
 </li>
+@endcan
 @can('products_access')
 <li class="nav-item">
     <a href="{{ route('products.index') }}" class="nav-link {{ Route::is('products.*') ? 'active' : '' }}">
@@ -88,7 +90,7 @@
     </a>
 </li>
 @endcan
-@can('configurations_access')
+@canany(['configurations_access', 'groups_access'])
 <li class="nav-item {{ Route::is('settings.*') ? 'menu-open' : '' }}">
     <a href="#" class="nav-link {{ Route::is('settings.*') ? 'active' : '' }}">
         <i class="fas fa-cogs nav-icon"></i>
@@ -98,23 +100,30 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
+        @can('company_edit')
         <li class="nav-item">
             <a href="{{ route('settings.business') }}" class="nav-link {{ Route::is('settings.business') ? 'active' : '' }}">
                 <i class="fas fa-cog nav-icon"></i>
                 Mi empresa
             </a>
         </li>
+        @endcan
+        @can('ticket_edit')
         <li class="nav-item">
             <a href="{{ route('settings.ticket') }}" class="nav-link {{ Route::is('settings.ticket') ? 'active' : '' }}">
                 <i class="fas fa-users nav-icon"></i>
                 <p>Ticket</p>
             </a>
-        </li><li class="nav-item">
+        </li>
+        @endcan
+        @can('groups_access')
+        <li class="nav-item">
             <a href="{{ route('settings.groups.index') }}" class="nav-link {{ Route::is('settings.groups.index') ? 'active' : '' }}">
                 <i class="fas fa-cog nav-icon"></i>
                 Grupos de productos
             </a>
         </li>
+        @endcan
     </ul>
 </li>
 @endcan

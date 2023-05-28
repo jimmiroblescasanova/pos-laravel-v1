@@ -5,10 +5,11 @@
         <h1 class="m-0">Configuracion de Grupos</h1>
     </div>
     <div class="col-6">
-        <!-- Button trigger modal -->
+        @can('groups_create')
         <button type="button" class="btn btn-default float-right" data-toggle="modal" data-target="#createGroup">
-            + Grupo
+            <i class="fas fa-pencil-alt mr-2"></i>Crear grupo
         </button>
+        @endcan
     </div>
 @endsection
 
@@ -22,18 +23,22 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        @can('groups_delete')
                         <th>Eliminar</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($groups as $id => $group)
                     <tr>
                         <td scope="row">{{ $group }}</td>
+                        @can('groups_delete')
                         <td>
-                            <button type="button" class="btn btn-danger btn-xs btn-delete" data-toggle="modal" data-group="{{ $id }}" data-target="#deleteGroup">
+                            <button type="button" class="btn btn-danger btn-xs btn-delete float-right" data-toggle="modal" data-group="{{ $id }}" data-target="#deleteGroup">
                                 <i class="fas fa-trash-alt mr-2"></i>Eliminar
                             </button>
                         </td>
+                        @endcan
                     </tr>
                     @empty
                     <tr>
@@ -44,7 +49,7 @@
             </table>
         </div>
         <div class="card-footer text-muted">
-            Footer
+            Footer // pagination
         </div>
     </div>
     

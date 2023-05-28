@@ -62,14 +62,18 @@
                 <i class="fas fa-print mr-2"></i>
                 Imprimir
             </a>
+            @can('sales_share')
             <a href="#" class="btn btn-lg btn-block btn-outline-primary">
                 <i class="fas fa-paper-plane mr-2"></i>
                 Email
             </a>
+            @endcan
+            @can('sales_cancel')
             <button type="button" id="cancelBtn" class="btn btn-lg btn-block btn-outline-danger">
                 <i class="fas fa-ban mr-2"></i>
                 Cancelar
             </button>
+            @endcan
             <button onclick="history.back();" class="btn btn-lg btn-block btn-outline-secondary">
                 <i class="fas fa-backward mr-2"></i>
                 Atrás

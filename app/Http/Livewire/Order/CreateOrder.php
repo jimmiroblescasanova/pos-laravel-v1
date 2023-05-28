@@ -214,7 +214,7 @@ class CreateOrder extends Component
             'closed' => true,
         ]);
 
-        return redirect()->route('ticket.print', $this->order);
+        return redirect()->route('orders.print', $this->order);
     }
 
     public function render()
