@@ -40,6 +40,10 @@
         .reportTotalArea {
             padding: 1em 0 0 0;
         }
+
+        .page-break {
+            page-break-before: always;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +85,23 @@
                         </thead>
                         <tbody>
                             @foreach ($documents as $docto)
+                                @if (($loop->iteration % 30) == 0)
+                                    </tbody>
+                                </table>
+                                <div class="page-break"></div>
+                                <table class="table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Folio</th>
+                                            <th>Cliente</th>
+                                            <th>Forma de Pago</th>
+                                            <th>Vendedor</th>
+                                            <th colspan="2">IVA</th>
+                                            <th colspan="2" style="width: 120px;">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                @endif
                                 <tr>
                                     <td>{{ $docto->id }}</td>
                                     <td>{{ $docto->customer }}</td>
