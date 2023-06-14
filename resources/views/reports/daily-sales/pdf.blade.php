@@ -85,7 +85,10 @@
                         </thead>
                         <tbody>
                             @foreach ($documents as $docto)
-                                @if (($loop->iteration % 25) == 0)
+                                @if (($loop->iteration % $pageRows) == 0)
+                                @php
+                                    $pageRows == 20 ?? $pageRows+=10;
+                                @endphp
                                     </tbody>
                                 </table>
                                 <div class="page-break"></div>
