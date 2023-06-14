@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Sale;
 
-use App\Exports\SalesExport;
 use App\Models\User;
 use App\Models\Order;
 use Livewire\Component;
+use App\Exports\SalesExport;
 use Livewire\WithPagination;
 
 class IndexSales extends Component
@@ -17,7 +17,7 @@ class IndexSales extends Component
         'page' => ['except' => 1],
         'perPage' => [
             'as' => 'show',
-            'except' => 10,
+            'except' => 25,
         ],
         'startDate' => ['as' => 's'],
         'endDate' => ['as' => 'e'],
@@ -27,7 +27,7 @@ class IndexSales extends Component
         ],
     ];
 
-    public $perPage = 10;
+    public $perPage = 25;
     public $startDate = null; 
     public $endDate = null; 
     public $users;

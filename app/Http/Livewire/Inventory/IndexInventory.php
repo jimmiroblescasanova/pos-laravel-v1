@@ -18,7 +18,7 @@ class IndexInventory extends Component
 
     protected $queryString = [
         'search' => ['except' => '', 'as' => 's'],
-        'perPage' => ['except' => 10, 'as' => 'show'],
+        'perPage' => ['except' => 25, 'as' => 'show'],
     ];
 
     public function mount()
@@ -48,7 +48,7 @@ class IndexInventory extends Component
             }
         })
         ->orderBy($this->sortField, $this->sortDirection)
-        ->paginate();
+        ->paginate($this->perPage);
         
         return view('livewire.inventory.index-inventory', [
             'products' => $products,

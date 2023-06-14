@@ -14,12 +14,12 @@ class IndexProducts extends Component
     use WithSearching;
     use WithPagination;
 
-    public $active = '1';
+    public $active = 'all';
 
     protected $queryString = [
         'search' => ['except' => '', 'as' => 'p'],
-        'active' => ['except' => '1', 'as' => 's'],
-        'perPage' => ['except' => 10, 'as' => 'show'],
+        'active' => ['except' => 'all', 'as' => 's'],
+        'perPage' => ['except' => 25, 'as' => 'show'],
     ];
 
     public function mount()

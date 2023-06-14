@@ -13,7 +13,7 @@ trait WithSearching
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $perPage = 10;
+    public $perPage = 25;
 
     public function clear()
     {

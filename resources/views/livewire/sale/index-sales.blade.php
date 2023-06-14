@@ -18,10 +18,10 @@
         </div>
         <div class="form-group col-2 col-md-1">
             <select wire:model="perPage" class="form-control">
-                <option>10</option>
-                <option>15</option>
                 <option>25</option>
                 <option>50</option>
+                <option>75</option>
+                <option>100</option>
             </select>
         </div>
         <div class="form-group col-2 col-md-1">

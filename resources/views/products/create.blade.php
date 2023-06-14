@@ -13,7 +13,7 @@
                 <div class="card-header">
                     Formulario de producto nuevo
                 </div>
-                <x-form :action="route('products.create')" enctype="multipart/form-data">
+                <x-form :action="route('products.create')" enctype="multipart/form-data" id="product-create-form">
                     <div class="card-body">
                         @include('products._form')
                         <div class="form-group">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-footer text-right">
                         <a href="{{ route('products.index') }}" class="btn btn-sm btn-default"><i class="fas fa-backward mr-2"></i>Atrás</a>
-                        <x-form-submit class="btn btn-sm btn-primary">
+                        <x-form-submit class="btn btn-sm btn-primary" id="save-product">
                             <i class="fas fa-save mr-2"></i>Guardar producto
                         </x-form-submit>
                     </div>
@@ -32,3 +32,16 @@
         </div>
     </div>
 @stop
+
+@push('third_party_scripts')
+<script type="module">
+    const submitProduct = document.getElementById('save-product');
+    const formProduct = document.getElementById('product-create-form');
+
+    submitProduct.addEventListener('click', (e) => {
+        e.preventDefault();
+        submitProduct.setAttribute("disabled", "true");
+        formProduct.submit();
+    })
+</script>
+@endpush

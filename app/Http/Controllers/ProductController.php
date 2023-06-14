@@ -27,6 +27,7 @@ class ProductController extends Controller
     public function create(): View
     {
         $product = new Product();
+        $product->active = 1;
         $groups = Group::orderBy('name')->pluck('name', 'id');
 
         return view('products.create', compact('product', 'groups'));
