@@ -85,7 +85,7 @@
                         </thead>
                         <tbody>
                             @foreach ($documents as $docto)
-                                @if (($loop->iteration % 30) == 0)
+                                @if (($loop->iteration % 25) == 0)
                                     </tbody>
                                 </table>
                                 <div class="page-break"></div>
