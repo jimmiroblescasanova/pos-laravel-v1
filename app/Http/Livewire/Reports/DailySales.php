@@ -40,7 +40,7 @@ class DailySales extends Component
         ->get();
 
         $pdf = Pdf::loadView('reports.daily-sales.pdf', [
-            'pageRows' => 20,
+            'pageRows' => 40,
             'documents' => $result,
             'date' => Carbon::parse($this->form['date']),
         ]);

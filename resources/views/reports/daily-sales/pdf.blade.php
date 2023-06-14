@@ -87,7 +87,7 @@
                             @foreach ($documents as $docto)
                                 @if (($loop->iteration % $pageRows) == 0)
                                 @php
-                                    $pageRows == 20 ?? $pageRows+=10;
+                                    $pageRows == 40 ?? $pageRows+=50;
                                 @endphp
                                     </tbody>
                                 </table>
@@ -107,7 +107,7 @@
                                 @endif
                                 <tr>
                                     <td>{{ $docto->id }}</td>
-                                    <td>{{ $docto->customer }}</td>
+                                    <td>{{ Str::limit($docto->customer, 20, '...') }}</td>
                                     <td>{{ paymentMethod($docto->payment_method) }}</td>
                                     <td>{{ $docto->user->name }}</td>
                                     <td class="money-sign">$</td>
