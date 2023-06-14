@@ -79,8 +79,8 @@
                                 <th>Cliente</th>
                                 <th>Forma de Pago</th>
                                 <th>Vendedor</th>
-                                <th colspan="2">IVA</th>
-                                <th colspan="2" style="width: 120px;">Total</th>
+                                <th colspan="2" style="width: 100px;">IVA</th>
+                                <th colspan="2" style="width: 100px;">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
                                             <th>Forma de Pago</th>
                                             <th>Vendedor</th>
                                             <th colspan="2">IVA</th>
-                                            <th colspan="2" style="width: 120px;">Total</th>
+                                            <th colspan="2">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,9 +111,9 @@
                                     <td>{{ paymentMethod($docto->payment_method) }}</td>
                                     <td>{{ $docto->user->name }}</td>
                                     <td class="money-sign">$</td>
-                                    <td class="total">{{ number_format($docto->tax, 2) }}</td>
+                                    <td class="total" style="width: 80px;">{{ number_format($docto->tax, 2) }}</td>
                                     <td class="money-sign">$</td>
-                                    <td class="total">{{ number_format( $docto->totalWithTaxes, 2) }}</td>
+                                    <td class="total" style="width: 80px;">{{ number_format( $docto->totalWithTaxes, 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
