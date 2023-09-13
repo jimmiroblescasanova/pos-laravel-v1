@@ -5,17 +5,18 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\Reports\DailySalesController;
-use App\Http\Controllers\Reports\InventoryCountController;
-use App\Http\Controllers\Reports\ProductSalesController;
 use App\Http\Controllers\Settings\TicketController;
 use App\Http\Controllers\Settings\BusinessController;
+use App\Http\Controllers\Reports\DailySalesController;
+use App\Http\Controllers\Reports\TicketSalesController;
+use App\Http\Controllers\Reports\ProductSalesController;
+use App\Http\Controllers\Reports\InventoryCountController;
 
 // routes for authenticating users
 Route::get('login', [LoginController::class, 'ShowLoginForm'])->name('login');
@@ -141,6 +142,8 @@ Route::group([
     ], function () {
         Route::get('/ventas-del-dia', DailySalesController::class)->name('daily-sales.index');
         Route::get('/ventas-por-producto', ProductSalesController::class)->name('product-sales.index');
+        Route::get('/ventas-por-ticket-xls', [TicketSalesController::class, 'index'])->name('ticket-sales.index');
+        Route::post('/ventas-por-ticket-xls', [TicketSalesController::class, 'download'])->name('ticket-sales.download');
     });
     
     Route::group([

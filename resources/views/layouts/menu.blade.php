@@ -58,6 +58,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('reports.sales.ticket-sales.index') }}" class="nav-link {{ Route::is('reports.sales.ticket-sales.index') ? 'active' : '' }}">
+                        <i class="fas fa-angle-double-right nav-icon"></i>
+                        <p>Ventas x Nota (XLS)</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('reports.sales.product-sales.index') }}" class="nav-link {{ Route::is('reports.sales.product-sales.index') ? 'active' : '' }}">
                         <i class="fas fa-angle-double-right nav-icon"></i>
                         <p>Ventas por producto</p>
