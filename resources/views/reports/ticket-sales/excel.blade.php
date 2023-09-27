@@ -38,7 +38,7 @@
                     <td style="border-top: 1px solid black"></td>
                     <td style="border-top: 1px solid black">{{ $order->discount }}</td>
                     <td style="border-top: 1px solid black">{{ $order->tax }}</td>
-                    <td style="border-top: 1px solid black">{{ $order->total }}</td>
+                    <td style="border-top: 1px solid black">{{ ($order->total + $order->tax) - $order->discount }}</td>
                     <td style="border-top: 1px solid black">{{ paymentMethod($order->payment_method) }}</td>
                 </tr>
                 @foreach ($order->items as $key => $item)
