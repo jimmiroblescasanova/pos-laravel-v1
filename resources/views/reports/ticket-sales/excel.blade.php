@@ -38,7 +38,7 @@
                     <td style="border-top: 1px solid black"></td>
                     <td style="border-top: 1px solid black">{{ $order->discount }}</td>
                     <td style="border-top: 1px solid black">{{ $order->tax }}</td>
-                    <td style="border-top: 1px solid black">{{ ($order->total + $order->tax) - $order->discount }}</td>
+                    <td style="border-top: 1px solid black">{{ $order->total + $order->tax }}</td>
                     <td style="border-top: 1px solid black">{{ paymentMethod($order->payment_method) }}</td>
                 </tr>
                 @foreach ($order->items as $key => $item)
@@ -60,7 +60,7 @@
                 <td></td>
                 <td></td>
                 <td style="font-size: 16px; font-weight: bold;">{{ paymentMethod($pay) }}</td>
-                <td style="font-size: 16px; font-weight: bold;">{{ number_format($subOrders->sum('total'), 2) }}</td>
+                <td style="font-size: 16px; font-weight: bold;">{{ number_format($subOrders->sum('total') + $subOrders->sum('tax'), 2) }}</td>
             </tr>
             @endforeach
             <tr>
@@ -71,7 +71,7 @@
                 <td></td>
                 <td></td>
                 <td style="font-size: 16px; font-weight: bold;">TOTAL GENERAL DEL DÍA</td>
-                <td style="font-size: 16px; font-weight: bold;">{{ number_format($orders->sum('total'), 2) }}</td>
+                <td style="font-size: 16px; font-weight: bold;">{{ number_format($orders->sum('total') + $orders->sum('tax'), 2) }}</td>
             </tr>
         </tbody>
     </table>
