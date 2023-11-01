@@ -39,7 +39,7 @@
                         <div class="dropdown-divider"></div>
                         @foreach (Auth::user()->unreadNotifications as $notification)
                         <a href="{{ route('home.readNotification', $notification) }}" class="dropdown-item">
-                            <i class="fas fa-exclamation-triangle mr-2"></i>Existencias agotadas
+                            <i class="fas fa-exclamation-triangle mr-2"></i>Producto agotado
                             <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans(null, true, true) }}</span>
                         </a>
                         <div class="dropdown-divider"></div>

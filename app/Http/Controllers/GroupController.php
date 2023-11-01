@@ -10,7 +10,7 @@ class GroupController extends Controller
     public function index()
     {
         return view('settings.groups', [
-            'groups' => Group::orderBy('name')->pluck('name', 'id'),
+            'groups' => Group::orderBy('name')->paginate(),
         ]);
     }
 

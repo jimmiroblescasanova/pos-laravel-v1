@@ -29,12 +29,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($groups as $id => $group)
+                    @forelse ($groups as $group)
                     <tr>
-                        <td scope="row">{{ $group }}</td>
+                        <td scope="row">{{ $group->name }}</td>
                         @can('groups_delete')
                         <td>
-                            <button type="button" class="btn btn-danger btn-xs btn-delete float-right" data-toggle="modal" data-group="{{ $id }}" data-target="#deleteGroup">
+                            <button type="button" class="btn btn-danger btn-xs btn-delete float-right" data-toggle="modal" data-group="{{ $group->id }}" data-target="#deleteGroup">
                                 <i class="fas fa-trash-alt mr-2"></i>Eliminar
                             </button>
                         </td>
@@ -49,7 +49,7 @@
             </table>
         </div>
         <div class="card-footer text-muted">
-            Footer // pagination
+            {{ $groups->links() }}
         </div>
     </div>
     
