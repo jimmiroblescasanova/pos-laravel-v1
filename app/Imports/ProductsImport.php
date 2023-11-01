@@ -26,10 +26,10 @@ class ProductsImport implements ToCollection, WithStartRow, WithValidation, Skip
     {
         return [
             '*.0' => ['required', 'min:1'],
-            '*.1' => ['nullable', 'string', 'min:5'],
-            '*.2' => ['string', 'min:5', 'max:125'],
-            '*.3' => ['numeric'],
-            '*.4' => ['numeric'],
+            '*.1' => ['nullable', 'string', 'min:1'],
+            '*.2' => ['required', 'string', 'min:5', 'max:125'],
+            '*.3' => ['numeric', 'nullable'],
+            '*.4' => ['numeric', 'nullable'],
         ];
     }
 
@@ -56,8 +56,8 @@ class ProductsImport implements ToCollection, WithStartRow, WithValidation, Skip
             [
                 'supplier_code' => $row[1],
                 'name' => $row[2],
-                'cost' => isset($row[3]) ? $row[3] : 0,
-                'price' => $row[4],
+                'cost' => $row[3] ?? 0,
+                'price' => $row[4] ?? 0,
             ]);
         }
     }

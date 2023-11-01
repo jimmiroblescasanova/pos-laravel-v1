@@ -28,7 +28,7 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
             '*.0' => ['required',],
             '*.1' => ['nullable', 'string', 'min:5'],
             '*.2' => ['string', 'min:5', 'max:255'],
-            '*.3' => ['numeric'],
+            '*.3' => ['numeric', 'nullable'],
             '*.4' => ['required', 'numeric'],
         ];
     }
@@ -51,7 +51,7 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
             $product = Product::where('barcode', (string)$row[0]);
 
             $product->update([
-                'minimum' => isset($row[3]) ? $row[3] : 0,
+                'minimum' => $row[3] ?? 0,
                 'inventory' => $row[4],
             ]);
         }
