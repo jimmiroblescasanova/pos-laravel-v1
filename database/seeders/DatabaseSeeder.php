@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        settings()->set('app_name', 'PuntoDeVenta');
+        
         $this->call([
             RolesAndPermissionsSeeder::class,
         ]);
@@ -27,7 +29,9 @@ class DatabaseSeeder extends Seeder
 
         $user->assignRole('admin');
 
-        settings()->set('app_name', 'PuntoDeVenta');
+        $this->call([
+            NewRolesSeeder::class,
+        ]);
 
     }
 }

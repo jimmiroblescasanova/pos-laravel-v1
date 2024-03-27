@@ -17,7 +17,7 @@
         <div class="col-12 col-md-4">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3><sup style="font-size: 20px">$</sup>{{ number_format($dailySales/100, 2) }}</h3>
+                    <h3><sup style="font-size: 20px">$</sup>{{ number_format($dailySales ?? 0/100, 2) }}</h3>
                     <p>Ventas del día</p>
                 </div>
                 <div class="icon">
@@ -46,10 +46,10 @@
     new Chart(sChart, {
         type: 'bar',
         data: {
-            labels: {{ Js::from($historySales->keys()) }},
+            labels: {{ isset($historySales) ? Js::from($historySales->keys()) : null }},
             datasets: [{
             label: 'Total del mes',
-            data: {{ Js::from($historySales->values()) }},
+            data: {{ isset($historySales) ? Js::from($historySales->values()) : null }},
             borderWidth: 1
             }]
         },
@@ -66,10 +66,10 @@
     new Chart(pChart, {
         type: 'pie',
         data: {
-            labels: {{ Js::from($top5products->keys()) }},
+            labels: {{ isset($top5products) ? Js::from($top5products->keys()) : null }},
             datasets: [{
                 label: 'Ventas',
-                data: {{ Js::from($top5products->values()) }},
+                data: {{ isset($top5products) ? Js::from($top5products->values()) : null }},
                 borderWidth: 1,
                 hoverOffset: 9,
             }]
