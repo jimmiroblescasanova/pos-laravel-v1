@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Product;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
@@ -45,15 +46,33 @@ class InventoryImport implements ToCollection, WithStartRow, WithValidation, Ski
     }
 
     public function collection(Collection $rows)
-    {        
-        foreach ($rows as $row) {
+    {
+        foreach ($rows as $index => $row) {
+            try {
+                $product = Product::where('barcode', (string)$row[0])->first();
 
-            $product = Product::where('barcode', (string)$row[0]);
+                if (!$product) {
+                    // Lanzar una excepción personalizada si el producto no se encuentra
+                    throw new \Exception("Producto con código de barras: {$row[0]}, no fue encontrado. Fila " . ($index + $this->startRow()));
+                }
 
-            $product->update([
-                'minimum' => $row[3] ?? 0,
-                'inventory' => $row[4],
-            ]);
+                $product->update([
+                    'minimum' => $row[3],
+                    'inventory' => $row[4],
+                ]);
+            } catch (\Exception $e) {
+                // Si ocurre algún error, será capturado y registrado, luego se omitirá la fila
+                $this->onError($e);
+            }
         }
+    }
+
+    public function onError(\Throwable $e)
+    {
+        // Aquí puedes manejar los errores capturados, como registrar en los logs o almacenarlos en un array
+        Log::error('Error durante la importación: ' . $e->getMessage());
+
+        // Si prefieres almacenar los errores para revisarlos luego, puedes usar un array
+        $this->errors[] = $e->getMessage();
     }
 }

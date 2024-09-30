@@ -53,6 +53,8 @@ class InventoryController extends Controller
         
         if ($import->failures()->isNotEmpty()) {
             return back()->withFailures($import->failures());
+        } elseif ($import->errors()->isNotEmpty()) {
+            return back()->withErrors($import->errors()->toArray());
         }
 
         notyf()
@@ -60,6 +62,6 @@ class InventoryController extends Controller
             ->duration(2000)
             ->addSuccess('Inventario cargado con éxito.');
 
-        return redirect()->route('inventory.index');
+        return redirect()->back();
     }
 }

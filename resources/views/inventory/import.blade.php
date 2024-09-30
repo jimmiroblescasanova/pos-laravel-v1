@@ -15,8 +15,8 @@
                         @csrf 
                         <div class="form-group">
                             <label for="file">Seleccionar archivo de inventario:</label>
-                            <input type="file" name="file" id="file" class="form-control-file" accept=".csv" required>
-                            <span class="text-xs text-muted">Extensiones permitidas: .csv</span>
+                            <input type="file" name="file" id="file" class="form-control-file" accept=".csv,.xls,.xlsx" required>
+                            <span class="text-xs text-muted">Extensiones permitidas: .csv, .xls, .xlsx</span>
                             <p class="text-xs text-muted"><a href="{{ asset('examples/inventario.csv') }}" download>DESCARGAR</a> archivo de ejemplo</p>
                         </div>
                         <button type="submit" id="submit" class="btn btn-sm btn-primary"><i class="fas fa-upload mr-2"></i>Cargar inventario</button>
@@ -44,6 +44,21 @@
                                 </td>
                             </tr>
                             @endforeach
+                        </table>
+                    @endif
+                    @if (session()->has('errors'))
+                        <table class="table table-sm table-danger">
+                            <tr>
+                                <th>Mensaje</th>
+                            </tr>
+                            @foreach ($errors->all() as $error)
+                            <tr>
+                                <td>{{ $error }}</td>
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <td class="bg-success">Todos los demas productos fueron actualizados correctamente.</td>
+                            </tr>
                         </table>
                     @endif
                 </div>
