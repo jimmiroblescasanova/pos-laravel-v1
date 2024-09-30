@@ -17,7 +17,7 @@
         <div class="col-12 col-md-4">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3><sup style="font-size: 20px">$</sup>{{ number_format($dailySales ?? 0/100, 2) }}</h3>
+                    <h3><sup style="font-size: 20px">$</sup>{{ number_format(($dailySales ?? 0)/100, 2) }}</h3>
                     <p>Ventas del día</p>
                 </div>
                 <div class="icon">

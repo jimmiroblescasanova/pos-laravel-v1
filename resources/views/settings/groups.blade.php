@@ -42,7 +42,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="2">la tabla esta vacía</td>
+                        <td colspan="2">No existen datos.</td>
                     </tr>
                     @endforelse
                 </tbody>

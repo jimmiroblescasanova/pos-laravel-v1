@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale($this->app->getLocale());
         setlocale(LC_TIME, $this->app->getLocale());
 
-        if (Schema::hasTable('order')) {
+        if (Schema::hasTable('orders')) {
             // Cache daily sales
             $dailySales = cache()->remember('dailySales', 300, function () {
                 return Order::query()
