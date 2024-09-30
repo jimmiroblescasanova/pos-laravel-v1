@@ -5,19 +5,19 @@ namespace App\Exports;
 use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 
-class InventoryExport implements FromQuery, WithHeadings, ShouldAutoSize, WithColumnFormatting
+class InventoryExport implements FromQuery, WithHeadings, ShouldAutoSize, WithColumnFormatting, WithMapping
 {
     use Exportable;
 
-    public function __construct($type)
-    {
-        $this->type = $type;
-    }
+    public function __construct(
+        public int $type
+    ) {}
 
     public function headings(): array
     {
@@ -30,13 +30,24 @@ class InventoryExport implements FromQuery, WithHeadings, ShouldAutoSize, WithCo
         ];
     }
 
+    public function map($inventory): array
+    {
+        return [
+            $inventory->barcode,
+            $inventory->supplier_code,
+            $inventory->name,
+            $inventory->minimum == 0 ? '0' : $inventory->minimum,
+            $inventory->inventory == 0 ? '0' : $inventory->inventory,
+        ];
+    }
+
     public function columnFormats(): array
     {
         return [
             'A' => NumberFormat::FORMAT_TEXT,
             'B' => NumberFormat::FORMAT_TEXT,
-            'D' => NumberFormat::FORMAT_NUMBER,
-            'E' => NumberFormat::FORMAT_NUMBER,
+            'D' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1,
+            'E' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1,
         ];
     }
     
