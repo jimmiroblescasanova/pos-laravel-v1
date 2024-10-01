@@ -15,8 +15,8 @@
                         @csrf 
                         <div class="form-group">
                             <label for="file">Seleccionar archivo:</label>
-                            <input type="file" name="file" id="file" class="form-control-file" accept=".csv" required>
-                            <span class="text-xs text-muted">Extensiones permitidas: .csv</span>
+                            <input type="file" name="file" id="file" class="form-control-file" accept=".csv,.xls,.xlsx" required>
+                            <span class="text-xs text-muted">Extensiones permitidas: .csv | .xls | .xlsx</span>
                             <p class="text-xs text-muted"><a href="{{ asset('examples/productos.csv') }}" download>DESCARGAR</a> plantilla para carga masiva</p>
                         </div>
                         <button type="submit" id="submit" class="btn btn-sm btn-primary"><i class="fas fa-upload mr-2"></i>Cargar productos</button>
