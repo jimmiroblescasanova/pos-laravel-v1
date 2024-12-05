@@ -97,7 +97,7 @@ Route::group([
     Route::get('/','index')->name('index');
     Route::post('/','update')->name('update')->middleware('can:inventory_edit');
     Route::post('/exportar','export')->name('export');
-    Route::get('/importar','import')->name('import');
+    Route::get('/importar','import')->name('import')->middleware('can:inventory_edit');
     Route::post('/importar','handleImport')->name('handleImport')->middleware('can:inventory_edit');
 });
 
@@ -128,7 +128,7 @@ Route::group([
 ], function() {
     Route::get('/', 'index')->name('index');
     Route::get('/{order}/ver', 'show')->name('show');
-    Route::get('/{order}/print', 'print')->name('print')->middleware('can:sales_share');
+    Route::get('/{order}/print', 'print')->name('print')->middleware('can:sales_access');
     Route::delete('/{order}/ver', 'cancel')->name('cancel')->middleware('can:sales_cancel');
 });
 

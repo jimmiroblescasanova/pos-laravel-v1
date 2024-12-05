@@ -45,10 +45,12 @@
                         <i class="fas fa-download mr-2"></i>
                         Descargar inventario
                     </button>
+                   @can('inventory_edit')
                     <a class="dropdown-item" href="{{ route('inventory.import') }}">
                         <i class="fas fa-upload mr-2"></i>
                         Cargar inventario
                     </a>
+                   @endcan
                 </div>
             </div>
         </div>
