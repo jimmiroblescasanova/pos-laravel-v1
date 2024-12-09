@@ -74,10 +74,19 @@ class OrderController extends Controller
 
     public function printTicket(Order $order)
     {
-        $pdf = Pdf::loadView('pdf.ticket', [
-            'order' => $order,
-        ]);
-        $pdf->setPaper('half-letter', 'portrait');
+        if (settings()->get('paper_size') == 'letter') {
+            $pdf = Pdf::loadView('pdf.ticket', [
+                'order' => $order,
+            ]);
+
+            $pdf->setPaper('letter', 'portrait');
+        } else {
+            $pdf = Pdf::loadView('pdf.ticket-small', [
+                'order' => $order,
+            ]);
+
+            $pdf->setPaper(array(0, 0, 230, 912), 'portrait');
+        }
         
         $content = $pdf->download()->getOriginalContent();
         $filePath = 'tickets/'.$order->id.'.pdf';

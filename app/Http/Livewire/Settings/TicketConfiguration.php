@@ -8,6 +8,7 @@ class TicketConfiguration extends Component
 {
     public $greeting_1, $greeting_2, $greeting_3;
     public $signature_line;
+    public $paper_size;
 
     protected $rules = [
         'greeting_1' => 'nullable|string|min:10',
@@ -22,6 +23,7 @@ class TicketConfiguration extends Component
         $this->greeting_2 = settings()->get('greeting_2');
         $this->greeting_3 = settings()->get('greeting_3');
         $this->signature_line = settings()->get('signature_line');
+        $this->paper_size = settings()->get('paper_size');
     }
 
     public function updated($field, $value)

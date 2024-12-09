@@ -30,6 +30,13 @@
                         <small class="form-text invalid-feedback">{{ $message }}</small>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="paper_size">Tamaño del papel</label>
+                        <select name="paper_size" id="paper_size" wire:model.lazy='paper_size' class="form-control">
+                            <option value="letter">Carta</option>
+                            <option value="ticket">Ticket 80mm</option>
+                        </select>
+                    </div>
                     <div class="form-check">
                       <label class="form-check-label">
                         <input type="checkbox" class="form-check-input" wire:model="signature_line" value="1">
