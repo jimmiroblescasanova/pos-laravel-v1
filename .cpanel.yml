@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/invent12/adocreto-cun.inventarionube.com/laravel
+    - cd $DEPLOYPATH
+    - /usr/local/bin/php artisan optimize
