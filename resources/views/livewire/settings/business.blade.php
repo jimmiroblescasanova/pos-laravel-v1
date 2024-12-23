@@ -24,6 +24,12 @@
                         <img src="{{ asset('storage/'.settings()->get('app_logo')) }}" height="100">
                     </div>
                 </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" wire:model.defer="tax" value="1">
+                        Agregar siempre el IVA
+                    </label>
+                </div>
             </div>
             <div class="card-footer text-muted">
                 @can('company_edit')

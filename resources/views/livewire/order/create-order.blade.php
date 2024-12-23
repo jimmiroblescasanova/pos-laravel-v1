@@ -80,7 +80,7 @@
                             <tr>
                                 <td colspan="2" class="text-right">
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" wire:model="tax" class="custom-control-input" id="customSwitch1" @checked($order->tax != 0)>
+                                        <input type="checkbox" wire:model="tax" class="custom-control-input" id="customSwitch1" @if (settings()->get('always_apply_tax') == 1) disabled @endif>
                                         <label class="custom-control-label" for="customSwitch1">Incluir IVA:</label>
                                     </div>
                                 <td class="text-right">

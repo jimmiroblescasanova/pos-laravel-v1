@@ -21,7 +21,7 @@ class CreateOrder extends Component
     public function mount(Order $order)
     {
         $this->order = $order;
-        $this->tax = $this->order->tax > 0 ?? true;
+        $this->tax = settings()->get('always_apply_tax') == true ?: false;
         $this->customerName = $this->order->customer;
         $this->discount = $this->order->discount;
         $this->paymentMethod = $this->order->payment_method;

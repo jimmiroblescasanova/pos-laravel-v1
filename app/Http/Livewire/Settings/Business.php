@@ -12,6 +12,7 @@ class Business extends Component
     public $name;
     public $address;
     public $logo;
+    public bool $tax;
 
     protected $rules = [
         'name' => 'required|min:3',
@@ -22,12 +23,14 @@ class Business extends Component
             'max:100',
             'dimensions:max_width=250,max_height=250',
         ],
+        'tax' => 'required|boolean',
     ];
 
     public function mount()
     {
         $this->name     = settings()->get('app_name');
         $this->address  = settings()->get('app_address');
+        $this->tax      = settings()->get('always_apply_tax') == true ?: false;
     }
 
     public function updated($name)
@@ -42,6 +45,7 @@ class Business extends Component
         settings()->set([
             'app_name' => $this->name,
             'app_address'=> $this->address,
+            'always_apply_tax' => $this->tax,
         ]);
 
         if ($this->logo != null) {
