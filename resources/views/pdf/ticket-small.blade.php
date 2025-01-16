@@ -6,8 +6,14 @@
     <title>Ticket de Venta</title>
 
     <style>
+        @page {
+            margin: 1em;
+            /* Establecemos el tamaño de página para ticket de 80mm */
+            size: 80mm auto;
+        }
+
         body {
-            font-size: 10px;
+            font-size: 12px;
         }
 
         .itemsTable {
@@ -46,7 +52,7 @@
 <body>
     <table style="width: 100%; text-align: center;">
         <tr>
-            <td><img src="{{ asset('storage/'.settings()->get('app_logo')) }}" alt="logo empresa" style="max-height: 120px;"></td>
+            <td><img src="{{ asset('storage/'.settings()->get('app_logo')) }}" alt="logo empresa" style="max-height: 90px;"></td>
         </tr>
         <tr>
             <td>
