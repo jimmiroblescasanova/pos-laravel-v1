@@ -63,7 +63,7 @@
                 Imprimir
             </a>
             @can('sales_share')
-            <a href="#" class="btn btn-lg btn-block btn-outline-primary">
+            <a href="{{ route('sales.sendEmail', $order) }}" class="btn btn-lg btn-block btn-outline-primary">
                 <i class="fas fa-paper-plane mr-2"></i>
                 Email
             </a>

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\View\View;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Notifications\SendOrderToAdmins;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -51,5 +54,22 @@ class SaleController extends Controller
         }
         
         return $pdf->stream();
+    }
+
+    public function sendEmail(Order $order)
+    {
+        $admins = User::role('admin')->get();
+        $user = Auth::user();
+
+        $admins->each(function ($admin) use ($order, $user) {
+            $admin->notify(new SendOrderToAdmins($order, $user));
+        });
+
+        notyf()
+            ->ripple(true)
+            ->duration(1500)
+            ->addSuccess('Venta enviada a los administradores');
+
+        return back();
     }
 }
