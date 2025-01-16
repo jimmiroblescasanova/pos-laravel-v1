@@ -51,9 +51,11 @@
 
 <body>
     <table style="width: 100%; text-align: center;">
+        @if(settings()->get('app_logo'))
         <tr>
             <td><img src="{{ asset('storage/'.settings()->get('app_logo')) }}" alt="logo empresa" style="max-height: 90px;"></td>
         </tr>
+        @endif
         <tr>
             <td>
                 {{ settings()->get('app_name') }}
@@ -66,12 +68,15 @@
         </tr>
         <tr>
             <td>
-                <table style="width: 100%;">
+                <table style="width: 100%; margin-top: 10px;">
                     <tr>
-                        <td>Cliente: {{ $order->customer }}</td>
-                        <td style="width: 20%;">
-                            Folio: {{ $order->id }} <br />
-                            {{ $order->updated_at->format('d/m/Y') }}
+                        <td style="text-align: left; padding-right: 10px;">
+                            <strong>Cliente:</strong><br/>
+                            <span style="padding-left: 10px;">{{ $order->customer }}</span>
+                        </td>
+                        <td style="width: 30%; border-left: 1px solid #ccc; padding-left: 10px;">
+                            <strong>Folio:</strong> {{ $order->id }}<br />
+                            <span style="font-size: 11px;">{{ $order->updated_at->format('d/m/Y') }}</span>
                         </td>
                     </tr>
                 </table>
@@ -104,21 +109,26 @@
         </tbody>
     </table>
     <br />
-    <table style="border: 0.5px solid gray; width:100%;">
+    <table style="width:100%;">
         <tr>
-            <td style="vertical-align: text-top;">Vendedor: {{ $order->user->name }}</td>
-            <td style="text-align: right;">Descuento:</td>
-            <td style="text-align: right;">{{ accounting($order->discount) }}</td>
+            <td>Vendedor: {{ $order->user->name }}</td>
         </tr>
         <tr>
-            <td style="vertical-align: text-top;">Forma de pago: 
-                <span>{{ paymentMethod($order->payment_method) }}</span>
-            </td>
+            <td>Forma de pago: {{ paymentMethod($order->payment_method) }}</td>
+        </tr>
+    </table>
+
+    <table style="width:100%;">
+        <tr>
+            <td style="text-align: right;">Descuento:</td>
+            <td style="text-align: right; width: 30%;">{{ accounting($order->discount) }}</td>
+        </tr>
+        <tr>
             <td style="text-align: right;">IVA:</td>
             <td style="text-align: right;">{{ accounting($order->tax) }}</td>
         </tr>
-        <tr>
-            <td colspan="2" style="text-align: right;">Total:</td>
+        <tr style="font-weight: bold;">
+            <td style="text-align: right;">Total:</td>
             <td style="text-align: right;">{{ accounting($order->totalWithTaxes) }}</td>
         </tr>
     </table>
