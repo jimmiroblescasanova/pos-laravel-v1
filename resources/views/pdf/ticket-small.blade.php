@@ -9,7 +9,7 @@
         @page {
             margin: 1em;
             /* Establecemos el tamaño de página para ticket de 80mm */
-            size: 80mm auto;
+            size: 76mm auto;
         }
 
         body {
