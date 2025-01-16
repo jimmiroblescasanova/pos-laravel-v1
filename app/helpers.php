@@ -30,6 +30,8 @@ if (!function_exists('paymentMethod')) {
                 return "Tarjeta de Débito";
             case 4:
                 return "Tarjeta de Crédito";
+            case 5:
+                return "Cheque nominativo";
             case 99:
                 return "Otro";
         }

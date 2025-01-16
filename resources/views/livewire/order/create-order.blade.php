@@ -24,6 +24,7 @@
                                 <option value="2">Transferencia Electrónica</option>
                                 <option value="3">Tarjeta de Débito</option>
                                 <option value="4">Tarjeta de Crédito</option>
+                                <option value="5">Cheque nominativo</option>
                                 <option value="99">Otro</option>
                             </select>
                         </div>
