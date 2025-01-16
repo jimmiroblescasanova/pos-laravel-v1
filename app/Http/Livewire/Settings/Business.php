@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Settings;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Business extends Component
 {
@@ -57,6 +58,27 @@ class Business extends Component
             ->ripple(true)
             ->duration(1500)
             ->addSuccess('Información actualizada');
+    }
+
+    /**
+     * Eliminar el logo de la empresa
+     * 
+     * @return void
+     */
+    public function deleteLogo()
+    {
+        // Eliminar el archivo físico
+        if (settings()->get('app_logo')) {
+            Storage::disk('public')->delete(settings()->get('app_logo'));
+        }
+        
+        // Actualizar el valor en la configuración
+        settings()->set('app_logo', null);
+        
+        notyf()
+            ->ripple(true)
+            ->duration(1500)
+            ->addSuccess('Logo eliminado correctamente');
     }
 
     public function render()

@@ -54,7 +54,7 @@ class ProductsImport implements ToCollection, WithStartRow, WithValidation, Skip
                 'barcode' => $row[0]
             ],
             [
-                'supplier_code' => $row[1],
+                'supplier_code' => $row[1] ?? '',
                 'name' => $row[2],
                 'cost' => $row[3] ?? 0,
                 'price' => $row[4] ?? 0,

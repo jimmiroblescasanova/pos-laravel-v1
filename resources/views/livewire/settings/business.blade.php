@@ -21,7 +21,14 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <img src="{{ asset('storage/'.settings()->get('app_logo')) }}" height="100">
+                        @if(settings()->get('app_logo'))
+                            <div class="d-flex flex-column align-items-start">
+                                <img src="{{ asset('storage/'.settings()->get('app_logo')) }}" height="100">
+                                <button type="button" class="btn btn-sm btn-danger mt-2" wire:click="deleteLogo">
+                                    <i class="fas fa-trash"></i> Eliminar logo
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-check">
