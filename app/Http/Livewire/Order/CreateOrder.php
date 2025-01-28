@@ -17,6 +17,9 @@ class CreateOrder extends Component
     public $paymentMethod;
     public $itemsCount = 0;
     public $tax = false;
+    // variables para el modal
+    public $manualItemSelected = null;
+    public $manualQuantity = 0;
 
     public function mount(Order $order)
     {
@@ -25,23 +28,6 @@ class CreateOrder extends Component
         $this->customerName = $this->order->customer;
         $this->discount = $this->order->discount;
         $this->paymentMethod = $this->order->payment_method;
-    }
-
-    public function updatedTax()
-    {
-        if ($this->tax == true) {
-            // obtenemos el total
-            $total = $this->order->total;
-            // actualizamos el impuesto
-            $this->order->update([
-                'tax' => ($total * 1.16) - $total,
-            ]);
-        } else {
-            // si es negativo, el impuesto es 0
-            $this->order->update([
-                'tax' => 0,
-            ]);
-        }
     }
 
     public function addProduct(Product $selectedProduct)
@@ -62,11 +48,7 @@ class CreateOrder extends Component
             'price' => $selectedProduct->price,
         ]);
         // actualizamos el total de la orden
-        $this->order->update([
-            'total' => $this->order->total + $selectedProduct->price,
-        ]);
-        // actualizamos el impuesto
-        $this->updatedTax();
+        $this->recalculateOrderAmounts($this->order);
 
         notyf()
             ->ripple(true)
@@ -76,24 +58,20 @@ class CreateOrder extends Component
 
     public function removeProduct(OrderItem $orderItem)
     {
-        // variable para almacenar el nuevo total de la orden
-        $total = 0;
         // eliminamos el producto del carrito
         $orderItem->forceDelete();
         // loop para obtener el nuevo total de la orden
-        foreach ($this->order->items()->get() as $orderItem) {
-            $total += $orderItem->price * $orderItem->quantity;
-        }
-        // asignamos el nuevo total a la bd
-        $this->order->total = $total;
+       $total = $this->order->items()->get()->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
         // si el nuevo total es menor al descuento, lo reseteamos
         if (($total - $this->order->discount) < 0) {
             $this->order->discount = 0;
             $this->discount = 0;
         }
         $this->order->save();
-        // actualizamos el impuesto
-        $this->updatedTax();
+
+        $this->recalculateOrderAmounts($this->order);
 
         notyf()
             ->ripple(true)
@@ -101,38 +79,55 @@ class CreateOrder extends Component
             ->addInfo('Producto eliminado');
     }
 
-    public function increaseQuantity(OrderItem $orderItem)
+    public function increaseQuantity(OrderItem $orderItem): void
     {
-        // primero se valia que no exceda el inventario 
-        if ($orderItem->product->inventory > $orderItem->quantity) {
-            // se actualiza la cantidad de producto
-            $orderItem->update([
-                'quantity' => $orderItem->quantity + 1,
-            ]);
-            // actualizamos el total de la orden
-            $this->order->update([
-                'total' => $this->order->total + $orderItem->product->price,
-            ]);
-            // volvemos a calcular el impuesto
-            $this->updatedTax();
+        if (!$this->validateInventory($orderItem->product->inventory, $orderItem->quantity)) {
+            return;
         }
+
+        $orderItem->increment('quantity');
+
+        $this->recalculateOrderAmounts($this->order);
     }
 
-    public function decreaseQuantity(OrderItem $orderItem)
+    public function decreaseQuantity(OrderItem $orderItem): void
     {
         // se valida que la cantidad no sea negativa
         if ($orderItem->quantity > 1) {
-            // actualizamos la cantidad de producto
-            $orderItem->update([
-                'quantity' => $orderItem->quantity - 1,
-            ]);
-            // actualizamos el importe total de la orden
-            $this->order->update([
-                'total' => $this->order->total - $orderItem->product->price,
-            ]);
-            // volvemos a calcular el impuesto
-            $this->updatedTax();
+            $orderItem->decrement('quantity');
+
+            $this->recalculateOrderAmounts($this->order);
         }
+    }
+
+    public function showEditQuantityModal(OrderItem $orderItem)
+    {
+        $this->manualItemSelected = $orderItem;
+        $this->emit('show-modal', $orderItem->quantity);
+    }
+
+    public function setManualQuantity()
+    {
+        // validamos el inventario antes de incrementar
+        if (!$this->validateInventory($this->manualItemSelected->product->inventory, $this->manualQuantity)) {
+            return;
+        }
+        // actualizamos la cantidad de producto
+        $this->manualItemSelected->update([
+            'quantity' => $this->manualQuantity,
+        ]);
+        // actualizamos el total de la orden
+        $this->recalculateOrderAmounts($this->order);
+        // reseteamos las variables
+        $this->manualItemSelected = null;
+        $this->manualQuantity = 0;
+        // cerramos el modal
+        $this->emit('close-modal');
+        // mostramos la notificacion
+        notyf()
+            ->ripple(true)
+            ->duration(1500)
+            ->addSuccess('Cantidad actualizada');
     }
 
     public function updatedCustomerName($value)
@@ -149,12 +144,13 @@ class CreateOrder extends Component
 
     public function updatedDiscount($value)
     {
+        $value = ($value === null || $value === '') ? 0 : $value;
         // se calcula el total con descuento
         $grandTotal = $this->order->total + $this->order->discount;
         // validamos si el descuento a aplicar es mayor
         // al gran total, o sea, negativo
         if (($grandTotal - $value) < 0) {
-            // regresamos la variable al importe de la tabla
+            // regresamos el descuento anterior al importe de la tabla
             $this->discount = $this->order->discount;
 
             notyf()
@@ -164,13 +160,12 @@ class CreateOrder extends Component
             
             return false;
         }
+        $this->discount = $value;
         // se actualiza el descuento del total de la orden
         $this->order->update([
             'discount' => $value,
-            'total' => $grandTotal - $value,
         ]);
-        // calculamos de nuevo el impuesto
-        $this->updatedTax();
+        $this->recalculateOrderAmounts($this->order);
 
         notyf()
             ->ripple(true)
@@ -191,6 +186,11 @@ class CreateOrder extends Component
             ->ripple(true)
             ->duration(1500)
             ->addSuccess('Pago actualizado');
+    }
+
+    public function updatedTax($value): void
+    {
+        $this->recalculateOrderAmounts($this->order);
     }
 
     public function closeOrder()
@@ -234,6 +234,65 @@ class CreateOrder extends Component
         return view('livewire.order.create-order', [
             'products' => $products,
             'orderItems' => $this->order->items()->get(),
+        ]);
+    }
+
+    /**
+     * Validates if there is enough inventory for the requested quantity
+     *
+     * @param int $inventory Current available inventory quantity
+     * @param int $requestedQuantity Quantity being requested
+     * @return bool Returns true if there is enough inventory, false otherwise
+     * 
+     * This method checks if the current inventory can satisfy the requested quantity.
+     * If validation fails, it shows an error notification to the user.
+     */
+    private function validateInventory($inventory, $requestedQuantity): bool
+    {
+        if ($inventory < ($requestedQuantity + 1)) {
+            notyf()
+                ->ripple(true)
+                ->duration(1500)
+                ->addError('No hay suficiente inventario. Disponible: ' . $inventory);
+
+            return false;
+        }
+
+        return true;
+    }
+    
+    /**
+     * Calculates the tax amount for a given total.
+     * Uses a fixed tax rate of 16% (1.16).
+     *
+     * @param int $total The base amount to calculate tax on
+     * @return float The calculated tax amount, formatted to 2 decimal places
+     */
+    private function calculateTax(int $total): float
+    {
+        return number_format(($total * 1.16) - $total, 2);
+    }
+
+    /**
+     * Recalculates the total amount and tax for a given order
+     *
+     * This method performs the following calculations:
+     * 1. Sums up the total by multiplying price * quantity for each order item
+     * 2. Applies any existing discount to the total
+     * 3. Calculates tax if applicable
+     *
+     * @param \App\Models\Order $order The order instance to recalculate amounts for
+     * @return void
+     */
+    protected function recalculateOrderAmounts(Order $order)
+    {
+        $total = $order->items()->get()->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        $order->update([
+            'total' => $total - $order->discount,
+            'tax' => $this->tax ? $this->calculateTax($total - $order->discount) : 0,
         ]);
     }
 }

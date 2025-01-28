@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="card card-outline card-danger">
                 <div class="card-header">
                     <div class="row justify-content-between">
@@ -34,7 +34,7 @@
                             <tr>
                                 <th>Descripcion</th>
                                 <th style="width: 15%;">Precio</th>
-                                <th style="width: 30%;">Cantidad</th>
+                                <th style="width: 35%;">Cantidad</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +59,11 @@
                                                     class="btn btn-default">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
+                                                <button type="button"
+                                                    wire:click="showEditQuantityModal('{{ $item->id }}')"
+                                                    class="btn btn-default">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
                                                 <button type="button" wire:click="removeProduct({{ $item->id }})"
                                                     class="btn btn-danger">
                                                     <i class="far fa-trash-alt"></i>
@@ -73,9 +78,21 @@
                                 </tr>
                             @endforelse
                             <tr>
+                                <td colspan="2" class="text-right text-bold">Subtotal:</td>
+                                <td class="text-right">
+                                    {{ accounting($order->total + $order->discount) }}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="2" class="text-right text-bold">Descuento:</td>
                                 <td class="text-right">
-                                    <input type="text" class="form-control form-control-sm text-right" wire:model.lazy='discount' value="{{ $discount }}">
+                                    <input type="number" class="form-control form-control-sm text-right" wire:model.lazy='discount' value="{{ $discount }}" min="0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-right text-bold">Subtotal:</td>
+                                <td class="text-right">
+                                    {{ accounting($order->total) }}
                                 </td>
                             </tr>
                             <tr>
@@ -107,7 +124,7 @@
                 @endif
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
                     Agregar productos
@@ -156,4 +173,44 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para editar cantidad --> 
+    <div class="modal" id="editQuantityModal" tabindex="-1" role="dialog" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editQuantityModalLabel">Editar Cantidad</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="number" id="manualQuantity" wire:model="manualQuantity" class="form-control" autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" wire:click="setManualQuantity">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+@push('third_party_scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Livewire.on('show-modal', (quantity) => {
+            console.log(quantity);
+            $('#editQuantityModal input[id="manualQuantity"]').val(quantity);
+            $('#editQuantityModal').modal('show');
+        });
+
+        Livewire.on('close-modal', () => {
+            $('#editQuantityModal').modal('hide');
+        });
+    });
+</script>
+@endpush
