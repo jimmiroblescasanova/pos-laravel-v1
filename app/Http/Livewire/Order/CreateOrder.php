@@ -268,9 +268,10 @@ class CreateOrder extends Component
      * @param int $total The base amount to calculate tax on
      * @return float The calculated tax amount, formatted to 2 decimal places
      */
-    private function calculateTax(int $total): float
+    private function calculateTax(int $total)
     {
-        return number_format(($total * 1.16) - $total, 2);
+        $tax = ($total * 1.16) - $total;
+        return floor($tax * 100) / 100;
     }
 
     /**
