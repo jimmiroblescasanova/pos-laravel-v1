@@ -271,7 +271,7 @@ class CreateOrder extends Component
     private function calculateTax(int $total)
     {
         $tax = ($total * 1.16) - $total;
-        return floor($tax * 100) / 100;
+        return round($tax, 2);
     }
 
     /**
