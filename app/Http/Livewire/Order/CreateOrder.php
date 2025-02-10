@@ -265,10 +265,8 @@ class CreateOrder extends Component
      * Calculates the tax amount for a given total.
      * Uses a fixed tax rate of 16% (1.16).
      *
-     * @param int $total The base amount to calculate tax on
-     * @return float The calculated tax amount, formatted to 2 decimal places
      */
-    private function calculateTax(int $total)
+    private function calculateTax($total)
     {
         $tax = ($total * 1.16) - $total;
         return round($tax, 2);
