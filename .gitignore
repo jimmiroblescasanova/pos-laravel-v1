@@ -18,4 +18,19 @@ yarn-error.log
 /.vscode
 /public/index.php
 .DS_Store
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+!/storage/logs/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/testing/.gitignore
+!/storage/framework/views/.gitignore
 
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+
+error_log
