@@ -211,6 +211,7 @@ class CreateOrder extends Component
 
         // Terminar y cerrar orden 
         $this->order->update([
+            'folio' => Order::getNextFolio(),
             'closed' => true,
         ]);
 

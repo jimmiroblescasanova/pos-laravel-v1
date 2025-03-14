@@ -15,6 +15,7 @@ class Order extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'folio',
         'customer',
         'discount',
         'total', 
@@ -46,7 +47,7 @@ class Order extends Model
     protected function number(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => Str::padLeft($attributes['id'], 5, '0'),
+            get: fn ($value, $attributes) => Str::padLeft($attributes['folio'], 6, '0'),
         );
     }
 
@@ -89,5 +90,31 @@ class Order extends Model
     public function scopeOnlyClosed($query)
     {
         return $query->where('closed', true);
+    }
+
+    /**
+     * Get the maximum folio number from the orders table.
+     * 
+     * This method retrieves the highest folio number currently in use.
+     * If no folio numbers exist, returns 0.
+     * 
+     * @return int The maximum folio number or 0 if no records exist
+     */
+    public static function getFolio(): int
+    {
+        return (int) self::withTrashed()->max('folio') ?? 0;
+    }
+
+    /**
+     * Gets the next available folio number.
+     * 
+     * This method calculates and returns the next sequential folio number
+     * by incrementing the current folio value by one.
+     *
+     * @return int The next available folio number
+     */
+    public static function getNextFolio(): int
+    {
+        return self::getFolio() + 1;
     }
 }

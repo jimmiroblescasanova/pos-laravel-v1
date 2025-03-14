@@ -61,7 +61,7 @@
                     <tr>
                         <td>Cliente: {{ $order->customer }}</td>
                         <td style="width: 20%;">
-                            Folio: {{ $order->id }} <br />
+                            Folio: {{ $order->number }} <br />
                             {{ $order->updated_at->format('d/m/Y') }}
                         </td>
                     </tr>

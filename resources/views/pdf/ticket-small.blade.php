@@ -75,7 +75,7 @@
                             <span style="padding-left: 10px;">{{ $order->customer }}</span>
                         </td>
                         <td style="width: 30%; border-left: 1px solid #ccc; padding-left: 10px;">
-                            <strong>Folio:</strong> {{ $order->id }}<br />
+                            <strong>No. </strong>{{ $order->number }}<br />
                             <span style="font-size: 11px;">{{ $order->updated_at->format('d/m/Y') }}</span>
                         </td>
                     </tr>
