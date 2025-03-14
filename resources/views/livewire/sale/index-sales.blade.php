@@ -38,6 +38,10 @@
                         <i class="fas fa-download mr-2"></i>
                         Descargar filtro XLS
                     </button>
+                    <button class="dropdown-item" wire:click="toggleCanceled">
+                        <i class="fas fa-ban mr-2"></i>
+                        Mostrar cancelados
+                    </button>
                 </div>
             </div>
         </div>
@@ -61,7 +65,9 @@
                             <a href="{{ route('sales.show', $sale) }}">{{ $sale->number }}</a>
                         </td>
                         <td>{{ $sale->updated_at->format('d/m/Y') }}</td>
-                        <td>{{ $sale->customer }}</td>
+                        <td @class([
+                            'text-danger' => $sale->trashed(),
+                        ])>{{ $sale->customer }}</td>
                         <td style="text-align: right;">$ {{ number_format($sale->totalWithTaxes, 2) }}</td>
                         <td>{{ $sale->user->name }}</td>
                     </tr>

@@ -28,6 +28,14 @@ class SaleController extends Controller
         ]);
     }
 
+    /**
+     * Cancel an order.
+     * 
+     * @deprecated This method is deprecated and will be removed in future versions.
+     * 
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function cancel(Order $order)
     {
         $order->update([

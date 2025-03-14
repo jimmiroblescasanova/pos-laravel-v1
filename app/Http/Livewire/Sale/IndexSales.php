@@ -32,6 +32,7 @@ class IndexSales extends Component
     public $endDate = null; 
     public $users;
     public $selectedUser = 'all';
+    public $showCanceled = false;
 
     public function mount()
     {
@@ -59,14 +60,26 @@ class IndexSales extends Component
 
     public function export()
     {
-        return (new SalesExport($this->selectedUser, $this->startDate, $this->endDate))
-            ->download('ventas_'.NOW()->format('Ymd').'.xlsx');
+        return (new SalesExport(
+                $this->selectedUser, 
+                $this->startDate, 
+                $this->endDate, 
+                $this->showCanceled)
+            )->download('ventas_'.NOW()->format('Ymd').'.xlsx');
+    }
+
+    public function toggleCanceled()
+    {
+        $this->showCanceled = !$this->showCanceled;
     }
 
     public function render()
     {
         $sales = Order::query()
         ->where('closed', true)
+        ->when($this->showCanceled, function ($q) {
+            $q->withTrashed();
+        })
         ->when($this->endDate != null, function ($q) {
             $q->whereBetween('updated_at', [$this->startDate, $this->endDate." 23:59:59"]);
         })

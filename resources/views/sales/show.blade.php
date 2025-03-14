@@ -2,7 +2,7 @@
 
 @section('content-header')
     <div class="col-12">
-        <h1 class="m-0">Venta ID: {{ $order->number }}</h1>
+        <h1 class="m-0">Venta ID: {{ $order->number }} @if ($order->trashed())<span class="badge badge-danger">Cancelada</span>@endif</h1>
     </div>
 @endsection
 
@@ -12,7 +12,7 @@
             <div class="card card-outline card-primary">
                 <div class="card-header d-flex">
                     <span class="mr-auto">Vendedor: {{ $order->user->name }}</span>
-                    <span>Fecha de Venta: {{ $order->updated_at->format('d-m-Y') }}</span>
+                    <span>Fecha de Venta: {{ $order->updated_at->format('d/m/Y') }}</span>
                 </div>
                 <div class="card-body">
                     <p>Nombre del cliente: 
@@ -58,22 +58,24 @@
             </div>
         </div>
         <div class="col-12 col-md-4">
-            <a href="{{ route('sales.print', $order) }}" target="_blank" class="btn btn-lg btn-block btn-outline-primary">
-                <i class="fas fa-print mr-2"></i>
-                Imprimir
-            </a>
-            @can('sales_share')
-            <a href="{{ route('sales.sendEmail', $order) }}" class="btn btn-lg btn-block btn-outline-primary">
-                <i class="fas fa-paper-plane mr-2"></i>
-                Email
-            </a>
-            @endcan
-            @can('sales_cancel')
-            <button type="button" id="cancelBtn" class="btn btn-lg btn-block btn-outline-danger">
-                <i class="fas fa-ban mr-2"></i>
-                Cancelar
-            </button>
-            @endcan
+            @if (!$order->trashed())
+                <a href="{{ route('sales.print', $order) }}" target="_blank" class="btn btn-lg btn-block btn-outline-primary">
+                    <i class="fas fa-print mr-2"></i>
+                    Imprimir
+                </a>
+                @can('sales_share')
+                <a href="{{ route('sales.sendEmail', $order) }}" class="btn btn-lg btn-block btn-outline-primary">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Email
+                </a>
+                @endcan
+                @can('sales_cancel')
+                <button type="button" id="cancelBtn" class="btn btn-lg btn-block btn-outline-danger">
+                    <i class="fas fa-ban mr-2"></i>
+                    Cancelar
+                </button>
+                @endcan
+            @endif
             <button onclick="history.back();" class="btn btn-lg btn-block btn-outline-secondary">
                 <i class="fas fa-backward mr-2"></i>
                 Atrás

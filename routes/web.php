@@ -127,7 +127,7 @@ Route::group([
     'middleware' => 'can:sales_access'
 ], function() {
     Route::get('/', 'index')->name('index');
-    Route::get('/{order}/ver', 'show')->name('show');
+    Route::get('/{order}/ver', 'show')->withTrashed()->name('show');
     Route::get('/{order}/print', 'print')->name('print')->middleware('can:sales_access');
     Route::get('/{order}/email', 'sendEmail')->name('sendEmail')->middleware('can:sales_share');
     Route::delete('/{order}/ver', 'cancel')->name('cancel')->middleware('can:sales_cancel');

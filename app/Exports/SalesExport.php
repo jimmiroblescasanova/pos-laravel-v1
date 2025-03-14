@@ -18,12 +18,12 @@ class SalesExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
 {
     use Exportable;
 
-    public function __construct($user, $startDate, $endDate)
-    {
-        $this->user = $user;
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
-    }
+    public function __construct(
+        public string $user, 
+        public string $startDate, 
+        public string $endDate,
+        public bool $showCanceled = false
+    ) { }
 
     public function styles(Worksheet $sheet)
     {
@@ -36,22 +36,24 @@ class SalesExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
     public function headings(): array
     {
         return [
-            'ID',
+            'Folio',
             'Fecha',
             'Cliente',
             'Total',
             'Vendedor',
+            'Estado',
         ];
     }
 
     public function map($order): array
     {
         return [
-            $order->id,
+            $order->folio,
             Date::dateTimeToExcel($order->updated_at),
             $order->customer,
             $order->total,
             $order->user->name,
+            $order->trashed() ? 'Cancelado' : 'Activo',
         ];
     }
 
@@ -67,6 +69,9 @@ class SalesExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMappin
     {
         return Order::query()
             ->where('closed', true)
+            ->when($this->showCanceled, function ($q) {
+                $q->withTrashed();
+            })
             ->when($this->endDate != null, function ($q) {
                 $q->whereBetween('updated_at', [$this->startDate, $this->endDate." 23:59:59"]);
             })
