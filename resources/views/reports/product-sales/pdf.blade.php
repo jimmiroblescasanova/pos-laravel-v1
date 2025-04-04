@@ -84,7 +84,7 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr>
-                        <td>{{ $item->order->id }}</td>
+                        <td>{{ $item->order->folio }}</td>
                         <td>{{ $item->updated_at->format('d/m/Y') }}</td>
                         <td style="text-align: center;">{{ $item->quantity }}</td>
                         <td class="money-sign">$</td>

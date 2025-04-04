@@ -106,7 +106,7 @@
                                     <tbody>
                                 @endif
                                 <tr>
-                                    <td>{{ $docto->id }}</td>
+                                    <td>{{ $docto->folio }}</td>
                                     <td>{{ Str::limit($docto->customer, 20, '...') }}</td>
                                     <td>{{ paymentMethod($docto->payment_method) }}</td>
                                     <td>{{ $docto->user->name }}</td>

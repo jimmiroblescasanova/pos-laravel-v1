@@ -32,7 +32,7 @@
             @foreach ($orders as $order)
                 <tr style="border: 1px solid #000;">
                     <td style="border-top: 1px solid black">{{ $order->updated_at->format('d-m-Y') }}</td>
-                    <td style="border-top: 1px solid black">{{ $order->id }}</td>
+                    <td style="border-top: 1px solid black">{{ $order->folio }}</td>
                     <td style="border-top: 1px solid black">{{ $order->customer }}</td>
                     <td style="border-top: 1px solid black"></td>
                     <td style="border-top: 1px solid black"></td>
