@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         settings()->set('app_name', 'PuntoDeVenta');
-        
+        settings()->set('subscription_active', 'yes');
+
         $this->call([
             RolesAndPermissionsSeeder::class,
         ]);

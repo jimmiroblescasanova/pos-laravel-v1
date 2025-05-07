@@ -46,8 +46,8 @@ Route::group([
 
     Route::group([
         'controller' => RoleController::class,
-        'prefix' => '/roles', 
-        'as' => 'roles.', 
+        'prefix' => '/roles',
+        'as' => 'roles.',
         'middleware' => 'can:roles_access'
     ], function () {
         Route::get('/nuevo', 'create')->name('create')->middleware('can:roles_create');
@@ -89,7 +89,7 @@ Route::group([
 });
 
 Route::group([
-    'controller' => InventoryController::class, 
+    'controller' => InventoryController::class,
     'prefix' => '/inventario',
     'as' => 'inventory.',
     'middleware' => 'can:inventory_access'
@@ -146,7 +146,7 @@ Route::group([
         Route::get('/ventas-por-ticket-xls', [TicketSalesController::class, 'index'])->name('ticket-sales.index');
         Route::post('/ventas-por-ticket-xls', [TicketSalesController::class, 'download'])->name('ticket-sales.download');
     });
-    
+
     Route::group([
         'prefix' => 'inventario',
         'as' => 'inventory.',
@@ -154,3 +154,5 @@ Route::group([
         Route::get('/conteo', InventoryCountController::class)->name('count.index');
     });
 });
+
+Route::view('/payment-pending', 'payment-pending')->name('payment.pending');
